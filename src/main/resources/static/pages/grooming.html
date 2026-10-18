@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preload" href="/vendor/fonts/font-5.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/vendor/fonts/font-11.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/vendor/fonts/font-17.woff2" as="font" type="font/woff2" crossorigin>
+<link href="/vendor/fonts/fonts.css?v=20261015-6" rel="stylesheet">
+<link href="/css/design.css?v=20261015-10" rel="stylesheet">
+    <title>Grooming Services - PawCare</title>
+    <link href="/vendor/bootstrap/bootstrap.min.css?v=5.3.2" rel="stylesheet">
+    <link href="/vendor/bootstrap-icons/bootstrap-icons.css?v=1.11.2" rel="stylesheet">
+    <link href="/css/style.css?v=20261015-10" rel="stylesheet">
+    <link href="/css/pawcare2.css?v=20261015-26" rel="stylesheet">
+    <link href="/css/grooming.css?v=20261015-23" rel="stylesheet">
+    <link rel="icon" href="/images/paw.svg" type="image/svg+xml">
+    <meta name="theme-color" content="#c7b6e3">
+<link href="/css/assistant-widget.css?v=20261015-24" rel="stylesheet">
+<style>
+.typing-heading { display: inline; white-space: nowrap; }
+.typing-heading::after { content: ''; display: inline-block; width: 3px; height: 0.9em; background: #fff; margin-left: 3px; vertical-align: text-bottom; animation: blink-pipe 0.7s step-end infinite; }
+@keyframes blink-pipe { from, to { opacity: 1 } 50% { opacity: 0 } }
+</style>
+<link href="/css/navigation.css?v=20261016-2" rel="stylesheet">
+<link rel="stylesheet" href="/css/site-fixes.css?v=20261015-26">
+<link href="/css/page-loading.css?v=20261015-10" rel="stylesheet">
+<link href="/css/typing.css?v=20261015-11" rel="stylesheet">
+<link href="/css/paw-cursor.css?v=20261015-20" rel="stylesheet">
+<link href="/css/workspace-polish.css?v=20261015-20" rel="stylesheet">
+</head>
+<body class="pc2-page groom-studio has-shared-nav">
+<script src="/js/page-loading.js?v=20261015-20"></script>
+<script src="/js/paw-cursor.js?v=20261015-20"></script>
+    <nav id="mainNavbar" aria-label="Main navigation"><a href="/">PawCare</a></nav>
+<script src="/js/navigation.js?v=20261016-2"></script>
+
+    <section class="page-masthead masthead-grooming">
+        <div class="container">
+            <div class="masthead-text">
+                <span class="section-badge" style="background:rgba(255,255,255,0.18);color:#fff;border:1px solid rgba(255,255,255,0.3)">Grooming</span>
+                <h1 class="display-4 fw-bold mt-2" style="color:#fff;text-shadow:0 2px 14px rgba(35,24,60,0.35)"><span class="typing-heading" id="typingHeading" data-typing>A fresh kind of happy.</span></h1>
+                <p class="lead mb-0" style="max-width:540px;color:rgba(255,255,255,0.92);text-shadow:0 1px 8px rgba(35,24,60,0.3)">Gentle hands. Fresh coats. Happy tails. A little pampering, made just for them.</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="container groom-entry-bar" role="group" aria-label="Grooming shortcuts"><div class="groom-hero-actions"><a href="/pages/login.html?grooming=book" data-groom-book="book" class="btn btn-pawcare btn-lg"><i class="bi bi-calendar-heart me-2" aria-hidden="true"></i>Book grooming</a><a href="#groomingPackages" class="btn btn-pawcare-outline">Browse services <i class="bi bi-arrow-down" aria-hidden="true"></i></a><a href="#meetGroomers" class="btn btn-pawcare-outline"><i class="bi bi-people me-1" aria-hidden="true"></i>Browse groomers</a></div></div>
+
+    <section class="groom-start-section" aria-label="Plan your grooming visit"><div class="container">
+        <div class="groom-start-grid">
+            <div class="groom-booking-guide"><span class="groom-eyebrow">A LITTLE CARE, IN THREE EASY STEPS</span><h2>Their next fresh start.</h2><ol><li><span>01</span><div><strong>Choose their care</strong><small>Select a service below, or let the smart planner help.</small></div></li><li><span>02</span><div><strong>Make it theirs</strong><small>Choose your pet and a groomer you feel good about.</small></div></li><li><span>03</span><div><strong>Pick a time & book</strong><small>See available times and confirm your visit.</small></div></li></ol></div>
+            <div class="groom-smart-entry"><span class="groom-smart-icon"><i class="bi bi-stars" aria-hidden="true"></i></span><span class="groom-eyebrow">SMART GROOMING PLANNER</span><h2>Not sure what they need?</h2><p>Start with your pet’s comfort, your budget and the time you have. Get a suggested selection, with a reason for every service.</p><a href="/pages/login.html?grooming=planner" data-groom-book="planner" class="btn btn-pawcare">Help me choose <i class="bi bi-arrow-up-right" aria-hidden="true"></i></a><small>You review every choice before booking.</small></div>
+        </div>
+    </div></section>
+
+    <section class="section-padding" id="groomingPackages">
+        <div class="container">
+            <div class="text-center mb-5"><span class="section-badge">Our Services</span><h2 class="section-title">Grooming Packages</h2><p class="section-subtitle">Select a service to start booking. You can add more services and review the total before confirming.</p></div>
+            <div class="grooming-benefits"><span><i class="bi bi-droplet"></i>Gentle bathing</span><span><i class="bi bi-scissors"></i>Personalized grooming</span><span><i class="bi bi-heart"></i>Thoughtful care</span></div>
+            <div class="row g-4" id="groomingServices" aria-live="polite"><div class="loading-spinner"></div></div>
+            <div class="groom-booking-footer"><div><strong>Ready for a little pampering?</strong><span>Your pet, your groomer, your perfect time.</span></div><a href="/pages/login.html?grooming=book" data-groom-book="book" class="btn btn-pawcare">Start booking <i class="bi bi-arrow-right" aria-hidden="true"></i></a></div>
+        </div>
+    </section>
+
+    <section class="section-padding pt-0" id="meetGroomers">
+        <div class="container">
+            <div class="text-center mb-4"><span class="section-badge">The people behind the care</span><h2 class="section-title">Meet our groomers</h2><p class="section-subtitle">See profile photos and reviews from completed PawCare grooming visits.</p></div>
+            <div class="row g-4" id="publicGroomers"><div class="col-12"><div class="loading-spinner"></div></div></div>
+        </div>
+    </section>
+
+    <footer class="footer-section"><div class="container"><div class="row g-4"><div class="col-md-5"><a href="/" class="navbar-brand-pawcare"><i class="bi bi-heart-pulse-fill"></i>PawCare</a><p class="mt-3">A little care. A happier life.<br>Here for every chapter of pet parenting.</p></div><div class="col-6 col-md-3"><h5>A world of care</h5><ul class="footer-links"><li><a href="/pages/services.html">Veterinary care</a></li><li><a href="/pages/grooming.html">Grooming</a></li><li><a href="/pages/entertainment.html">Entertainment</a></li><li><a href="/pages/store.html">The pet store</a></li></ul></div><div class="col-6 col-md-4"><h5>Here for you</h5><ul class="footer-links"><li><a href="/pages/contact.html">Get in touch</a></li><li><a href="/pages/login.html">Your account</a></li><li><a href="tel:+94715473916">+94 71 547 3916</a></li></ul></div></div><div class="footer-bottom"><p class="mb-0">© 2026 PawCare. All paws welcome.</p><a href="/">Back to our world ↗</a></div></div></footer>
+    <script src="/vendor/bootstrap/bootstrap.bundle.min.js?v=5.3.2"></script>
+    <script src="/js/api.js?v=20261016-2"></script><script src="/js/forms.js?v=20261015-17"></script>
+    <script src="/js/grooming-images.js?v=20261015-8"></script>
+    <script src="/js/grooming-booking.js?v=20261015-18"></script>
+    <script>
+        window.addEventListener('scroll',()=>{document.getElementById('mainNavbar')?.classList.toggle('scrolled',window.scrollY>50)});
+
+
+        const icons = ['bi-droplet','bi-scissors','bi-hand-index','bi-emoji-smile','bi-wind','bi-bug'];
+        async function loadServices() {
+            try {
+                const services = await api.getGroomingServices();
+                document.getElementById('groomingServices').innerHTML = (services || []).map((s,i) => `
+                    <div class="col-md-6 col-lg-4">
+                        <article class="card-pawcare groom-package p-4 h-100 text-center">
+                            <div class="groom-package-top"><div class="groom-package-image"><img src="${escapeHtml(groomingServiceImage(s))}" alt="${escapeHtml(groomingPhotos[s.name]?.alt || (s.name+' grooming service'))}" loading="lazy" decoding="async" width="560" height="560" onerror="this.onerror=null;this.src='/images/grooming.png'"></div><div class="groom-package-heading"><div class="card-icon groom-package-icon"><i class="bi ${icons[i%icons.length]}" aria-hidden="true"></i></div><h5 class="fw-bold">${escapeHtml(s.name)}</h5></div></div>
+                            <p>${escapeHtml(s.description || '')}</p>
+                            <footer><strong>${formatCurrency(s.price)}</strong><span><i class="bi bi-clock me-1"></i>${Number(s.durationMinutes)||0} min</span></footer>
+                            <div class="groom-package-actions"><a class="btn btn-pawcare w-100" href="/pages/login.html?grooming=book&services=${Number(s.id)}" data-groom-book="book" data-service-id="${Number(s.id)}" aria-label="Select and book ${escapeHtml(s.name)}">Select & book <i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a><small>Add more services in the booking form.</small></div>
+                        </article>
+                    </div>
+                `).join('') || '<div class="col-12 product-error"><h3>A little refresh is on its way.</h3><p>Grooming packages will appear here when available.</p><a href="/pages/contact.html" class="btn btn-pawcare-outline">Talk to our team</a></div>';
+            } catch (e) {
+                document.getElementById('groomingServices').innerHTML = '<div class="col-12 product-error"><i class="bi bi-scissors"></i><h3>Let’s try that again.</h3><p>We couldn’t load the grooming packages just now.</p><button class="btn btn-pawcare-outline" onclick="loadServices()">Try again ↻</button></div>';
+            }
+        }
+        function publicGroomerAvatar(g){
+            if(g.profileImage)return `<img class="public-groomer-photo" src="${escapeHtml(g.profileImage)}" alt="${escapeHtml(g.name)} profile photo" data-person-name="${escapeHtml(g.name)}">`;
+            const initials=(g.name||'G').split(/\s+/).filter(Boolean).slice(0,2).map(x=>x[0]).join('').toUpperCase();
+            return `<div class="public-groomer-photo groomer-card-fallback">${escapeHtml(initials||'G')}</div>`;
+        }
+        async function loadPublicGroomers(){
+            const host=document.getElementById('publicGroomers');
+            try{
+                const groomers=await api.get('/groomers');
+                host.innerHTML=(groomers||[]).map(g=>{
+                    const rating=g.totalReviews?`<div class="groomer-rating justify-content-center"><i class="bi bi-star-fill"></i>${Number(g.averageRating||0).toFixed(1)} <small>(${g.totalReviews} review${g.totalReviews===1?'':'s'})</small></div>`:'<div class="text-muted small">No reviews yet</div>';
+                    const snippets=(g.recentReviews||[]).slice(0,2).map(r=>`<div class="public-review-snippet"><span class="text-warning">${'★'.repeat(Number(r.rating||0))}${'☆'.repeat(Math.max(0,5-Number(r.rating||0)))}</span><p>“${escapeHtml(r.review||'')}”</p><small>${escapeHtml(r.userName||'Pet owner')}</small></div>`).join('');
+                    return `<div class="col-md-6 col-lg-4"><article class="public-groomer-card h-100">${publicGroomerAvatar(g)}<h5>${escapeHtml(g.name)}</h5><p class="text-muted small mb-2">${escapeHtml(g.organization||'PawCare Grooming Center')}</p><div class="vet-available-badge"><i class="bi bi-check-circle-fill"></i> Available on PawCare</div><div class="vet-profile-details groomer-public-details"><div class="vet-detail-row"><i class="bi bi-mortarboard"></i><div><small>Qualification</small><strong>${escapeHtml(g.qualification||'Not provided yet')}</strong></div></div><div class="vet-detail-row"><i class="bi bi-briefcase"></i><div><small>Experience</small><strong>${g.experienceYears==null?'Not provided yet':`${Number(g.experienceYears)} years`}</strong></div></div><div class="vet-detail-row"><i class="bi bi-scissors"></i><div><small>Specialty</small><strong>${escapeHtml(g.specialty||'Not provided yet')}</strong></div></div></div><div class="mt-3">${rating}</div><div class="mt-3">${snippets||'<p class="text-muted small mb-0">Ready for their first customer review.</p>'}</div><a class="btn btn-pawcare-outline w-100 mt-4" href="/pages/login.html?grooming=book&groomer=${Number(g.id)}" data-groom-book="book" data-groomer-id="${Number(g.id)}">Book with ${escapeHtml((g.name||'Groomer').split(' ')[0])} <i class="bi bi-arrow-up-right" aria-hidden="true"></i></a></article></div>`;
+                }).join('')||'<div class="col-12 text-center text-muted">Our groomer profiles will appear here when available.</div>';
+            }catch(e){host.innerHTML='<div class="col-12 product-error"><h3>Groomer profiles are taking a short break.</h3><p>Please try again in a moment.</p><button class="btn btn-pawcare-outline" onclick="loadPublicGroomers()">Try again ↻</button></div>';}
+        }
+        document.getElementById('publicGroomers').addEventListener('error',event=>{
+            const img=event.target;
+            if(!(img instanceof HTMLImageElement)||!img.matches('img[data-person-name]'))return;
+            const fallback=document.createElement('div');fallback.className='public-groomer-photo groomer-card-fallback';
+            fallback.textContent=(img.dataset.personName||'G').split(/\s+/).filter(Boolean).slice(0,2).map(x=>x[0]).join('').toUpperCase();
+            img.replaceWith(fallback);
+        },true);
+        loadServices();
+        loadPublicGroomers();
+    </script>
+    <script src="/js/ui.js?v=20261015-5"></script>
+    <script src="/js/pawcare2.js?v=20261015-26"></script>
+<script src="/js/assistant-widget.js?v=1.0"></script>
+<script src="/js/site-shell.js?v=20261014-5"></script>
+<script src="/js/typing.js?v=20261015-11"></script>
+</body>
+</html>

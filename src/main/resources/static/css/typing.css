@@ -1,0 +1,14 @@
+.paw-typing {display:grid;text-wrap:wrap;overflow-wrap:normal;word-break:normal;hyphens:none;}
+.typing-heading[data-typing] {display:inline-grid;max-width:100%;white-space:normal;}
+.paw-typing>.paw-typing-measure,.paw-typing>.paw-typing-copy {grid-area:1/1;display:block;min-width:0;white-space:pre-line;text-wrap:wrap;overflow-wrap:normal;word-break:normal;}
+.paw-typing-measure {visibility:hidden;pointer-events:none;}
+.paw-typing-measure::after {content:'';display:inline-block;width:8px;}
+.paw-typing-word {display:inline-grid;vertical-align:baseline;white-space:nowrap;word-break:keep-all;overflow-wrap:normal;}
+.paw-typing-word::before {content:attr(data-word);visibility:hidden;grid-area:1/1;}
+.paw-typing-letters {display:block;grid-area:1/1;white-space:nowrap;}
+.paw-typing-caret {display:inline-block;position:relative;width:0;height:.86em;vertical-align:-.04em;}
+.paw-typing-caret::after {content:'';position:absolute;inset:0 auto 0 4px;width:2px;background:currentColor;animation:pawTypingCaret .74s step-end infinite;}
+.typing-heading[data-typing]::after,#services-typed[data-typing]::after {content:none;}
+.paw-typing.is-paused .paw-typing-caret::after {visibility:hidden;animation:none;}
+@keyframes pawTypingCaret {50% {opacity:0;}}
+@media(prefers-reduced-motion:reduce) {.paw-typing-caret::after {visibility:hidden;animation:none;}}

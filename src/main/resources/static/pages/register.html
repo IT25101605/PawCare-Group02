@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preload" href="/vendor/fonts/font-5.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/vendor/fonts/font-11.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/vendor/fonts/font-17.woff2" as="font" type="font/woff2" crossorigin>
+<link href="/vendor/fonts/fonts.css?v=20261015-6" rel="stylesheet">
+<link href="/css/design.css?v=20261015-10" rel="stylesheet">
+    <title>Register - PawCare</title>
+    <link href="/vendor/bootstrap/bootstrap.min.css?v=5.3.2" rel="stylesheet">
+    <link href="/vendor/bootstrap-icons/bootstrap-icons.css?v=1.11.2" rel="stylesheet">
+    <link href="/css/style.css?v=20261015-10" rel="stylesheet">
+    <link href="/css/pawcare2.css?v=20261015-26" rel="stylesheet">
+    <link rel="icon" href="/images/paw.svg" type="image/svg+xml">
+    <meta name="theme-color" content="#c7b6e3">
+    <style>
+        .reg-page { min-height:100vh; background:var(--body-bg); display:flex; align-items:center; justify-content:center; padding:2rem; }
+        .reg-card { background:var(--card-bg); border-radius:var(--radius-xl); box-shadow:var(--shadow-xl); padding:2.5rem; width:100%; max-width:520px; animation:authFade .5s ease-out; }
+        .role-option { border:2px solid var(--border); border-radius:var(--radius-md); padding:0.8rem 1rem; cursor:pointer; transition:var(--transition); display:flex; align-items:center; gap:0.75rem; }
+        .role-option:hover { border-color:var(--primary-light); background:rgba(13,115,119,0.03); }
+        .role-option.selected { border-color:var(--primary); background:rgba(13,115,119,0.06); }
+        .role-option i { font-size:1.3rem; color:var(--primary); width:28px; text-align:center; }
+        .pw-strength { height:4px; border-radius:2px; background:var(--border); margin-top:6px; overflow:hidden; }
+        .pw-strength-bar { height:100%; border-radius:2px; transition:all .3s; width:0; }
+    </style>
+<link href="/css/assistant-widget.css?v=20261015-24" rel="stylesheet">
+<link href="/css/navigation.css?v=20261016-2" rel="stylesheet">
+<link rel="stylesheet" href="/css/site-fixes.css?v=20261015-26">
+<link href="/css/page-loading.css?v=20261015-10" rel="stylesheet">
+<link href="/css/paw-cursor.css?v=20261015-20" rel="stylesheet">
+<link href="/css/workspace-polish.css?v=20261015-20" rel="stylesheet">
+</head>
+<body class="pc2-page pc2-register has-shared-nav">
+<script src="/js/page-loading.js?v=20261015-20"></script>
+<script src="/js/paw-cursor.js?v=20261015-20"></script>
+<nav id="mainNavbar" aria-label="Main navigation"><a href="/">PawCare</a></nav>
+<script src="/js/navigation.js?v=20261016-2"></script>
+<div class="reg-page">
+    <div class="reg-card">
+        <div class="text-center mb-4">
+            <a href="/" style="font-size:1.5rem;font-weight:800;color:var(--primary);text-decoration:none"><i class="bi bi-heart-pulse-fill me-2" style="color:var(--secondary)"></i>PawCare</a>
+            <h3 class="fw-bold mt-3 mb-1">Your next chapter starts here.</h3>
+            <p class="text-muted" style="font-size:0.9rem">A little about you. A world of care for them.</p>
+        </div>
+        <form id="regForm" onsubmit="handleRegister(event)">
+            <div class="row g-3 mb-3">
+                <div class="col-6">
+                    <label class="form-label fw-semibold" style="font-size:0.85rem">First Name</label>
+                    <input type="text" id="firstName" class="form-control form-control-pawcare" required>
+                </div>
+                <div class="col-6">
+                    <label class="form-label fw-semibold" style="font-size:0.85rem">Last Name</label>
+                    <input type="text" id="lastName" class="form-control form-control-pawcare" required>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label fw-semibold" style="font-size:0.85rem">Email Address</label>
+                <input type="email" id="email" class="form-control form-control-pawcare" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label fw-semibold" style="font-size:0.85rem">Phone</label>
+                <input type="text" id="phone" class="form-control form-control-pawcare">
+            </div>
+            <div class="mb-3">
+                <label class="form-label fw-semibold" style="font-size:0.85rem">Password</label>
+                <input type="password" id="password" class="form-control form-control-pawcare" required oninput="checkPwStrength()">
+
+                <div class="password-requirements mt-2">
+                    <small class="fw-semibold">Password must have:</small>
+                    <div id="pwdRequirements" class="small mt-1">
+                        <div id="pwdLength" class="text-danger">
+                            <i class="bi bi-x-circle"></i> Minimum 8 characters
+                        </div>
+                        <div id="pwdUpper" class="text-danger">
+                            <i class="bi bi-x-circle"></i> At least one uppercase letter (A-Z)
+                        </div>
+                        <div id="pwdLower" class="text-danger">
+                            <i class="bi bi-x-circle"></i> At least one lowercase letter (a-z)
+                        </div>
+                        <div id="pwdNumber" class="text-danger">
+                            <i class="bi bi-x-circle"></i> At least one number (0-9)
+                        </div>
+                        <div id="pwdSymbol" class="text-danger">
+                            <i class="bi bi-x-circle"></i> At least one symbol (!@#$%^&*)
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label fw-semibold" style="font-size:0.85rem">I am a...</label>
+                <input type="hidden" id="role" value="PET_OWNER">
+                <div class="row g-2">
+                    <div class="col-6"><div class="role-option selected" onclick="selectRole(this,'PET_OWNER')"><i class="bi bi-person-heart"></i><div><div class="fw-semibold" style="font-size:0.88rem">Pet Owner</div><div style="font-size:0.72rem;color:var(--text-muted)">Manage my pets</div></div></div></div>
+                    <div class="col-6"><div class="role-option" onclick="selectRole(this,'VETERINARIAN')"><i class="bi bi-clipboard2-pulse"></i><div><div class="fw-semibold" style="font-size:0.88rem">Veterinarian</div><div style="font-size:0.72rem;color:var(--text-muted)">Medical provider</div></div></div></div>
+                    <div class="col-6"><div class="role-option" onclick="selectRole(this,'GROOMER')"><i class="bi bi-scissors"></i><div><div class="fw-semibold" style="font-size:0.88rem">Groomer</div><div style="font-size:0.72rem;color:var(--text-muted)">Grooming services</div></div></div></div>
+
+                    <div class="col-6"><div class="role-option" onclick="selectRole(this,'STORE_MANAGER')"><i class="bi bi-shop"></i><div><div class="fw-semibold" style="font-size:0.88rem">Store Manager</div><div style="font-size:0.72rem;color:var(--text-muted)">Products & orders</div></div></div></div>
+                    <div class="col-6"><div class="role-option" onclick="selectRole(this,'SERVICE_STAFF')"><i class="bi bi-credit-card"></i><div><div class="fw-semibold" style="font-size:0.88rem">Service Staff</div><div style="font-size:0.72rem;color:var(--text-muted)">Payments & billing</div></div></div></div>
+                </div>
+            </div>
+            <div class="mb-3"><label for="address" class="form-label">Address</label><input id="address" required minlength="5" maxlength="500" autocomplete="street-address" class="form-control form-control-pawcare"></div>
+            <div class="row g-3 mb-3">
+                <div class="col-6"><label for="city" class="form-label">City</label><input id="city" required maxlength="100" autocomplete="address-level2" class="form-control form-control-pawcare"></div>
+                <div class="col-6"><label for="zipCode" class="form-label">Postal code (optional)</label><input id="zipCode" maxlength="20" pattern="[A-Za-z0-9 \-]{3,20}" autocomplete="postal-code" class="form-control form-control-pawcare"></div>
+            </div>
+            <div id="roleFields" class="p-3 mb-3 rounded border" aria-live="polite"></div>
+            <div class="mb-3"><label for="confirmPassword" class="form-label">Confirm password</label><input type="password" id="confirmPassword" required minlength="8" maxlength="72" autocomplete="new-password" class="form-control form-control-pawcare"></div>
+            <p class="text-muted small">Password: 8–72 characters, uppercase and lowercase letters, a number and a symbol. No spaces.</p>
+            <button type="submit" class="btn btn-pawcare w-100 py-3 mt-2" id="regBtn">Create Account</button>
+        </form>
+        <p class="text-center text-muted mt-3" style="font-size:0.88rem">Already have an account? <a href="/pages/login.html" class="fw-semibold">Sign In</a></p>
+    </div>
+</div>
+
+<script src="/vendor/bootstrap/bootstrap.bundle.min.js?v=5.3.2"></script>
+<script src="/js/api.js?v=20261016-2"></script><script src="/js/forms.js?v=20261015-17"></script>
+<script>
+    if (api.isLoggedIn()) {
+        const validatingToken=api.token;
+        api.me().then(current => {
+            if(api.token!==validatingToken)return;
+            api.user = current; authStorage.set('pawcare_user', JSON.stringify(current));
+            window.location.href = '/';
+        }).catch(error => { if (api.token===validatingToken && error.status === 401 && !error.unexpectedResponse) api.clearAuth(); });
+    }
+    function selectRole(el, role) {
+        document.querySelectorAll('.role-option').forEach(o => o.classList.remove('selected'));
+        el.classList.add('selected');
+        document.getElementById('role').value = role;
+    }
+    function checkPwStrength() {
+        const password = document.getElementById('password').value;
+
+        updatePasswordRequirement(
+            'pwdLength',
+            password.length >= 8
+        );
+
+        updatePasswordRequirement(
+            'pwdUpper',
+            /[A-Z]/.test(password)
+        );
+
+        updatePasswordRequirement(
+            'pwdLower',
+            /[a-z]/.test(password)
+        );
+
+        updatePasswordRequirement(
+            'pwdNumber',
+            /[0-9]/.test(password)
+        );
+
+        updatePasswordRequirement(
+            'pwdSymbol',
+            /[^A-Za-z0-9]/.test(password)
+        );
+    }
+
+    function updatePasswordRequirement(id, valid) {
+        const element = document.getElementById(id);
+
+        if (valid) {
+            element.classList.remove('text-danger');
+            element.classList.add('text-success');
+
+            element.querySelector('i').className = 'bi bi-check-circle';
+        } else {
+            element.classList.remove('text-success');
+            element.classList.add('text-danger');
+
+            element.querySelector('i').className = 'bi bi-x-circle';
+        }
+    }
+    async function handleRegister(e) {
+        e.preventDefault();
+        const btn = document.getElementById('regBtn');
+        btn.disabled = true; btn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Creating...';
+        try {
+            const data = await api.register({
+                firstName: document.getElementById('firstName').value,
+                lastName: document.getElementById('lastName').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                password: document.getElementById('password').value,
+                role: document.getElementById('role').value
+            });
+            api.setAuth(data);
+            showToast('Account created!', 'success');
+            const pages = { ADMIN:'/pages/dashboard/admin.html', PET_OWNER:'/pages/dashboard/owner.html', VETERINARIAN:'/pages/dashboard/vet.html', GROOMER:'/pages/dashboard/groomer.html', STORE_MANAGER:'/pages/dashboard/store.html', SERVICE_STAFF:'/pages/dashboard/service.html' };
+            setTimeout(() => { window.location.href = pages[data.role] || '/'; }, 500);
+        } catch (err) {
+            showToast(err.message || 'Registration failed', 'error');
+            btn.disabled = false; btn.textContent = 'Create Account';
+        }
+    }
+</script>
+<script src="/js/groomer-fields.js?v=20261015-17"></script>
+<script src="/js/grooming-booking.js?v=20261015-18"></script>
+<script src="/js/registration.js?v=20261015-17"></script>
+<script src="/js/ui.js?v=20261015-5"></script>
+    <script src="/js/pawcare2.js?v=20261015-26"></script>
+<script src="/js/assistant-widget.js?v=1.0"></script>
+<script src="/js/site-shell.js?v=20261014-5"></script>
+</body>
+</html>

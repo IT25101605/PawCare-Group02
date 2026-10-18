@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preload" href="/vendor/fonts/font-5.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/vendor/fonts/font-11.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/vendor/fonts/font-17.woff2" as="font" type="font/woff2" crossorigin>
+<link href="/vendor/fonts/fonts.css?v=20261015-6" rel="stylesheet">
+<link href="/css/design.css?v=20261015-10" rel="stylesheet">
+    <title>Entertainment - PawCare</title>
+    <meta name="description" content="PawPause by PawCare: quick pet-themed mini games for little waiting moments. No login required.">
+    <link href="/vendor/bootstrap/bootstrap.min.css?v=5.3.2" rel="stylesheet">
+    <link href="/vendor/bootstrap-icons/bootstrap-icons.css?v=1.11.2" rel="stylesheet">
+    <link href="/css/style.css?v=20261015-10" rel="stylesheet">
+    <link href="/css/pawcare2.css?v=20261015-26" rel="stylesheet">
+    <link href="/css/entertainment.css?v=20261015-10" rel="stylesheet">
+    <link rel="icon" href="/images/paw.svg" type="image/svg+xml">
+    <meta name="theme-color" content="#c7b6e3">
+    <link href="/css/assistant-widget.css?v=20261015-24" rel="stylesheet">
+<link href="/css/navigation.css?v=20261016-2" rel="stylesheet">
+<link rel="stylesheet" href="/css/site-fixes.css?v=20261015-26">
+<link href="/css/page-loading.css?v=20261015-10" rel="stylesheet">
+<link href="/css/paw-cursor.css?v=20261015-20" rel="stylesheet">
+<link href="/css/workspace-polish.css?v=20261015-20" rel="stylesheet">
+<link href="/css/page-scenes.css?v=20261015-22" rel="stylesheet">
+</head>
+<body class="pc2-page pc2-entertainment has-shared-nav">
+<script src="/js/page-loading.js?v=20261015-20"></script>
+<script src="/js/paw-cursor.js?v=20261015-20"></script>
+    <nav id="mainNavbar" aria-label="Main navigation"><a href="/">PawCare</a></nav>
+<script src="/js/navigation.js?v=20261016-2"></script>
+
+    <main>
+        <section class="page-masthead pawpause-masthead masthead-scene masthead-entertainment">
+            <img class="masthead-scene-photo" src="/images/page-scenes/entertainment-playroom.webp" alt="A playful corgi and ginger kitten with a lilac tunnel and toys" width="1536" height="1024" fetchpriority="high">
+            <div class="container scene-content"><div class="scene-copy">
+                <span class="section-badge pawpause-badge"><i class="bi bi-controller me-1"></i> PawPause · no login needed</span>
+                <h1 class="display-4 fw-bold mt-3" style="color:#fff">A little joy while you wait.</h1>
+                <p class="lead mx-auto">Quick pet-themed games for little waiting moments. Play a round while your pet is in caring hands.</p>
+                <div class="pawpause-promise"><span><i class="bi bi-clock-history"></i> 1–5 minute games</span><span><i class="bi bi-person-check"></i> Guests welcome</span><span><i class="bi bi-phone"></i> Phone & desktop friendly</span></div>
+            </div></div>
+        </section>
+
+        <section class="section-padding pb-4">
+            <div class="container">
+                <div class="wait-studio card-pawcare">
+                    <div class="wait-studio-copy">
+                        <span class="eyebrow">Your tiny waiting-room companion</span>
+                        <h2>PawPause Timer</h2>
+                        <p>Pick how much time you want to fill. The timer stays with you while you play any game below.</p>
+                    </div>
+                    <div class="wait-timer-panel" aria-live="polite">
+                        <div class="wait-timer-ring"><span id="waitTimer">Ready</span><small id="waitTimerLabel">choose a pause</small></div>
+                        <div class="wait-presets" role="group" aria-label="PawPause timer length">
+                            <button type="button" class="wait-chip" data-pause-minutes="1">1 min</button>
+                            <button type="button" class="wait-chip" data-pause-minutes="3">3 min</button>
+                            <button type="button" class="wait-chip" data-pause-minutes="5">5 min</button>
+                            <button type="button" class="wait-chip wait-chip-stop" id="stopPause" disabled>Stop</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-padding pt-4 pawplay-zone">
+            <div class="container">
+                <div class="text-center mb-5">
+                    <span class="section-badge">Pick your little joy</span>
+                    <h2 class="section-title">Three mini games. Zero pressure.</h2>
+                    <p class="section-subtitle">Play as a guest or while signed in. Best scores are saved only in this browser.</p>
+                </div>
+
+                <div class="game-jump-grid mb-5">
+                    <a href="#treat-catch" class="game-jump-card"><span>01</span><i class="bi bi-bullseye"></i><div><strong>Treat Catch</strong><small>20-second reflex game</small></div></a>
+                    <a href="#paw-pairs" class="game-jump-card"><span>02</span><i class="bi bi-grid-3x3-gap"></i><div><strong>Paw Pairs</strong><small>Memory matching</small></div></a>
+                    <a href="#pet-trivia" class="game-jump-card"><span>03</span><i class="bi bi-lightbulb"></i><div><strong>Pet Trivia</strong><small>Quick knowledge sprint</small></div></a>
+                </div>
+
+                <article class="game-shell" id="treat-catch">
+                    <div class="game-header">
+                        <div><span class="game-kicker">QUICK REFLEX · 20 SEC</span><h3>Treat Catch</h3><p>Catch as many playful treats as you can before the clock runs out.</p></div>
+                        <div class="game-stats"><div><small>Score</small><strong id="catchScore">0</strong></div><div><small>Time</small><strong id="catchTime">20</strong></div><div><small>Best</small><strong id="catchBest">0</strong></div></div>
+                    </div>
+                    <div class="catch-board" id="catchBoard" aria-label="Treat Catch play area">
+                        <div class="catch-intro" id="catchIntro"><span>🦴</span><strong>Ready for a tiny challenge?</strong><small>The treat will move around this area.</small></div>
+                        <button type="button" id="catchTarget" class="catch-target" aria-label="Catch the treat" hidden>🦴</button>
+                    </div>
+                    <div class="game-actions"><button type="button" class="btn btn-pawcare" id="startCatch"><i class="bi bi-play-fill me-1"></i>Start 20-second game</button><span id="catchMessage" class="game-message" aria-live="polite">Tap Start when you're ready.</span></div>
+                </article>
+
+                <article class="game-shell" id="paw-pairs">
+                    <div class="game-header">
+                        <div><span class="game-kicker">MEMORY · 6 PAIRS</span><h3>Paw Pairs</h3><p>Flip two cards at a time and find all the matching pet pairs.</p></div>
+                        <div class="game-stats"><div><small>Moves</small><strong id="pairMoves">0</strong></div><div><small>Matches</small><strong id="pairMatches">0/6</strong></div><div><small>Best</small><strong id="pairBest">—</strong></div></div>
+                    </div>
+                    <div class="pair-board" id="pairBoard" aria-label="Paw Pairs memory board"></div>
+                    <div class="game-actions"><button type="button" class="btn btn-pawcare" id="newPairs"><i class="bi bi-shuffle me-1"></i>New board</button><span id="pairMessage" class="game-message" aria-live="polite">Find all six pairs.</span></div>
+                </article>
+
+                <article class="game-shell" id="pet-trivia">
+                    <div class="game-header">
+                        <div><span class="game-kicker">TRIVIA · 5 QUESTIONS</span><h3>Pet Trivia Sprint</h3><p>Five friendly pet-care questions. See how many you can get right.</p></div>
+                        <div class="game-stats"><div><small>Score</small><strong id="triviaScore">0</strong></div><div><small>Question</small><strong id="triviaProgress">1/5</strong></div><div><small>Best</small><strong id="triviaBest">0/5</strong></div></div>
+                    </div>
+                    <div class="trivia-stage">
+                        <div class="trivia-icon" id="triviaIcon">🐾</div>
+                        <h4 id="triviaQuestion">Loading a question…</h4>
+                        <div class="trivia-options" id="triviaOptions"></div>
+                        <div class="trivia-feedback" id="triviaFeedback" aria-live="polite"></div>
+                    </div>
+                    <div class="game-actions"><button type="button" class="btn btn-pawcare" id="nextTrivia" disabled>Next question <i class="bi bi-arrow-right ms-1"></i></button><button type="button" class="btn btn-pawcare-outline" id="restartTrivia"><i class="bi bi-arrow-clockwise me-1"></i>Restart</button></div>
+                </article>
+            </div>
+        </section>
+
+        <section class="section-padding pt-0">
+            <div class="container">
+                <div class="pawpause-note">
+                    <div class="pawpause-note-icon">🐾</div>
+                    <div><span class="eyebrow">The PawCare idea</span><h3>Care for them. A little calm for you.</h3><p>PawPause is our small “in-between moments” space — something light to enjoy while your pet is with a veterinarian or groomer, while you wait for an appointment, or simply when you need a cheerful minute.</p></div>
+                    <a href="/pages/veterinarians.html" class="btn btn-pawcare-outline">Meet our vets <i class="bi bi-arrow-up-right ms-1"></i></a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer-section"><div class="container"><div class="row g-4"><div class="col-md-5"><a href="/" class="navbar-brand-pawcare"><i class="bi bi-heart-pulse-fill"></i>PawCare</a><p class="mt-3">A little care. A happier life.<br>Here for every chapter of pet parenting.</p></div><div class="col-6 col-md-3"><h5>A world of care</h5><ul class="footer-links"><li><a href="/pages/veterinarians.html">Veterinarians</a></li><li><a href="/pages/grooming.html">Grooming</a></li><li><a href="/pages/entertainment.html">Entertainment</a></li><li><a href="/pages/store.html">The pet store</a></li></ul></div><div class="col-6 col-md-4"><h5>Here for you</h5><ul class="footer-links"><li><a href="/pages/contact.html">Get in touch</a></li><li><a href="/pages/login.html">Your account</a></li><li><a href="tel:+94715473916">+94 71 547 3916</a></li></ul></div></div><div class="footer-bottom"><p class="mb-0">© 2026 PawCare. All paws welcome.</p><a href="/">Back to our world ↗</a></div></div></footer>
+
+    <script src="/vendor/bootstrap/bootstrap.bundle.min.js?v=5.3.2"></script>
+    <script src="/js/api.js?v=20261016-2"></script><script src="/js/forms.js?v=20261015-17"></script>
+    <script src="/js/ui.js?v=20261015-5"></script>
+    <script src="/js/pawcare2.js?v=20261015-26"></script>
+    <script src="/js/entertainment.js?v=20261015-26"></script>
+    <script src="/js/assistant-widget.js?v=1.0"></script>
+<script src="/js/site-shell.js?v=20261014-5"></script>
+</body>
+</html>

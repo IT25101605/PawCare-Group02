@@ -1,0 +1,30 @@
+# Maven build artifacts and editor metadata
+target/
+build/
+.idea/
+.vscode/
+.settings/
+.classpath
+.project
+*.iml
+*.log
+.DS_Store
+Thumbs.db
+
+# Local credentials, environment files and user data
+.env
+.env.*
+!.env.example
+*.local.properties
+/uploads/*
+!/uploads/.gitkeep
+/private-uploads/*
+!/private-uploads/.gitkeep
+
+# Local/private keys and generated files
+*.keystore
+*.jks
+*.p12
+*.pem
+*.key
+*.class

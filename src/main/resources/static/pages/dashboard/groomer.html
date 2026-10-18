@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preload" href="/vendor/fonts/font-5.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/vendor/fonts/font-11.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/vendor/fonts/font-17.woff2" as="font" type="font/woff2" crossorigin>
+<link href="/vendor/fonts/fonts.css?v=20261015-6" rel="stylesheet">
+<link href="/css/design.css?v=20261015-10" rel="stylesheet">
+    <title>Groomer Dashboard - PawCare</title>
+    <link href="/vendor/bootstrap/bootstrap.min.css?v=5.3.2" rel="stylesheet">
+    <link href="/vendor/bootstrap-icons/bootstrap-icons.css?v=1.11.2" rel="stylesheet">
+    <link href="/css/style.css?v=20261015-10" rel="stylesheet">
+    <link href="/css/pawcare2.css?v=20261015-26" rel="stylesheet">
+    <link href="/css/grooming.css?v=20261015-22" rel="stylesheet">
+    <link rel="icon" href="/images/paw.svg" type="image/svg+xml">
+    <meta name="theme-color" content="#c7b6e3">
+<link href="/css/assistant-widget.css?v=20261015-24" rel="stylesheet">
+<link href="/css/navigation.css?v=20261016-2" rel="stylesheet">
+<link rel="stylesheet" href="/css/site-fixes.css?v=20261015-26">
+<link href="/css/page-loading.css?v=20261015-10" rel="stylesheet">
+<link href="/css/paw-cursor.css?v=20261015-20" rel="stylesheet">
+<link href="/css/workspace-polish.css?v=20261015-20" rel="stylesheet">
+</head>
+<body class="workspace-page pc2-page pc2-workspace groomer-studio has-shared-nav">
+<script src="/js/page-loading.js?v=20261015-20"></script>
+<script src="/js/paw-cursor.js?v=20261015-20"></script>
+<nav id="mainNavbar" aria-label="Main navigation"><a href="/">PawCare</a></nav>
+<script src="/js/navigation.js?v=20261016-2"></script>
+    <div class="dashboard-sidebar" id="sidebar">
+        <div class="sidebar-brand"><h4><a class="sidebar-home" href="/" aria-label="PawCare homepage"><i class="bi bi-heart-pulse-fill me-2"></i>PawCare</a></h4><small class="text-white-50">Groomer</small></div>
+        <nav class="sidebar-nav">
+            <div class="nav-item"><a class="nav-link active" href="#" onclick="showSection('overview')"><i class="bi bi-house-heart"></i>Overview</a></div>
+            <div class="nav-item"><a class="nav-link" href="#" onclick="showSection('appointments')"><i class="bi bi-scissors"></i>My Appointments</a></div>
+            <div class="nav-item"><a class="nav-link" href="#" onclick="showSection('all')"><i class="bi bi-calendar-week"></i>My Schedule</a></div>
+            <div class="nav-item"><a class="nav-link" href="#" onclick="event.preventDefault();openAccount()"><i class="bi bi-person-circle"></i>My Account</a></div>
+            <hr class="mx-3" style="border-color:rgba(255,255,255,0.1)">
+            <div class="nav-item"><a class="nav-link" href="/pages/entertainment.html"><i class="bi bi-controller"></i>Entertainment</a></div>
+            <div class="nav-item"><a class="nav-link" href="/"><i class="bi bi-house"></i>Back to Site</a></div>
+            <div class="nav-item"><a class="nav-link" href="#" onclick="logout()"><i class="bi bi-box-arrow-left"></i>Logout</a></div>
+        </nav>
+    </div>
+    <div class="dashboard-content">
+        <div class="dashboard-header">
+            <div><h4 class="fw-bold mb-0">Groomer Dashboard</h4><small class="text-muted">Welcome, <span id="gName"></span></small></div>
+            <button class="btn btn-pawcare-outline d-lg-none" onclick="document.getElementById('sidebar').classList.toggle('show')"><i class="bi bi-list"></i></button>
+        </div>
+
+        <div id="section-overview">
+            <div class="groom-workspace-heading"><div><span class="groom-eyebrow">THE GROOMING STUDIO</span><h2>Your day, with a little more care.</h2><p>Prepare for each pet, follow their progress, and share how it went.</p></div><div><label for="groomQueueDate" class="form-label small">Visit date</label><input type="date" id="groomQueueDate" class="form-control" onchange="loadGroomerDay()"></div></div>
+            <div id="groomDayStats" class="groom-visit-grid" aria-live="polite"></div>
+            <div class="groom-queue-heading"><h5 class="fw-bold mb-0">The visit list</h5><button class="btn btn-sm btn-pawcare-outline" onclick="loadGroomerDay()"><i class="bi bi-arrow-clockwise"></i> Refresh</button></div>
+            <div id="groomDayQueue" class="mb-4" aria-live="polite"><p class="text-muted">Loading your visits…</p></div>
+            <div id="groomerProfileHome" class="card-pawcare p-4 mb-4"><div class="loading-spinner"></div></div>
+            <div class="d-flex justify-content-between align-items-end mb-3"><div><h5 class="fw-bold mb-1">What pet owners are saying</h5><p class="text-muted small mb-0">Reviews from completed grooming appointments assigned to you.</p></div></div>
+            <div id="groomerReviewHome" class="row g-3"><div class="col-12 text-muted small">Loading reviews…</div></div>
+        </div>
+
+        <div id="section-appointments" style="display:none">
+            <h5 class="fw-bold mb-3">My Grooming Appointments</h5>
+            <div class="card-pawcare"><div class="table-responsive"><table class="table table-pawcare mb-0"><thead><tr><th>Appointment / Pet</th><th>Owner</th><th>Service</th><th>Date / Time</th><th>Price</th><th>Instructions</th><th>Status</th><th>Action</th></tr></thead><tbody id="gTable"></tbody></table></div></div>
+        </div>
+
+        <div id="section-all" style="display:none">
+            <h5 class="fw-bold mb-3">My Grooming Schedule</h5>
+            <div class="card-pawcare"><div class="table-responsive"><table class="table table-pawcare mb-0"><thead><tr><th>Appointment / Pet</th><th>Owner</th><th>Service</th><th>Date / Time</th><th>Price</th><th>Status</th></tr></thead><tbody id="allTable"></tbody></table></div></div>
+        </div>
+    </div>
+
+    <script src="/vendor/bootstrap/bootstrap.bundle.min.js?v=5.3.2"></script>
+    <script src="/js/api.js?v=20261016-2"></script><script src="/js/forms.js?v=20261015-17"></script>
+    <script>
+        if (!api.isLoggedIn() || api.getRole() !== 'GROOMER') window.location.href = '/pages/login.html';
+        document.getElementById('gName').textContent = api.user?.firstName;
+
+        function showSection(name) {
+            document.querySelectorAll('[id^="section-"]').forEach(s => s.style.display = 'none');
+            document.getElementById('section-' + name).style.display = 'block';
+            document.querySelectorAll('.sidebar-nav .nav-link, .pc2-mobile-nav a').forEach(link=>{
+                const active=(link.getAttribute('onclick')||'').includes("showSection('"+name+"')");
+                link.classList.toggle('active',active);
+                if(active)link.setAttribute('aria-current','page');else link.removeAttribute('aria-current');
+            });
+            if (name === 'overview') {loadGroomerProfile();loadGroomerDay();}
+            if (name === 'appointments') loadMy();
+            if (name === 'all') loadAll();
+        }
+
+
+        function groomerHomeAvatar(g){
+            if(g.profileImage)return `<img class="groomer-home-avatar" src="${escapeHtml(g.profileImage)}" alt="${escapeHtml(g.name)} profile photo">`;
+            const initials=(g.name||'G').split(/\s+/).filter(Boolean).slice(0,2).map(x=>x[0]).join('').toUpperCase();
+            return `<div class="groomer-home-avatar groomer-card-fallback">${escapeHtml(initials||'G')}</div>`;
+        }
+        async function loadGroomerProfile(){
+            try{
+                const groomers=await api.get('/groomers');
+                const g=(groomers||[]).find(x=>Number(x.id)===Number(api.user?.id));
+                if(!g)throw new Error('Your groomer profile is not available yet.');
+                const rating=g.totalReviews?`${Number(g.averageRating||0).toFixed(1)} / 5`:'New';
+                document.getElementById('groomerProfileHome').innerHTML=`<div class="groomer-home-profile">${groomerHomeAvatar(g)}<div class="flex-grow-1"><span class="section-badge mb-2">Your public groomer profile</span><h3 class="mb-1">${escapeHtml(g.name)}</h3><p class="text-muted mb-2">${escapeHtml(g.specialty||'Professional pet groomer')}${g.experienceYears!=null?` · ${g.experienceYears} years experience`:''}<br><small><i class=\"bi bi-mortarboard me-1\"></i>Qualification: ${escapeHtml(g.qualification||'Not provided yet')}</small></p><div class="d-flex flex-wrap gap-2 align-items-center"><span class="groomer-rating large"><i class="bi bi-star-fill"></i>${rating}${g.totalReviews?` <small>(${g.totalReviews} review${g.totalReviews===1?'':'s'})</small>`:''}</span><button class="btn btn-sm btn-pawcare-outline" onclick="openAccount()"><i class="bi bi-camera me-1"></i>Edit profile & photo</button></div><p class="small text-muted mt-3 mb-0">This photo, rating and your latest customer reviews are visible to owners choosing a groomer.</p></div></div>`;
+                document.getElementById('groomerReviewHome').innerHTML=(g.recentReviews||[]).map(r=>`<div class="col-md-6 col-xl-4"><article class="review-home-card"><div class="text-warning mb-2">${'★'.repeat(Number(r.rating||0))}${'☆'.repeat(Math.max(0,5-Number(r.rating||0)))}</div><p class="mb-2">“${escapeHtml(r.review||'')}”</p><small class="text-muted">${escapeHtml(r.userName||'Pet owner')} · ${escapeHtml(r.petName||'Pet')}</small></article></div>`).join('')||'<div class="col-12"><div class="card-pawcare p-4 text-muted">No customer reviews yet. Completed appointments can be reviewed by their owners.</div></div>';
+            }catch(e){document.getElementById('groomerProfileHome').innerHTML=`<div class="text-danger">${escapeHtml(e.message)}</div>`;document.getElementById('groomerReviewHome').innerHTML='';}
+        }
+
+        async function loadMy(page=0) {
+            try {
+                const data = await api.getGroomerAppointments(page);
+                renderPager("gTable",data,loadMy);
+                document.getElementById('gTable').innerHTML = (data.content || []).map(g => `
+                    <tr><td class="fw-semibold">${escapeHtml(g.petName)}<small class="d-block text-muted">Pet ID: ${g.petId} · Appointment ID: ${g.id}</small></td><td>${escapeHtml(g.ownerName)}</td><td>${escapeHtml(g.serviceName)}</td><td>${formatDate(g.appointmentDate)}<br>${g.appointmentTime}<small class="d-block text-muted">${escapeHtml(g.groomerName||"Assigned to you")}</small></td>
+                    <td>${formatCurrency(g.totalPrice)}</td><td style="font-size:0.82rem;max-width:150px">${groomingComfortBadge(g.comfortProfile)}<div class="mt-1">${escapeHtml(g.specialInstructions || '-')}</div></td><td>${statusBadge(g.status)}</td>
+                    <td>${groomStatusControl(g)}<button class="btn btn-sm btn-pawcare-outline mt-1" onclick="openGroomingVisit(${g.id})">Checklist & report</button></td></tr>
+                `).join('') || '<tr><td colspan="8" class="empty-state">No appointments assigned</td></tr>';
+            } catch(e) { showToast(e.message || 'Unable to load data. Please try again.','error'); }
+        }
+
+        async function loadAll(page=0) {
+            try {
+                const data = await api.getGroomerAppointments(page);
+                renderPager("allTable",data,loadAll);
+                document.getElementById('allTable').innerHTML = (data.content || []).map(g => `
+                    <tr><td class="fw-semibold">${escapeHtml(g.petName)}<small class="d-block text-muted">Pet ID: ${g.petId} · Appointment ID: ${g.id}</small></td><td>${escapeHtml(g.ownerName)}</td><td>${escapeHtml(g.serviceName)}</td>
+                    <td>${formatDate(g.appointmentDate)}<br>${g.appointmentTime}<small class="d-block text-muted">${escapeHtml(g.groomerName||"Assigned to you")}</small></td><td>${formatCurrency(g.totalPrice)}</td><td>${statusBadge(g.status)}</td></tr>
+                `).join('') || '<tr><td colspan="6" class="empty-state">No bookings</td></tr>';
+            } catch(e) { showToast(e.message || 'Unable to load data. Please try again.','error'); }
+        }
+
+        async function upd(id,status){try{await api.updateGrooming(id,{status});showToast('Visit updated','success');}catch(e){showToast(e.message,'error');}finally{loadMy();loadGroomerDay();}}
+        loadGroomerProfile();
+    </script>
+    <script src="/js/grooming-studio.js?v=20261014-3"></script>
+    <script src="/js/groomer-workspace.js?v=20261014-3"></script>
+    <script src="/js/groomer-fields.js?v=20261015-17"></script>
+<script src="/js/account.js?v=20261015-26"></script>
+    <script src="/js/ui.js?v=20261015-5"></script>
+    <script src="/js/pawcare2.js?v=20261015-26"></script>
+<script src="/js/assistant-widget.js?v=1.0"></script>
+<script src="/js/site-shell.js?v=20261014-5"></script>
+</body>
+</html>

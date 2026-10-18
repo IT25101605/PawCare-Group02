@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preload" href="/vendor/fonts/font-5.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/vendor/fonts/font-11.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/vendor/fonts/font-17.woff2" as="font" type="font/woff2" crossorigin>
+<link href="/vendor/fonts/fonts.css?v=20261015-6" rel="stylesheet">
+<link href="/css/design.css?v=20261015-10" rel="stylesheet">
+    <title>Admin Dashboard - PawCare</title>
+    <link href="/vendor/bootstrap/bootstrap.min.css?v=5.3.2" rel="stylesheet">
+    <link href="/vendor/bootstrap-icons/bootstrap-icons.css?v=1.11.2" rel="stylesheet">
+    <link href="/css/style.css?v=20261015-10" rel="stylesheet">
+    <link href="/css/pawcare2.css?v=20261015-26" rel="stylesheet">
+    <link rel="icon" href="/images/paw.svg" type="image/svg+xml">
+    <meta name="theme-color" content="#c7b6e3">
+    <script src="/vendor/chart/chart.umd.min.js?v=4.4.1"></script>
+<link href="/css/assistant-widget.css?v=20261015-24" rel="stylesheet">
+<link href="/css/navigation.css?v=20261016-2" rel="stylesheet">
+<link rel="stylesheet" href="/css/site-fixes.css?v=20261015-26">
+<link href="/css/page-loading.css?v=20261015-10" rel="stylesheet">
+<link href="/css/paw-cursor.css?v=20261015-20" rel="stylesheet">
+<link href="/css/workspace-polish.css?v=20261015-20" rel="stylesheet">
+</head>
+<body class="workspace-page pc2-page pc2-workspace has-shared-nav">
+<script src="/js/page-loading.js?v=20261015-20"></script>
+<script src="/js/paw-cursor.js?v=20261015-20"></script>
+<nav id="mainNavbar" aria-label="Main navigation"><a href="/">PawCare</a></nav>
+<script src="/js/navigation.js?v=20261016-2"></script>
+    <div class="dashboard-sidebar" id="sidebar">
+        <div class="sidebar-brand"><h4><a class="sidebar-home" href="/" aria-label="PawCare homepage"><i class="bi bi-heart-pulse-fill me-2"></i>PawCare</a></h4><small class="text-white-50">Admin Panel</small></div>
+        <nav class="sidebar-nav">
+            <div class="nav-item"><a class="nav-link active" href="#" onclick="showSection('overview')"><i class="bi bi-grid-1x2"></i>Overview</a></div>
+            <div class="nav-item"><a class="nav-link" href="#" onclick="showSection('users')"><i class="bi bi-people"></i>Users</a></div>
+            <div class="nav-item"><a class="nav-link" href="#" onclick="showSection('appointments')"><i class="bi bi-calendar-check"></i>Appointments</a></div>
+            <div class="nav-item"><a class="nav-link" href="#" onclick="showSection('orders')"><i class="bi bi-cart"></i>Orders</a></div>
+            <div class="nav-item"><a class="nav-link" href="#" onclick="showSection('products')"><i class="bi bi-box-seam"></i>Products</a></div>
+            <div class="nav-item"><a class="nav-link" href="#" onclick="showSection('grooming-services')"><i class="bi bi-scissors"></i>Grooming Services</a></div>
+            <div class="nav-item"><a class="nav-link" href="#" onclick="showSection('reviews')"><i class="bi bi-star"></i>Reviews</a></div>
+            <div class="nav-item"><a class="nav-link" href="#" onclick="showSection('reports')"><i class="bi bi-bar-chart-line"></i>Reports</a></div>
+            <hr class="mx-3" style="border-color:rgba(255,255,255,0.1)">
+            <div class="nav-item"><a class="nav-link" href="/pages/entertainment.html"><i class="bi bi-controller"></i>Entertainment</a></div>
+            <div class="nav-item"><a class="nav-link" href="/"><i class="bi bi-house"></i>Back to Site</a></div>
+            <div class="nav-item"><a class="nav-link" href="#" onclick="logout()"><i class="bi bi-box-arrow-left"></i>Logout</a></div>
+        </nav>
+    </div>
+
+    <div class="dashboard-content">
+        <div class="dashboard-header">
+            <div><h4 class="fw-bold mb-0">Admin Dashboard</h4><small class="text-muted">Welcome, <span id="adminName"></span></small></div>
+            <button class="btn btn-pawcare-outline d-lg-none" onclick="document.getElementById('sidebar').classList.toggle('show')"><i class="bi bi-list"></i></button>
+        </div>
+
+        <!-- Overview -->
+        <div id="section-overview">
+            <div class="row g-4 mb-4">
+                <div class="col-md-3"><div class="stat-card"><div class="stat-icon card-icon-primary"><i class="bi bi-people"></i></div><div class="stat-value" id="statUsers">0</div><div class="stat-label">Total Users</div></div></div>
+                <div class="col-md-3"><div class="stat-card"><div class="stat-icon card-icon-secondary"><i class="bi bi-bug"></i></div><div class="stat-value" id="statPets">0</div><div class="stat-label">Total Pets</div></div></div>
+                <div class="col-md-3"><div class="stat-card"><div class="stat-icon card-icon-accent"><i class="bi bi-calendar-check"></i></div><div class="stat-value" id="statAppts">0</div><div class="stat-label">Appointments</div></div></div>
+                <div class="col-md-3"><div class="stat-card"><div class="stat-icon card-icon-success"><i class="bi bi-currency-dollar"></i></div><div class="stat-value" id="statRevenue">Rs. 0</div><div class="stat-label">Total Revenue</div></div></div>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-6"><div class="card-pawcare p-4"><h6 class="fw-bold mb-3">Appointments by Status</h6><canvas id="appointmentsChart"></canvas></div></div>
+                <div class="col-lg-6"><div class="card-pawcare p-4"><h6 class="fw-bold mb-3">Orders by Status</h6><canvas id="ordersChart"></canvas></div></div>
+            </div>
+        </div>
+
+        <!-- Users -->
+        <div id="section-users" style="display:none">
+            <div class="d-flex justify-content-between mb-3"><h5 class="fw-bold">User Management</h5>
+            <input type="text" id="userSearch" class="form-control form-control-pawcare w-auto" placeholder="Search users..." onkeyup="loadUsers()"></div>
+            <div class="card-pawcare"><div class="table-responsive"><table class="table table-pawcare mb-0"><thead><tr><th>Name</th><th>Email</th><th>Role</th><th>Status</th><th>Actions</th></tr></thead><tbody id="usersTable"></tbody></table></div></div>
+        </div>
+
+        <!-- Appointments -->
+        <div id="section-appointments" style="display:none">
+            <h5 class="fw-bold mb-3">All Appointments</h5>
+            <div class="card-pawcare"><div class="table-responsive"><table class="table table-pawcare mb-0"><thead><tr><th>Pet</th><th>Owner</th><th>Vet</th><th>Date</th><th>Status</th><th>Actions</th></tr></thead><tbody id="appointmentsTable"></tbody></table></div></div>
+        </div>
+
+        <!-- Orders -->
+        <div id="section-orders" style="display:none">
+            <h5 class="fw-bold mb-3">All Orders</h5>
+            <div class="card-pawcare"><div class="table-responsive"><table class="table table-pawcare mb-0"><thead><tr><th>Order #</th><th>Customer</th><th>Total</th><th>Status</th><th>Actions</th></tr></thead><tbody id="ordersTable"></tbody></table></div></div>
+        </div>
+
+        <!-- Products -->
+        <div id="section-products" style="display:none">
+            <h5 class="fw-bold mb-3">Product Management</h5><a class="btn btn-sm btn-pawcare mb-3" href="/pages/dashboard/store.html#addProduct">Add Product / Category</a>
+            <div class="card-pawcare"><div class="table-responsive"><table class="table table-pawcare mb-0"><thead><tr><th>Name</th><th>Category</th><th>Price</th><th>Stock</th><th>Featured</th><th>Actions</th></tr></thead><tbody id="productsTable"></tbody></table></div></div>
+        </div>
+
+        <div id="section-grooming-services" style="display:none">
+            <div class="d-flex justify-content-between align-items-center mb-3"><h5 class="fw-bold">Grooming Services</h5><button class="btn btn-pawcare" onclick="editGroomingService()">Add grooming service</button></div>
+            <p class="text-muted">Active services appear on the grooming page and in booking. Disable a service to stop new bookings.</p>
+            <div class="card-pawcare p-3 mb-3"><div class="row g-3"><div class="col-md-5"><label class="form-label" for="groomingServiceSearch">Search services</label><input id="groomingServiceSearch" class="form-control" type="search" placeholder="Search name or description" oninput="renderGroomingServicesAdmin()"></div><div class="col-md-3"><label class="form-label" for="groomingServiceFilter">Status</label><select id="groomingServiceFilter" class="form-select" onchange="renderGroomingServicesAdmin()"><option value="ALL">All services</option><option value="ACTIVE">Active</option><option value="INACTIVE">Inactive</option></select></div><div class="col-md-4"><label class="form-label" for="groomingServiceSort">Sort by</label><select id="groomingServiceSort" class="form-select" onchange="renderGroomingServicesAdmin()"><option value="NAME">Name</option><option value="PRICE_ASC">Price: low to high</option><option value="PRICE_DESC">Price: high to low</option><option value="DURATION">Duration</option></select></div></div><div class="d-flex flex-wrap justify-content-between gap-2 mt-3"><p id="groomingServiceSummary" class="small text-muted mb-0" role="status"></p><button class="btn btn-sm btn-pawcare-outline" onclick="loadGroomingServicesAdmin()">Refresh services</button></div></div>
+            <p id="groomingServiceError" class="text-danger" role="alert"></p>
+            <div class="card-pawcare table-responsive"><table class="table table-pawcare mb-0"><thead><tr><th>Service</th><th>Duration</th><th>Price</th><th>Status</th><th>Actions</th></tr></thead><tbody id="groomingServiceTable"></tbody></table></div>
+        </div>
+
+        <!-- Review Management -->
+        <div id="section-reviews" style="display:none">
+            <div class="d-flex flex-wrap justify-content-between align-items-end gap-2 mb-3">
+                <div><h5 class="fw-bold mb-1">Review Management</h5><p class="text-muted small mb-0">Customer reviews publish immediately. Admin can review reported content and hide or delete a review when necessary.</p></div>
+                <select id="reviewModerationFilter" class="form-select form-select-sm" style="width:auto" onchange="loadReviewModeration(0)"><option value="ALL">All reviews</option><option value="REPORTED">Reported only</option></select>
+            </div>
+            <div class="card-pawcare"><div class="table-responsive"><table class="table table-pawcare mb-0"><thead><tr><th>Type / Subject</th><th>Owner</th><th>Rating</th><th>Review</th><th>Visibility</th><th>Actions</th></tr></thead><tbody id="reviewModerationTable"></tbody></table></div></div>
+        </div>
+
+        <!-- Reports (Management) -->
+        <div id="section-reports" style="display:none">
+            <h5 class="fw-bold mb-3">Management Reports & Summaries</h5>
+            <div class="row g-4 mb-4">
+                <div class="col-md-2"><div class="stat-card text-center"><div class="stat-value" id="rUsers">0</div><div class="stat-label">Users</div></div></div>
+                <div class="col-md-2"><div class="stat-card text-center"><div class="stat-value" id="rPets">0</div><div class="stat-label">Pets</div></div></div>
+                <div class="col-md-2"><div class="stat-card text-center"><div class="stat-value" id="rAppts">0</div><div class="stat-label">Appointments</div></div></div>
+                <div class="col-md-2"><div class="stat-card text-center"><div class="stat-value" id="rOrders">0</div><div class="stat-label">Orders</div></div></div>
+                <div class="col-md-2"><div class="stat-card text-center"><div class="stat-value" id="rPayments">0</div><div class="stat-label">Payments</div></div></div>
+                <div class="col-md-2"><div class="stat-card text-center"><div class="stat-value" id="rRevenue">Rs. 0</div><div class="stat-label">Revenue</div></div></div>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-6"><div class="card-pawcare p-4"><h6 class="fw-bold mb-3">Appointment Distribution</h6><canvas id="rApptChart"></canvas></div></div>
+                <div class="col-lg-6"><div class="card-pawcare p-4"><h6 class="fw-bold mb-3">Order Distribution</h6><canvas id="rOrderChart"></canvas></div></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/vendor/bootstrap/bootstrap.bundle.min.js?v=5.3.2"></script>
+    <script src="/js/api.js?v=20261016-2"></script><script src="/js/grooming-images.js?v=20261015-8"></script><script src="/js/admin-grooming-services.js?v=20261015-8"></script><script src="/js/forms.js?v=20261015-17"></script>
+    <script src="/js/groomer-fields.js?v=20261015-17"></script><script src="/js/admin-groomer-details.js?v=20261015-16"></script>
+    <script>
+        if (!api.isLoggedIn() || api.getRole() !== 'ADMIN') window.location.href = '/pages/login.html';
+        document.getElementById('adminName').textContent = api.user?.firstName || 'Admin';
+        const chartColors = ['#8062aa','#b49acf','#c897b3','#d9bc89','#86ad98','#919ec2','#b8adbf'];
+        const reportCharts = {};
+        function replaceChart(key, canvasId, config) {
+            const canvas = document.getElementById(canvasId);
+            if (!canvas || typeof Chart === 'undefined') return false;
+            try {
+                if (reportCharts[key]) { reportCharts[key].destroy(); reportCharts[key] = null; }
+                const existing = typeof Chart.getChart === 'function' ? Chart.getChart(canvas) : null;
+                if (existing) existing.destroy();
+                reportCharts[key] = new Chart(canvas, config);
+                return true;
+            } catch (chartError) {
+                console.warn('PawCare report chart could not be rendered', chartError);
+                return false;
+            }
+        }
+
+        function showSection(name) {
+            document.querySelectorAll('[id^="section-"]').forEach(s => s.style.display = 'none');
+            document.getElementById('section-' + name).style.display = 'block';
+            document.querySelectorAll('.sidebar-nav .nav-link').forEach(l => l.classList.remove('active'));
+            window.event?.target?.closest('.nav-link')?.classList.add('active');
+            if (name === 'users') loadUsers();
+            if (name === 'appointments') loadAppointments();
+            if (name === 'orders') loadOrders();
+            if (name === 'products') loadProductsAdmin();
+            if (name === 'grooming-services') loadGroomingServicesAdmin();
+            if (name === 'reviews') loadReviewModeration();
+            if (name === 'reports') loadReports();
+        }
+
+        async function loadDashboard() {
+            try {
+                const d = await api.getAdminDashboard();
+                document.getElementById('statUsers').textContent = d.totalUsers;
+                document.getElementById('statPets').textContent = d.totalPets;
+                document.getElementById('statAppts').textContent = d.totalAppointments;
+                document.getElementById('statRevenue').textContent = formatCurrency(d.totalRevenue);
+                if (d.appointmentsByStatus) {
+                    new Chart(document.getElementById('appointmentsChart'), {
+                        type: 'doughnut',
+                        data: { labels: Object.keys(d.appointmentsByStatus), datasets: [{ data: Object.values(d.appointmentsByStatus), backgroundColor: chartColors }] },
+                        options: { responsive: true, plugins: { legend: { position: 'bottom' } } }
+                    });
+                }
+                if (d.ordersByStatus) {
+                    new Chart(document.getElementById('ordersChart'), {
+                        type: 'bar',
+                        data: { labels: Object.keys(d.ordersByStatus), datasets: [{ label: 'Orders', data: Object.values(d.ordersByStatus), backgroundColor: '#987cb8', borderRadius: 10 }] },
+                        options: { responsive: true, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true } } }
+                    });
+                }
+            } catch (e) { showToast('Failed to load dashboard', 'error'); }
+        }
+
+        async function loadContactMessages() {
+            try {
+                const data=await api.get('/contact');
+                let panel=document.getElementById('contactMessages');
+                if(!panel){panel=document.createElement('div');panel.id='contactMessages';panel.className='card-pawcare p-4 mt-4';document.getElementById('section-users').append(panel);}
+                panel.innerHTML='<h5>Contact messages</h5>'+data.content.map(m=>'<article class="border-bottom py-3"><strong>'+escapeHtml(m.subject)+'</strong><p class="small">'+escapeHtml(m.name)+' · '+escapeHtml(m.email)+'</p><p style="white-space:pre-wrap">'+escapeHtml(m.message)+'</p></article>').join('');
+            }catch(e){showToast(e.message,'error');}
+        }
+        async function loadUsers() {
+            loadContactMessages();
+            try {
+                const search = document.getElementById('userSearch')?.value || '';
+                const data = await api.getAllUsers(0, search);
+                document.getElementById('usersTable').innerHTML = (data.content || []).map(u => `
+                    <tr><td class="fw-semibold">${escapeHtml(u.firstName)} ${escapeHtml(u.lastName)}</td><td>${escapeHtml(u.email)}</td>
+                    <td><span class="badge" style="background:rgba(13,115,119,0.1);color:var(--primary);font-size:0.75rem">${u.role}</span></td>
+                    <td>${u.enabled ? '<span class="text-success"><i class="bi bi-check-circle-fill me-1"></i>Active</span>' : '<span class="text-danger"><i class="bi bi-x-circle-fill me-1"></i>Disabled</span>'}</td>
+                    <td>${u.role==='GROOMER'?`<button class="btn btn-sm btn-pawcare-outline me-1" onclick="editGroomerDetails(${u.id})">Edit details</button>`:''}${u.role!=='PET_OWNER' && u.role!=='ADMIN'?`<button class="btn btn-sm btn-pawcare-outline me-1" onclick="reviewApplication(${u.id},${u.enabled})">Review</button>`:''}<button class="btn btn-sm btn-outline-danger" onclick="deleteUser(${u.id})"><i class="bi bi-trash"></i></button></td></tr>
+                `).join('') || '<tr><td colspan="5" class="empty-state">No users found</td></tr>';
+            } catch(e) { showToast(e.message || 'Unable to load data. Please try again.','error'); }
+        }
+
+        async function reviewApplication(id,enabled) {
+            try {
+                const profile=await api.get('/users/'+id+'/professional-profile');
+                const details=Object.entries(profile).filter(([k,v])=>v!==null).map(([k,v])=>k.replace(/([A-Z])/g,' $1')+': '+v).join('\n');
+                if(enabled) {await pawAlert(details,{title:'Professional account details',type:'info',confirmText:'Close'});return;}
+                if(await pawConfirm(details+'\n\nApprove this professional account?',{title:'Approve professional account?',type:'warning',confirmText:'Approve Account'})) {
+                    await api.put('/users/'+id,{enabled:true});showToast('Account approved','success');loadUsers();
+                }
+            } catch(e) {showToast(e.message,'error');}
+        }
+        async function deleteUser(id) {
+            if (!await pawConfirm('Delete this user? This action cannot be undone.',{title:'Delete user?',type:'danger',confirmText:'Delete User'})) return;
+            try { await api.deleteUser(id); showToast('User deleted', 'success'); loadUsers(); } catch (e) { showToast(e.message, 'error'); }
+        }
+
+        const adminValidVetTransitions={SCHEDULED:['CONFIRMED','CANCELLED','NO_SHOW'],CONFIRMED:['IN_PROGRESS','CANCELLED','NO_SHOW'],IN_PROGRESS:['COMPLETED'],COMPLETED:[],CANCELLED:[],NO_SHOW:[]};
+        function adminVetStatusOptions(s){return [s,...(adminValidVetTransitions[s]||[])].map(value=>`<option value="${value}" ${s===value?'selected':''}>${value.replaceAll('_',' ')}</option>`).join('');}
+        async function loadAppointments() {
+            try {
+                const data = await api.getAllAppointments();
+                document.getElementById('appointmentsTable').innerHTML = (data.content || []).map(a => `
+                    <tr><td class="fw-semibold">${escapeHtml(a.petName)}</td><td>${escapeHtml(a.ownerName)}</td><td>${escapeHtml(a.veterinarianName)}</td><td>${formatDate(a.appointmentDate)}</td>
+                    <td>${statusBadge(a.status)}</td>
+                    <td><select ${adminValidVetTransitions[a.status]?.length?"":"disabled"} class="form-select form-select-sm" style="width:auto;font-size:0.82rem" onchange="updateApptStatus(${a.id},this.value)">
+                        ${adminVetStatusOptions(a.status)}</select></td></tr>
+                `).join('') || '<tr><td colspan="6" class="empty-state">No appointments</td></tr>';
+            } catch(e) { showToast(e.message || 'Unable to load data. Please try again.','error'); }
+        }
+
+        async function updateApptStatus(id, status) {
+            try { await api.updateAppointment(id, { status }); showToast('Status updated', 'success'); } catch (e) { showToast(e.message, 'error'); } finally {await loadAppointments();}
+        }
+
+        async function loadOrders() {
+            try {
+                const data = await api.getAllOrders();
+                document.getElementById('ordersTable').innerHTML = (data.content || []).map(o => `
+                    <tr><td class="fw-semibold">${o.orderNumber}</td><td>${escapeHtml(o.userName)}</td><td>${formatCurrency(o.totalAmount)}</td>
+                    <td>${statusBadge(o.status)}</td>
+                    <td><select class="form-select form-select-sm" style="width:auto;font-size:0.82rem" onchange="updateOrderSt(${o.id},this.value)">
+                        <option ${o.status==='PENDING'?'selected':''}>PENDING</option><option ${o.status==='CONFIRMED'?'selected':''}>CONFIRMED</option>
+                        <option ${o.status==='PROCESSING'?'selected':''}>PROCESSING</option><option ${o.status==='SHIPPED'?'selected':''}>SHIPPED</option>
+                        <option ${o.status==='DELIVERED'?'selected':''}>DELIVERED</option><option ${o.status==='CANCELLED'?'selected':''}>CANCELLED</option></select></td></tr>
+                `).join('') || '<tr><td colspan="5" class="empty-state">No orders</td></tr>';
+            } catch(e) { showToast(e.message || 'Unable to load data. Please try again.','error'); }
+        }
+
+        async function updateOrderSt(id, status) {
+            try { await api.updateOrderStatus(id, status); showToast('Order updated', 'success'); } catch (e) { showToast(e.message, 'error'); }
+        }
+
+        async function loadProductsAdmin(page=0) {
+            try {
+                const data = await api.get("/products/manage?page="+page);
+                renderPager("productsTable",data,loadProductsAdmin);
+                document.getElementById('productsTable').innerHTML = (data.content || []).map(p => `
+                    <tr><td class="fw-semibold">${escapeHtml(p.name)}</td><td>${escapeHtml(p.categoryName)}</td><td>${formatCurrency(p.price)}</td><td>${p.stockQuantity}</td>
+                    <td>${p.isFeatured ? '<i class="bi bi-star-fill text-warning"></i>' : '<i class="bi bi-star text-muted"></i>'}</td><td><a class="btn btn-sm btn-pawcare-outline" href="/pages/dashboard/store.html?edit=${p.id}">Edit</a> <button class="btn btn-sm btn-outline-danger" onclick="deleteManagedProduct(${p.id},this,loadProductsAdmin)">Delete</button></td></tr>
+                `).join('') || '<tr><td colspan="5" class="empty-state">No products</td></tr>';
+            } catch(e) { showToast(e.message || 'Unable to load data. Please try again.','error'); }
+        }
+
+        async function loadReviewModeration(page=0) {
+            try {
+                const status=document.getElementById('reviewModerationFilter')?.value||'ALL';
+                const data=await api.getReviewModeration(status,page);
+                renderPager("reviewModerationTable",data,loadReviewModeration);
+                document.getElementById('reviewModerationTable').innerHTML=(data.content||[]).map(r=>{
+                    const subject=r.reviewType==='PRODUCT' ? `${escapeHtml(r.productName||'Product')}<small class="d-block text-muted">Order ${escapeHtml(r.orderNumber||'-')}</small>` : `${escapeHtml(r.serviceName||'Service')}<small class="d-block text-muted">${escapeHtml(r.petName||'Pet')} · ${escapeHtml(r.groomerName||'Groomer')}</small>`;
+                    const report=r.reported?`<small class="d-block text-danger mt-1"><i class="bi bi-flag-fill me-1"></i>Reported: ${escapeHtml(r.reportReason||'No reason')}</small>`:'';
+                    return `<tr><td><strong>${escapeHtml(r.reviewType)}</strong><div>${subject}</div></td><td>${escapeHtml(r.userName||'-')}</td><td><span class="text-warning">${'★'.repeat(r.rating||0)}${'☆'.repeat(Math.max(0,5-(r.rating||0)))}</span> ${r.rating||0}/5</td><td style="max-width:320px;white-space:pre-wrap">${escapeHtml(r.review||'')}${report}</td><td>${r.hidden?'<span class="text-danger"><i class="bi bi-eye-slash me-1"></i>Hidden</span>':'<span class="text-success"><i class="bi bi-eye me-1"></i>Published</span>'}</td><td><div class="d-flex flex-wrap gap-1"><button class="btn btn-sm btn-pawcare-outline" onclick="toggleReviewHidden(${r.id},${!r.hidden})">${r.hidden?'Publish':'Hide'}</button><button class="btn btn-sm btn-outline-danger" onclick="deleteReviewAdmin(${r.id})"><i class="bi bi-trash me-1"></i>Delete</button></div></td></tr>`;
+                }).join('')||'<tr><td colspan="6" class="empty-state">No reviews found</td></tr>';
+            } catch(e) { showToast(e.message||'Unable to load reviews','error'); }
+        }
+        async function toggleReviewHidden(id,hidden){try{await api.setReviewHidden(id,hidden);showToast(hidden?'Review hidden from public view.':'Review published again.','success');loadReviewModeration();}catch(e){showToast(e.message,'error');}}
+        async function deleteReviewAdmin(id){if(!await pawConfirm('Permanently delete this customer review? This cannot be undone.',{title:'Delete review?',type:'danger',confirmText:'Delete Review'}))return;try{await api.deleteReviewAsAdmin(id);showToast('Review deleted by admin.','success');loadReviewModeration();}catch(e){showToast(e.message,'error');}}
+
+        async function loadReports() {
+            try {
+                const d = await api.getManagementSummary();
+                document.getElementById('rUsers').textContent = d.totalUsers || 0;
+                document.getElementById('rPets').textContent = d.totalPets || 0;
+                document.getElementById('rAppts').textContent = d.totalAppointments || 0;
+                document.getElementById('rOrders').textContent = d.totalOrders || 0;
+                document.getElementById('rPayments').textContent = d.totalPayments || 0;
+                document.getElementById('rRevenue').textContent = formatCurrency(d.totalRevenue);
+                if (d.appointmentsByStatus) {
+                    replaceChart('appointments','rApptChart', {
+                        type: 'pie',
+                        data: { labels: Object.keys(d.appointmentsByStatus), datasets: [{ data: Object.values(d.appointmentsByStatus), backgroundColor: chartColors }] },
+                        options: { responsive: true, plugins: { legend: { position: 'bottom' } } }
+                    });
+                }
+                if (d.ordersByStatus) {
+                    replaceChart('orders','rOrderChart', {
+                        type: 'doughnut',
+                        data: { labels: Object.keys(d.ordersByStatus), datasets: [{ data: Object.values(d.ordersByStatus), backgroundColor: chartColors }] },
+                        options: { responsive: true, plugins: { legend: { position: 'bottom' } } }
+                    });
+                }
+            } catch(e) { console.error('Management reports failed to render', e); showToast(e.message || 'Failed to load reports', 'error'); }
+        }
+
+        loadDashboard();
+    </script>
+    <script src="/js/product-actions.js"></script>
+    <script src="/js/account.js?v=20261015-26"></script>
+    <script src="/js/ui.js?v=20261015-5"></script>
+    <script src="/js/pawcare2.js?v=20261015-26"></script>
+<script src="/js/assistant-widget.js?v=1.0"></script>
+<script src="/js/site-shell.js?v=20261014-5"></script>
+</body>
+</html>

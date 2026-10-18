@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preload" href="/vendor/fonts/font-5.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/vendor/fonts/font-11.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/vendor/fonts/font-17.woff2" as="font" type="font/woff2" crossorigin>
+<link href="/vendor/fonts/fonts.css?v=20261015-6" rel="stylesheet">
+<link href="/css/design.css?v=20261015-10" rel="stylesheet">
+    <title>My Dashboard - PawCare</title>
+    <link href="/vendor/bootstrap/bootstrap.min.css?v=5.3.2" rel="stylesheet">
+    <link href="/vendor/bootstrap-icons/bootstrap-icons.css?v=1.11.2" rel="stylesheet">
+    <link href="/css/style.css?v=20261015-10" rel="stylesheet">
+    <link href="/css/pawcare2.css?v=20261015-26" rel="stylesheet">
+    <link rel="icon" href="/images/paw.svg" type="image/svg+xml">
+    <meta name="theme-color" content="#c7b6e3">
+<link href="/css/assistant-widget.css?v=20261015-24" rel="stylesheet">
+<link href="/css/passport.css?v=20261015-10" rel="stylesheet">
+<link href="/css/grooming.css?v=20261015-22" rel="stylesheet">
+<link href="/css/navigation.css?v=20261016-2" rel="stylesheet">
+<link rel="stylesheet" href="/css/site-fixes.css?v=20261015-26">
+<link href="/css/page-loading.css?v=20261015-10" rel="stylesheet">
+<link href="/css/paw-cursor.css?v=20261015-20" rel="stylesheet">
+<link href="/css/workspace-polish.css?v=20261015-20" rel="stylesheet">
+<link href="/css/owner-dashboard.css?v=20261016-2" rel="stylesheet">
+</head>
+<body class="workspace-page pc2-page pc2-workspace has-shared-nav owner-dashboard-page">
+<script src="/js/page-loading.js?v=20261015-20"></script>
+<script src="/js/paw-cursor.js?v=20261015-20"></script>
+<nav id="mainNavbar" aria-label="Main navigation"><a href="/">PawCare</a></nav>
+<script src="/js/navigation.js?v=20261016-2"></script>
+    <div class="dashboard-sidebar" id="sidebar">
+        <div class="sidebar-brand"><h4><a class="sidebar-home" href="/" aria-label="PawCare homepage"><i class="bi bi-heart-pulse-fill me-2"></i>PawCare</a></h4><small class="text-white-50">Pet Owner</small></div>
+        <nav class="sidebar-nav" aria-label="Pet Owner sections">
+            <div class="owner-nav-label">YOUR WORKSPACE</div>
+            <div class="nav-item owner-nav-overview"><a class="nav-link active" href="#overview" onclick="showSection('overview');return false" aria-current="page"><span class="owner-nav-dashboard-icon"><i class="bi bi-grid-1x2-fill" aria-hidden="true"></i><img src="/images/paw.svg" alt="" aria-hidden="true"></span>My Dashboard</a></div>
+            <div class="owner-nav-label owner-nav-label-secondary">MANAGE &amp; EXPLORE</div>
+            <div class="nav-item"><a class="nav-link" href="#pets" onclick="showSection('pets');return false"><i class="bi bi-heart-fill" aria-hidden="true"></i>My Pets</a></div>
+            <div class="nav-item"><a class="nav-link" href="#" onclick="showSection('appointments');return false"><i class="bi bi-calendar-check"></i>Appointments</a></div>
+            <div class="nav-item"><a class="nav-link" href="#" onclick="showSection('grooming');return false"><i class="bi bi-scissors"></i>Grooming</a></div>
+            <div class="nav-item"><a class="nav-link" href="#" onclick="showSection('orders');return false"><i class="bi bi-cart"></i>Orders</a></div>
+            <div class="nav-item"><a class="nav-link" href="#" onclick="event.preventDefault();openMessagesInbox()"><i class="bi bi-chat-dots"></i>Messages <span data-message-unread-badge class="badge bg-danger ms-auto" hidden>0</span></a></div>
+            <div class="nav-item"><a class="nav-link" href="#" onclick="showSection('addPet');return false"><i class="bi bi-plus-circle"></i>Add Pet</a></div>
+            <div class="nav-item"><a class="nav-link" href="#" onclick="event.preventDefault();openAccount()"><i class="bi bi-person-circle"></i>My Account</a></div>
+            <hr class="mx-3" style="border-color:rgba(255,255,255,0.1)">
+            <div class="nav-item"><a class="nav-link" href="/pages/store.html#cart"><i class="bi bi-cart"></i>My Cart</a></div>
+            <div class="nav-item"><a class="nav-link" href="/pages/store.html"><i class="bi bi-shop"></i>Pet Store</a></div>
+            <div class="nav-item"><a class="nav-link" href="/pages/entertainment.html"><i class="bi bi-controller"></i>Entertainment</a></div>
+            <div class="nav-item"><a class="nav-link" href="/"><i class="bi bi-house"></i>Back to Site</a></div>
+            <div class="nav-item"><a class="nav-link" href="#" onclick="logout()"><i class="bi bi-box-arrow-left"></i>Logout</a></div>
+        </nav>
+    </div>
+    <div class="dashboard-content">
+        <div class="dashboard-header">
+            <div><h4 class="fw-bold mb-0" id="ownerPageTitle">My Dashboard</h4><small class="text-muted">Your little corner of PawCare <span class="owner-header-paw" aria-hidden="true">✦</span></small></div>
+            <div class="owner-header-actions"><a href="/pages/notifications.html" class="owner-header-notifications" aria-label="View all notifications"><i class="bi bi-bell" aria-hidden="true"></i></a><button class="btn btn-pawcare-outline d-lg-none" type="button" aria-controls="sidebar" aria-expanded="false" onclick="toggleOwnerSidebar()"><i class="bi bi-list" aria-hidden="true"></i><span class="visually-hidden">Open dashboard menu</span></button></div>
+        </div>
+
+        <!-- Overview: real data from existing owner, booking, orders and notifications APIs -->
+        <section id="section-overview" aria-labelledby="ownerWelcomeTitle">
+            <div class="owner-hero">
+                <div class="owner-hero-copy">
+                    <span class="owner-eyebrow"><span aria-hidden="true">✦</span> YOUR PET CARE HOME</span>
+                    <h1 id="ownerWelcomeTitle">Welcome home, <span id="ownerName">Pet parent</span><span class="owner-wave" aria-hidden="true"> ✨</span></h1>
+                    <p>Everything your companions need, all in one lovely place. See what’s coming up and get back to caring.</p>
+                    <div class="owner-hero-actions"><button class="owner-button owner-button-light" type="button" data-owner-section="addPet"><i class="bi bi-plus-lg" aria-hidden="true"></i> Add a pet</button><button class="owner-button owner-button-ghost" type="button" data-owner-section="appointments">Book a vet <i class="bi bi-arrow-up-right" aria-hidden="true"></i></button></div>
+                </div>
+                <div class="owner-hero-art" aria-hidden="true"><div class="owner-hero-photo"></div><span class="owner-hero-spark owner-spark-one">✦</span><span class="owner-hero-spark owner-spark-two">✳</span><div class="owner-hero-art-label"><i class="bi bi-heart-fill"></i> Made for your best friends</div></div>
+            </div>
+            <div class="owner-section-topline"><div><span class="owner-kicker">AT A GLANCE</span><h2>Life with your little ones</h2></div><span class="owner-date" id="ownerToday"></span></div>
+            <div class="owner-stats" id="ownerStats" aria-live="polite" aria-busy="true">
+                <div class="owner-stat owner-skeleton"></div><div class="owner-stat owner-skeleton"></div><div class="owner-stat owner-skeleton"></div><div class="owner-stat owner-skeleton"></div>
+            </div>
+            <div class="owner-overview-grid">
+                <section class="owner-surface owner-next" aria-labelledby="ownerNextHeading"><div class="owner-surface-heading"><div><span class="owner-kicker">STAY ON TRACK</span><h2 id="ownerNextHeading">Upcoming care</h2></div><button type="button" class="owner-inline-link" data-owner-section="appointments">All bookings <i class="bi bi-arrow-right" aria-hidden="true"></i></button></div><div id="ownerUpcoming" aria-live="polite"><p class="owner-loading" role="status">Finding your upcoming visits…</p></div></section>
+                <section class="owner-surface owner-actions-card" aria-labelledby="ownerActionsHeading"><div class="owner-surface-heading"><div><span class="owner-kicker">ONE TAP AWAY</span><h2 id="ownerActionsHeading">Quick actions</h2></div></div><div class="owner-quick-grid"><button type="button" data-owner-section="appointments" class="owner-quick owner-quick-vet"><span class="owner-quick-icon"><i class="bi bi-heart-pulse" aria-hidden="true"></i></span><span>Book a vet<small>Appointments</small></span><i class="bi bi-arrow-up-right" aria-hidden="true"></i></button><button type="button" data-owner-section="grooming" class="owner-quick owner-quick-groom"><span class="owner-quick-icon"><i class="bi bi-scissors" aria-hidden="true"></i></span><span>Grooming<small>Plan a visit</small></span><i class="bi bi-arrow-up-right" aria-hidden="true"></i></button><button type="button" data-owner-section="addPet" class="owner-quick owner-quick-pets"><span class="owner-quick-icon"><i class="bi bi-plus-circle" aria-hidden="true"></i></span><span>Add a pet<small>New profile</small></span><i class="bi bi-arrow-up-right" aria-hidden="true"></i></button><a href="/pages/store.html" class="owner-quick owner-quick-store"><span class="owner-quick-icon"><i class="bi bi-bag-heart" aria-hidden="true"></i></span><span>Pet store<small>Shop essentials</small></span><i class="bi bi-arrow-up-right" aria-hidden="true"></i></a></div></section>
+            </div>
+            <div class="owner-overview-grid owner-lower-grid">
+                <section class="owner-surface" aria-labelledby="ownerPetsHeading"><div class="owner-surface-heading"><div><span class="owner-kicker">MEET THE FAMILY</span><h2 id="ownerPetsHeading">Your companions</h2></div><button type="button" class="owner-inline-link" data-owner-section="pets">View all <i class="bi bi-arrow-right" aria-hidden="true"></i></button></div><div id="ownerPetHighlights" aria-live="polite"><p class="owner-loading">Gathering your pet profiles…</p></div></section>
+                <section class="owner-surface" aria-labelledby="ownerActivityHeading"><div class="owner-surface-heading"><div><span class="owner-kicker">LATEST UPDATES</span><h2 id="ownerActivityHeading">Recent activity</h2></div><a class="owner-inline-link" href="/pages/notifications.html">View all <i class="bi bi-arrow-right" aria-hidden="true"></i></a></div><div id="ownerRecentActivity" aria-live="polite"><p class="owner-loading">Loading notifications…</p></div></section>
+            </div>
+        </section>
+
+        <!-- My Pets -->
+        <div id="section-pets">
+            <div class="d-flex justify-content-between mb-3"><h5 class="fw-bold">My Pets</h5><button class="btn btn-sm btn-pawcare" onclick="showSection('addPet')"><i class="bi bi-plus me-1"></i>Add Pet</button></div>
+            <div class="row g-4" id="petsGrid"><div class="loading-spinner"></div></div>
+        </div>
+
+        <!-- Appointments -->
+        <div id="section-appointments" style="display:none">
+            <h5 class="fw-bold mb-3">My Appointments</h5>
+            <div class="card-pawcare mb-4 p-4">
+                <h6 id="apptEditorTitle" class="fw-bold mb-3">Book New Appointment</h6><button id="resetAppt" hidden class="btn btn-sm btn-pawcare-outline mb-3" onclick="resetAppointmentEditor(false)">Cancel Editing</button>
+                <div class="row g-3 align-items-start booking-fields">
+                    <div class="col-md-6 col-xl-3"><label for="apptPet" class="form-label">Your pet</label><select id="apptPet" required class="form-control form-control-pawcare"><option value="">Choose pet</option></select></div>
+                    <div class="col-md-6 col-xl-3"><label for="apptVet" class="form-label">Veterinarian</label><select id="apptVet" required class="form-control form-control-pawcare"><option value="">Choose veterinarian</option></select></div>
+                    <div class="col-md-6 col-xl-3"><label for="apptDate" class="form-label">Appointment date</label><input type="date" id="apptDate" required class="form-control form-control-pawcare"></div>
+                    <div class="col-md-6 col-xl-3"><label for="apptTime" class="form-label">Time</label><select id="apptTime" required disabled class="form-control form-control-pawcare"><option value="">Select veterinarian and date first</option></select></div>
+                    <div class="col-md-10"><label for="apptReason" class="form-label">Reason for visit</label><input type="text" id="apptReason" required class="form-control form-control-pawcare" placeholder="Reason for visit"></div>
+                    <div class="col-md-2"><button class="btn btn-pawcare w-100" onclick="bookAppt()"><i class="bi bi-check me-1"></i>Book</button></div>
+                </div>
+            </div>
+            <div class="card-pawcare"><div class="table-responsive"><table class="table table-pawcare mb-0"><thead><tr><th>Pet</th><th>Vet</th><th>Date</th><th>Time</th><th>Reason</th><th>Status</th><th>Actions</th></tr></thead><tbody id="apptsTable"></tbody></table></div></div>
+        </div>
+
+        <!-- Grooming -->
+        <div id="section-grooming" style="display:none">
+            <div class="groom-workspace-heading"><div><span class="groom-eyebrow">THE GROOMING STUDIO</span><h2>A visit that fits your pet.</h2><p>Plan a little pampering, book a time, and follow every step.</p></div><div class="groom-workspace-actions"><button type="button" class="btn btn-pawcare" onclick="GroomingBooking.openPlanner()"><i class="bi bi-stars me-1" aria-hidden="true"></i>Smart planner</button><a href="/pages/grooming.html" class="btn btn-pawcare-outline">Explore services <i class="bi bi-arrow-up-right"></i></a></div></div>
+            <div id="groomBookingNotice" class="groom-booking-notice" role="status" hidden><i class="bi bi-check2-circle" aria-hidden="true"></i><span data-booking-message></span></div>
+            <div id="groomNoPets" class="groom-booking-notice" hidden><i class="bi bi-heart" aria-hidden="true"></i><span>Add your pet’s profile before booking so your groomer can prepare for them.</span><button type="button" class="btn btn-sm btn-pawcare-outline" onclick="GroomingBooking.addPet()">Add my pet</button></div>
+            <div class="card-pawcare mb-4 p-4">
+                <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3"><h6 id="groomEditorTitle" class="fw-bold mb-0">Book Grooming</h6><button id="resetGroom" hidden class="btn btn-sm btn-pawcare-outline" onclick="resetAppointmentEditor(true)">Cancel Editing</button></div>
+                <div class="row g-3 align-items-start booking-fields">
+                    <div class="col-md-6"><label for="groomPet" class="form-label">Your pet</label><select id="groomPet" required class="form-control form-control-pawcare"></select></div>
+                    <div class="col-md-6"><label for="groomGroomer" class="form-label">Groomer</label><select id="groomGroomer" required class="form-control form-control-pawcare"><option value="">Choose groomer</option></select></div>
+                    <div class="col-12"><div id="selectedGroomerDetails" class="groomer-selection-summary" aria-live="polite"><i class="bi bi-person-heart" aria-hidden="true"></i><span>Choose a groomer to see their salon, training and experience.</span></div></div>
+                    <div class="col-12"><details class="groom-optional" id="groomPlanner"><summary><i class="bi bi-stars me-2"></i>Help me choose services <span>Smart suggestions for your budget, time and pet’s comfort</span></summary><section class="groom-planner" aria-labelledby="groomPlannerTitle">
+                        <div class="groom-planner-head"><i class="bi bi-stars" aria-hidden="true"></i><div><span class="groom-eyebrow mb-1">SMART GROOMING PLANNER</span><h3 id="groomPlannerTitle">Their comfort. Your budget. One thoughtful plan.</h3><p>Choose your pet above, then tell us what matters. See a suggestion and why it fits.</p></div></div>
+                        <div class="groom-planner-fields">
+                            <div><label for="groomGoal">Grooming priority</label><select id="groomGoal"><option value="FRESH_COAT">A fresh, clean coat</option><option value="QUICK_TIDY">A quick tidy-up</option><option value="FULL_STYLE">A full groom & style</option></select></div>
+                            <div><label for="groomBudget">Budget (Rs.)</label><input id="groomBudget" type="number" min="0.01" max="1000000" step="0.01" value="3500" required></div>
+                            <div><label for="groomMaxMinutes">Maximum visit length</label><select id="groomMaxMinutes"><option value="30">30 minutes</option><option value="45">45 minutes</option><option value="60" selected>60 minutes</option><option value="90">90 minutes</option><option value="120">120 minutes</option><option value="180">180 minutes</option></select></div>
+                            <div><label for="groomComfort" class="form-label">Comfort with grooming</label><select id="groomComfort" class="form-select"><option value="">Choose their comfort level</option><option value="CALM">Comfortable</option><option value="FIRST_VISIT">First grooming visit</option><option value="NERVOUS">A little nervous</option></select></div>
+                        </div>
+                        <div class="d-flex flex-wrap align-items-center gap-3 mt-3"><button type="button" id="groomPlanButton" class="btn btn-pawcare" onclick="buildGroomingPlan()"><i class="bi bi-stars me-1"></i> Find my fit</button><small class="text-muted">Optional. You can also choose services yourself below.</small></div>
+                        <div id="groomPlanResult" class="groom-plan-result" aria-live="polite"></div>
+                    </section></details></div>
+                    <div class="col-12"><label class="form-label fw-semibold mb-2">Services <span class="text-danger">*</span> <small class="text-muted fw-normal">Choose up to 8 services. Check package descriptions to avoid repeating included care.</small></label><div id="groomServiceOptions" class="groom-service-picker"><div class="text-muted small">Loading grooming services…</div></div><div id="groomServiceSummary" aria-live="polite" class="groom-service-summary mt-2">Choose at least one service.</div></div>
+                    <div class="col-md-6"><label for="groomDate" class="form-label">Date</label><input type="date" id="groomDate" required class="form-control form-control-pawcare"></div>
+                    <div class="col-md-6"><label for="groomTime" class="form-label">Time</label><select id="groomTime" required disabled aria-label="Grooming time" class="form-control form-control-pawcare"><option value="">Select services, groomer and date first</option></select></div>
+                    <div class="col-12"><details class="groom-optional" id="groomPreferences"><summary><i class="bi bi-heart me-2"></i>Your pet’s preferences <span>Optional</span></summary><div class="row g-3 p-3">
+                        <div class="col-md-6"><label for="groomFinish" class="form-label">Preferred finish</label><select id="groomFinish" class="form-select"><option value="AS_DISCUSSED">Discuss with the groomer</option><option value="KEEP_LENGTH">Keep the coat length</option><option value="NATURAL_TIDY">Natural tidy-up (trimming service)</option><option value="SHORT_NEAT">Short & neat (trimming service)</option></select><small class="text-muted">A preference for the booked service; final suitability is agreed with your groomer.</small></div>
+                        <div class="col-12"><label for="groomInstructions" class="form-label">Shampoo, sensitive areas or handling notes</label><textarea id="groomInstructions" maxlength="2000" rows="2" class="form-control form-control-pawcare" placeholder="For example: fragrance-free shampoo, avoid touching the ears, introduce tools slowly…"></textarea></div>
+                    </div></details></div>
+                    <div class="col-md-3"><button id="groomBookButton" class="btn btn-pawcare w-100" onclick="bookGroom()"><i class="bi bi-scissors me-1"></i>Book Grooming</button></div>
+                </div>
+            </div>
+            <div class="mb-4"><div class="d-flex justify-content-between align-items-end mb-2"><div><h6 class="fw-bold mb-1">Meet our groomers</h6><p class="text-muted small mb-0">Profile photos and ratings come from completed PawCare grooming visits.</p></div></div><div id="ownerGroomerCards" class="row g-3"><div class="col-12 text-muted small">Loading groomers…</div></div></div>
+            <h6 class="fw-bold mb-2">Your visits & grooming history</h6><div class="card-pawcare"><div class="table-responsive"><table class="table table-pawcare mb-0"><thead><tr><th>Pet</th><th>Services</th><th>Groomer</th><th>Date</th><th>Price</th><th>Status</th><th>Actions</th></tr></thead><tbody id="groomTable"></tbody></table></div></div>
+        </div>
+
+        <!-- Orders -->
+        <div id="section-orders" style="display:none">
+            <h5 class="fw-bold mb-3">My Orders</h5>
+            <div class="card-pawcare"><div class="table-responsive"><table class="table table-pawcare mb-0"><thead><tr><th>Order #</th><th>Total</th><th>Status</th><th>Date</th><th>Products / Reviews</th><th>Payment</th></tr></thead><tbody id="ordersTable"></tbody></table></div></div>
+        </div>
+
+        <!-- Add Pet -->
+        <div id="section-addPet" style="display:none">
+            <h5 id="petEditorTitle" class="fw-bold mb-3">Add New Pet</h5>
+            <div class="card-pawcare p-4" style="max-width:550px">
+                <div class="mb-3"><label class="form-label fw-semibold">Pet Name</label><input type="text" id="petName" class="form-control form-control-pawcare" required maxlength="50" autocomplete="off"><small class="text-muted">Letters and spaces only.</small></div>
+                <div class="row g-3 mb-3">
+                    <div class="col-6"><label class="form-label fw-semibold">Species</label><select id="petSpecies" class="form-control form-control-pawcare" onchange="handleSpeciesChange()"></select><input id="petCustomSpecies" class="form-control form-control-pawcare mt-2" maxlength="100" placeholder="Enter custom species" hidden></div>
+                    <div class="col-6"><label class="form-label fw-semibold">Breed</label><select id="petBreed" class="form-control form-control-pawcare" onchange="handleBreedChange()"></select><input id="petCustomBreed" class="form-control form-control-pawcare mt-2" maxlength="100" placeholder="Enter custom breed" hidden></div>
+                </div>
+                <div class="row g-3 mb-3">
+                    <div class="col-4"><label class="form-label fw-semibold">Date of Birth</label><input type="date" id="petDob" class="form-control form-control-pawcare"></div>
+                    <div class="col-4"><label class="form-label fw-semibold">Gender</label><select id="petGender" class="form-control form-control-pawcare"><option>MALE</option><option>FEMALE</option><option>UNKNOWN</option></select></div>
+                    <div class="col-4"><label class="form-label fw-semibold">Weight (kg)</label><input type="number" step="0.01" min="0.01" max="200" id="petWeight" class="form-control form-control-pawcare"><small id="petWeightHint" class="text-muted">Choose a species to see its maximum weight.</small></div>
+                </div>
+                <div class="mb-3"><label class="form-label fw-semibold">Color</label><input type="text" id="petColor" class="form-control form-control-pawcare"></div>
+                <div class="mb-3"><label for="petPhoto" class="form-label fw-semibold">Pet photo (optional)</label>
+<input id="petPhoto" type="file" accept="image/jpeg,image/png" class="form-control" onchange="previewPhoto(this,'petPreview')">
+<small class="text-muted">JPEG or PNG, up to 5 MB and 16 megapixels.</small>
+<img id="petPreview" hidden alt="Selected pet photo" style="width:120px;height:120px;object-fit:cover;border-radius:16px;margin-top:12px"></div>
+<button class="btn btn-pawcare" id="savePetBtn" onclick="savePet()">Save Pet</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/vendor/bootstrap/bootstrap.bundle.min.js?v=5.3.2"></script>
+    <script src="/js/api.js?v=20261016-2"></script><script src="/js/forms.js?v=20261015-17"></script>
+    <script src="/js/grooming-images.js?v=20261015-8"></script>
+    <script src="/js/owner-dashboard.js?v=20261016-2"></script>
+    <script src="/js/qr-code.js?v=1.0"></script><script src="/js/passport-ui.js?v=20261015-5"></script>
+    <script>
+        if (!api.isLoggedIn() || api.getRole() !== 'PET_OWNER') window.location.href = '/pages/login.html';
+        document.getElementById('ownerName').textContent = api.user?.firstName;
+        let myPets = [], editingPetId = null, editingPetPassword = null, editingApptId = null, editingGroomId = null;
+        let groomingWorkspaceVersion=0;
+        let petsRequest=null, petsLoaded=false;
+
+        function toggleOwnerSidebar() {
+            const sidebar=document.getElementById('sidebar');
+            const expanded=sidebar.classList.toggle('show');
+            const button=document.querySelector('.owner-header-actions button[aria-controls="sidebar"]');
+            if(button){button.setAttribute('aria-expanded',String(expanded));button.setAttribute('aria-label',expanded?'Close dashboard menu':'Open dashboard menu');}
+        }
+        async function showSection(name) {
+            if (!['overview','pets','appointments','grooming','orders','addPet'].includes(name)) return;
+            document.getElementById('sidebar').classList.remove('show');
+            const menuButton=document.querySelector('.owner-header-actions button[aria-controls="sidebar"]');
+            if(menuButton){menuButton.setAttribute('aria-expanded','false');menuButton.setAttribute('aria-label','Open dashboard menu');}
+            document.body.dataset.initialSectionLoaded='true';const version=++groomingWorkspaceVersion;
+            history.replaceState(null,'',location.pathname+location.search+'#'+name);
+            document.body.classList.toggle('grooming-open',name==='grooming');
+            document.querySelectorAll('[id^="section-"]').forEach(s => s.style.display = 'none');
+            document.getElementById('section-' + name).style.display = 'block';
+            document.getElementById('ownerPageTitle').textContent = ({overview:'My Dashboard',pets:'My Pets',appointments:'Appointments',grooming:'Grooming Studio',orders:'My Orders',addPet:'Add a Pet'})[name];
+            document.querySelectorAll('.sidebar-nav .nav-link, .pc2-mobile-nav a').forEach(link=>{
+                const active=(link.getAttribute('onclick')||'').includes("showSection('"+name+"')");
+                link.classList.toggle('active',active);
+                if(active)link.setAttribute('aria-current','page');else link.removeAttribute('aria-current');
+            });
+            if (name === 'overview') await PawCareOwnerOverview.load();
+            if (name === 'pets') await loadPets();
+            if (name === 'appointments') { resetAppointmentEditor(false); await Promise.all([loadPets(),loadVets(),loadAppts()]); }
+            if (name === 'grooming') {
+                resetAppointmentEditor(true);loadGroom();
+                const loaded=await Promise.all([loadPets(),loadGroomServices(),loadGroomers()]);
+                if(version===groomingWorkspaceVersion&&loaded.every(Boolean))GroomingBooking.apply();
+            }
+            if (name === 'orders') loadOrders();
+            if (name === 'addPet') { resetPetEditor(); await loadSpecies(); }
+        }
+
+        function populatePetSelects() {
+            const opts = '<option value="">Choose pet</option>' + myPets.map(p => `<option value="${p.id}">${escapeHtml(p.name)}</option>`).join('');
+            ['apptPet','groomPet'].forEach(id => { const el = document.getElementById(id); if (el) {const previous=el.value;el.innerHTML=opts;if([...el.options].some(option=>option.value===previous))el.value=previous;} });
+        }
+
+        async function loadPets() {
+            if(petsRequest)return petsRequest;
+            const grid=document.getElementById('petsGrid');
+            if(!petsLoaded)grid.innerHTML='<div class="col-12" role="status"><div class="loading-spinner"></div><p class="text-center text-muted">Loading your pets…</p></div>';
+            grid.setAttribute('aria-busy','true');
+            petsRequest=(async()=>{
+            try {
+                const pets=await api.getMyPets();
+                if(!Array.isArray(pets))throw new Error('Your pets could not be loaded. Please try again.');
+                myPets=pets; petsLoaded=true;
+                populatePetSelects();
+                document.getElementById('groomNoPets').hidden=myPets.length>0;
+                document.getElementById('petsGrid').innerHTML = myPets.length ? myPets.map(p => `
+                    <div class="col-md-6 col-xl-4"><article class="owner-pet-card">
+                        <div class="owner-pet-picture">${p.photo ? `<img src="${escapeHtml(p.photo)}" alt="Photo of ${escapeHtml(p.name)}" loading="lazy" onerror="this.onerror=null;this.hidden=true;this.nextElementSibling.hidden=false"><div class="owner-pet-picture-fallback" hidden><i class="bi bi-heart-fill" aria-hidden="true"></i></div>` : `<div class="owner-pet-picture-fallback"><i class="bi bi-heart-fill" aria-hidden="true"></i></div>`}<span class="owner-pet-species">${p.speciesName==='Dog'?'🐕':p.speciesName==='Cat'?'🐈':'🐾'}</span></div>
+                        <div class="owner-pet-body"><div class="owner-pet-title"><div><span class="owner-kicker">YOUR COMPANION</span><h3>${escapeHtml(p.name)}</h3></div><span class="owner-pet-sparkle" aria-hidden="true">✳</span></div>
+                        <div class="owner-pet-details"><span><i class="bi bi-tag" aria-hidden="true"></i> ${escapeHtml(p.breedName||p.speciesName||'Pet')}</span><span><i class="bi bi-heart-pulse" aria-hidden="true"></i> ${p.weight != null ? escapeHtml(p.weight)+' kg' : 'Weight not added'}</span><span><i class="bi bi-calendar-heart" aria-hidden="true"></i> ${p.dateOfBirth ? formatDate(p.dateOfBirth) : 'Birthday not added'}</span></div>
+                        <div class="owner-pet-buttons"><button type="button" class="owner-pet-primary" onclick="viewMedical(${Number(p.id)})"><i class="bi bi-journal-medical" aria-hidden="true"></i> Medical records</button><button type="button" class="owner-pet-secondary" onclick="openPetPassport(${Number(p.id)})" aria-label="Open ${escapeHtml(p.name)}'s pet passport"><i class="bi bi-qr-code" aria-hidden="true"></i></button></div>
+                        <div class="owner-pet-other-actions"><button type="button" onclick="openPetAssistantForPet(${Number(p.id)},'${encodeURIComponent(p.name).replace(/'/g,'%27')}')"><i class="bi bi-stars" aria-hidden="true"></i> Ask PawCare</button><button type="button" onclick="editMyPet(${Number(p.id)})"><i class="bi bi-pencil-square" aria-hidden="true"></i> Edit</button><button type="button" class="owner-pet-remove" onclick="deleteMyPet(${Number(p.id)},this)"><i class="bi bi-trash3" aria-hidden="true"></i> Delete</button></div></div>
+                    </article></div>
+                `).join('') : '<div class="col-12"><div class="owner-empty-state"><i class="bi bi-heart" aria-hidden="true"></i><h3>Your PawCare family starts here</h3><p>Add your first pet to keep their care, appointments and memories together.</p><button type="button" class="owner-button owner-button-primary" onclick="showSection(\'addPet\')"><i class="bi bi-plus-lg"></i> Add my first pet</button></div></div>';
+                return true;
+            } catch(e) {
+                const message=e.message || 'Unable to load your pets. Please try again.';
+                if(!petsLoaded)grid.innerHTML=`<div class="col-12"><div class="empty-state" role="alert"><i class="bi bi-wifi-off"></i><p>${escapeHtml(message)}</p><button type="button" class="btn btn-pawcare-outline" onclick="loadPets()">Try again</button></div></div>`;
+                showToast(message,'error');return false;
+            } finally { grid.setAttribute('aria-busy','false');petsRequest=null; }
+            })();
+            return petsRequest;
+        }
+
+        async function deleteMyPet(petId, button) {
+            const pet = myPets.find(p => p.id === petId);
+            if (!pet || button.disabled) return;
+            if (!await pawConfirm('Delete "' + pet.name + '"? This removes the pet from active profiles and cancels upcoming bookings. Past medical and booking history will be preserved.', {title:'Delete pet?', type:'danger', confirmText:'Delete Pet'})) return;
+            const password = await requestPasswordConfirmation('Confirm pet deletion','Enter your current password to remove "' + pet.name + '" from active profiles.','Delete Pet');
+            if (!password) return;
+            button.disabled = true;
+            try {
+                await api.deletePetConfirmed(petId, password);
+                myPets = myPets.filter(p => p.id !== petId);
+                populatePetSelects();
+                button.closest('.col-md-6')?.remove();
+                showToast('Pet removed from active profiles. Previous medical history and bookings remain preserved.', 'success');
+                await loadPets();
+            } catch (e) {
+                showToast(e.message, 'error');
+            } finally {
+                button.disabled = false;
+            }
+        }
+
+        function openPetAssistantForPet(petId,encodedName){ const name=decodeURIComponent(encodedName||'Pet'); if(window.PawCareAssistant) window.PawCareAssistant.setPetContext(petId,name); else showToast('PawCare Assistant is still loading. Please try again.','info'); }
+
+        async function viewMedical(petId) {
+            const rawPetName = myPets.find(p=>p.id===petId)?.name || 'Pet';
+            const petName = escapeHtml(rawPetName);
+            if(window.PawCareAssistant?.setContext) window.PawCareAssistant.setContext(petId,rawPetName);
+            try {
+                const [records,summary] = await Promise.all([api.getMedicalRecords(petId),api.getMedicalSummary(petId)]);
+                const timeline = (records||[]).map(r => `
+                    <div class="border-start border-3 ps-3 pb-3 mb-2">
+                        <div class="d-flex justify-content-between"><strong>${formatDate(r.recordDate)} · ${escapeHtml(r.recordType||'GENERAL')}</strong><small class="text-muted">${r.appointmentId?'Appointment #'+r.appointmentId:''}</small></div>
+                        <p class="mb-1"><strong>Diagnosis:</strong> ${escapeHtml(r.diagnosis)} <button class="btn btn-sm btn-link p-0" onclick="ownerExplain('${encodeURIComponent(r.diagnosis)}')">Explain</button></p>
+                        <p class="text-muted mb-1" style="font-size:0.85rem"><strong>Treatment:</strong> ${escapeHtml(r.treatment)}</p>
+                        ${r.prescription ? `<p class="mb-0" style="font-size:0.82rem"><strong>Rx:</strong> ${escapeHtml(r.prescription)}</p>` : ''}
+                    </div>`).join('') || '<p class="text-muted">No medical records yet.</p>';
+                const recent=(summary.recent||[]).map(x=>`<li>${formatDate(x.date)} — ${escapeHtml(x.type)} — ${escapeHtml(x.diagnosis)}</li>`).join('')||'<li>No medical records yet.</li>';
+                const follow=(summary.upcomingFollowUps||[]).map(x=>`<li>${formatDate(x)}</li>`).join('')||'<li>No upcoming follow-ups recorded.</li>';
+                document.getElementById('petsGrid').innerHTML = `<div class="col-12"><div class="d-flex flex-wrap justify-content-between gap-2 mb-3"><h5 class="fw-bold">${petName}'s Medical History</h5><div><button class="btn btn-sm btn-pawcare-outline" onclick="ownerMedicalReport(${petId},false)">View PDF</button> <button class="btn btn-sm btn-pawcare-outline" onclick="ownerMedicalReport(${petId},true)">Download PDF</button> <button class="btn btn-sm btn-pawcare-outline" onclick="loadPets()"><i class="bi bi-arrow-left me-1"></i>Back</button></div></div><div class="card-pawcare p-3 mb-3"><span class="badge bg-light text-dark mb-2">AI-generated summary</span><p class="small text-muted">${escapeHtml(summary.label)}</p><strong>${summary.recordCount||0} medical record(s)</strong><div class="row mt-2"><div class="col-md-7"><strong>Recent care</strong><ul>${recent}</ul></div><div class="col-md-5"><strong>Upcoming</strong><ul>${follow}</ul></div></div></div>${timeline}</div>`;
+            } catch(e) { showToast(e.message||'Failed to load records', 'error'); }
+        }
+        async function ownerExplain(encoded){try{const x=await api.explainMedicalTerm(decodeURIComponent(encoded));await pawAlert(`${x.explanation}
+
+${x.notice}`,{title:`AI Explanation — ${x.term}`,type:'ai',confirmText:'Got it'});}catch(e){showToast(e.message,'error');}}
+        async function ownerMedicalReport(petId,download){try{await openSecuredFile(`/api/medical-records/pet/${petId}/report.pdf?disposition=${download?'download':'inline'}`,`pet-health-report-${petId}.pdf`,download);}catch(e){showToast(e.message,'error');}}
+
+        async function loadAppts(page=0) {
+            try {
+                const data = await api.getMyAppointments(page);
+                renderPager("apptsTable",data,loadAppts);
+                document.getElementById('apptsTable').innerHTML = (data.content||[]).map(a => `
+                    <tr><td class="fw-semibold">${escapeHtml(a.petName)}</td><td>${escapeHtml(a.veterinarianName||'-')}</td><td>${formatDate(a.appointmentDate)}</td>
+                    <td>${a.appointmentTime}</td><td>${escapeHtml(a.reason)}</td><td>${statusBadge(a.status)}</td><td>${ownerAppointmentActions(a,false)}</td></tr>
+                `).join('') || '<tr><td colspan="6" class="empty-state">No appointments</td></tr>';
+            } catch(e) { showToast(e.message || 'Unable to load data. Please try again.','error'); }
+        }
+
+        async function loadVets() {
+            try {
+                const vets=await api.getVeterinarians();
+                setOptions('apptVet',vets,'Choose veterinarian');
+                const preferred=localStorage.getItem('pawcare_selected_vet');
+                if(preferred && vets.some(v=>String(v.id)===preferred)){
+                    document.getElementById('apptVet').value=preferred;
+                    localStorage.removeItem('pawcare_selected_vet');
+                }
+                await loadAppointmentSlots();
+            }
+            catch(e) { showToast(e.message,'error'); }
+        }
+        async function loadAppointmentSlots() {
+            const vet=Number(value('apptVet')),date=value('apptDate'),select=document.getElementById('apptTime');
+            if(!vet||!date){
+                select.disabled=true;
+                select.innerHTML='<option value="">Select veterinarian and date first</option>';
+                return;
+            }
+            select.disabled=true;
+            select.innerHTML='<option value="">Loading available times…</option>';
+            try{
+                const slots=await api.getAvailableSlots(vet,date,'vet',editingApptId);
+                if(!Array.isArray(slots)||!slots.length){
+                    select.innerHTML='<option value="">No available times for this date</option>';
+                    select.disabled=true;
+                    return;
+                }
+                select.innerHTML='<option value="">Choose time</option>'+slots.map(t=>`<option value="${t}">${t}</option>`).join('');
+                select.disabled=false;
+            } catch(e){
+                select.innerHTML='<option value="">Unable to load times</option>';
+                select.disabled=true;
+                showToast(e.message,'error');
+            }
+        }
+        document.getElementById('apptVet').addEventListener('change',loadAppointmentSlots);
+        document.getElementById('apptDate').addEventListener('change',loadAppointmentSlots);
+        async function bookAppt() {
+            if (!validateFields(['apptPet','apptVet','apptDate','apptTime','apptReason']) || !validateBooking('apptDate','apptTime')) return;
+            try {
+                await (editingApptId ? data=>api.updateAppointment(editingApptId,data) : api.createAppointment)({ veterinarianId: Number(document.getElementById('apptVet').value), petId: parseInt(document.getElementById('apptPet').value), appointmentDate: document.getElementById('apptDate').value, appointmentTime: document.getElementById('apptTime').value, reason: document.getElementById('apptReason').value });
+                showToast(editingApptId?'Appointment updated!':'Appointment booked!', 'success'); resetAppointmentEditor(false); loadAppts();
+            } catch(e) { showToast(e.message, 'error'); }
+        }
+
+        let groomingServices=[];
+        let ownerGroomers=[],groomerDirectoryVersion=0;
+        let editingGroomSnapshot=null;
+        function usesGroomingSnapshot(){if(!editingGroomId||!editingGroomSnapshot)return false;const ids=selectedGroomServiceIds(),original=editingGroomSnapshot.serviceIds||[editingGroomSnapshot.serviceId];return ids.length===original.length&&ids.every(id=>original.map(Number).includes(id));}
+        let groomingSlotTimer=null;
+        let groomingSlotRequestSeq=0;
+        let lastGroomSlotErrorAt=0;
+        function scheduleGroomingSlots(delay=350){clearTimeout(groomingSlotTimer);groomingSlotRequestSeq++;const select=document.getElementById('groomTime');select.disabled=true;select.innerHTML='<option value="">Updating available times…</option>';groomingSlotTimer=setTimeout(()=>loadGroomingSlots(),delay);}
+        function selectedGroomServiceIds(){return [...document.querySelectorAll('.groom-service-check:checked')].map(el=>Number(el.value)).filter(Boolean);}
+        function selectedGroomDuration(){if(usesGroomingSnapshot())return Number(editingGroomSnapshot.totalDurationMinutes);const ids=new Set(selectedGroomServiceIds());return groomingServices.filter(s=>ids.has(Number(s.id))).reduce((sum,s)=>sum+Number(s.durationMinutes||0),0);}
+        function selectedGroomTotal(){if(usesGroomingSnapshot())return Number(editingGroomSnapshot.totalPrice);const ids=new Set(selectedGroomServiceIds());return groomingServices.filter(s=>ids.has(Number(s.id))).reduce((sum,s)=>sum+Number(s.price||0),0);}
+        function updateGroomServiceSummary(refreshSlots=true){
+            const ids=selectedGroomServiceIds(),summary=document.getElementById('groomServiceSummary');
+            if(!ids.length) summary.innerHTML='<i class="bi bi-info-circle me-1"></i>Choose at least one service.';
+            else summary.innerHTML=`<strong>${ids.length} service${ids.length===1?'':'s'}</strong> · ${selectedGroomDuration()} min · <strong>${formatCurrency(selectedGroomTotal())}</strong>${usesGroomingSnapshot()?' <small>· Agreed booking price</small>':''}`;
+            if(refreshSlots) scheduleGroomingSlots();
+        }
+        async function loadGroomServices() {
+            try {
+                groomingServices=await api.getGroomingServices()||[];
+                document.getElementById('groomServiceOptions').innerHTML=groomingServices.map(s=>`<label class="groom-service-choice"><input class="form-check-input groom-service-check" type="checkbox" value="${s.id}" onchange="updateGroomServiceSummary()"><span class="groom-service-info"><span class="groom-service-heading"><img class="groom-service-thumbnail" src="${escapeHtml(groomingServiceImage(s))}" alt="" width="72" height="72" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='/images/grooming.png'"><strong>${escapeHtml(s.name)}</strong></span><small>${escapeHtml(s.description||'')}</small><em>${formatCurrency(s.price)} · ${Number(s.durationMinutes||0)} min</em></span></label>`).join('')||'<div class="text-muted small">No grooming services are available right now.</div>';
+                updateGroomServiceSummary(false);return true;
+            } catch(e) { document.getElementById('groomServiceOptions').innerHTML='<div class="text-danger small">Unable to load grooming services.</div>';showToast(e.message || 'Unable to load grooming services.','error'); }
+        }
+        function groomerAvatar(g){
+            if(g.profileImage)return `<img class="groomer-card-photo" src="${escapeHtml(g.profileImage)}" alt="${escapeHtml(g.name)} profile photo" data-groomer-name="${escapeHtml(g.name)}">`;
+            const initials=(g.name||'G').split(/\s+/).filter(Boolean).slice(0,2).map(x=>x[0]).join('').toUpperCase();
+            return `<div class="groomer-card-photo groomer-card-fallback">${escapeHtml(initials||'G')}</div>`;
+        }
+        document.getElementById('section-grooming').addEventListener('error',event=>{
+            const img=event.target;if(!(img instanceof HTMLImageElement)||!img.matches('img[data-groomer-name]'))return;
+            const fallback=document.createElement('div');fallback.className='groomer-card-photo groomer-card-fallback';fallback.setAttribute('aria-label',img.alt);
+            fallback.textContent=(img.dataset.groomerName||'G').split(/\s+/).filter(Boolean).slice(0,2).map(part=>part[0]).join('').toUpperCase();img.replaceWith(fallback);
+        },true);
+        function renderOwnerGroomers(groomers){
+            const host=document.getElementById('ownerGroomerCards');
+            host.innerHTML=(groomers||[]).map(g=>{
+                const rating=g.totalReviews?`<span class="groomer-rating"><i class="bi bi-star-fill"></i>${Number(g.averageRating||0).toFixed(1)} <small>(${g.totalReviews})</small></span>`:'<span class="text-muted small">No reviews yet</span>';
+                const latest=(g.recentReviews||[])[0];
+                const review=latest?`<div class="groomer-review-snippet"><span>${'★'.repeat(Number(latest.rating||0))}${'☆'.repeat(Math.max(0,5-Number(latest.rating||0)))}</span><p>“${escapeHtml(latest.review||'')}”</p><small>${escapeHtml(latest.userName||'Pet owner')}</small></div>`:'<div class="groomer-review-snippet empty">Ready for their first PawCare review.</div>';
+                return `<div class="col-md-6 col-xl-4"><article class="groomer-profile-card">${groomerAvatar(g)}<div class="flex-grow-1"><div class="d-flex justify-content-between gap-2"><div><h6>${escapeHtml(g.name)}</h6><p class="mb-1 text-muted small">${escapeHtml(g.specialty||'Professional pet groomer')}${g.experienceYears!=null?` · ${g.experienceYears} yrs experience`:''}</p></div>${rating}</div>${review}<button class="btn btn-sm btn-pawcare-outline mt-2" onclick="chooseGroomer(${g.id})">Choose ${escapeHtml((g.name||'Groomer').split(' ')[0])}</button></div></article></div>`;
+            }).join('')||'<div class="col-12 text-muted small">No groomers are available right now.</div>';
+        }
+        function updateSelectedGroomer() {
+            const groomer=ownerGroomers.find(g=>Number(g.id)===Number(value('groomGroomer'))),host=document.getElementById('selectedGroomerDetails');
+            if(!host)return;
+            if(!groomer){host.innerHTML='<i class="bi bi-person-heart" aria-hidden="true"></i><span>Choose a groomer to see their salon, training and experience.</span>';return;}
+            const facts=[groomer.organization,groomer.experienceYears!=null?groomer.experienceYears+' years of experience':null].filter(Boolean);
+            host.innerHTML=groomerAvatar(groomer)+'<div><strong>'+escapeHtml(groomer.name)+'</strong><span>'+escapeHtml(groomer.specialty||'Pet groomer')+'</span>'+(facts.length?'<small>'+escapeHtml(facts.join(' · '))+'</small>':'')+(groomer.qualification?'<small>'+escapeHtml(groomer.qualification)+'</small>':'')+'</div>';
+        }
+        function chooseGroomer(id){document.getElementById('groomGroomer').value=String(id);document.getElementById('groomGroomer').dispatchEvent(new Event('change',{bubbles:true}));document.getElementById('groomGroomer').scrollIntoView({behavior:'smooth',block:'center'});}
+        async function loadGroomers() {
+            const version=++groomerDirectoryVersion,select=document.getElementById('groomGroomer');
+            try {
+                const groomers=await api.get('/groomers');if(version!==groomerDirectoryVersion)return;
+                const previous=select.value;ownerGroomers=groomers;
+                select.replaceChildren(new Option(groomers.length?'Choose groomer':'No groomers available',''));
+                for(const groomer of groomers){const label=groomer.name+' — '+(groomer.specialty||'Pet groomer')+(groomer.experienceYears!=null?' · '+groomer.experienceYears+' yrs':'');select.add(new Option(label,groomer.id));}
+                if([...select.options].some(option=>option.value===previous))select.value=previous;
+                renderOwnerGroomers(groomers);updateSelectedGroomer();await loadGroomingSlots();return true;
+            }catch(error){if(version!==groomerDirectoryVersion)return;ownerGroomers=[];setOptions('groomGroomer',[],'Unable to load groomers');updateSelectedGroomer();document.getElementById('ownerGroomerCards').textContent='Unable to load groomer profiles.';showToast(error.message,'error');}
+        }
+        async function loadGroomingSlots() {
+            const requestSeq=++groomingSlotRequestSeq;
+            const groomer=Number(value('groomGroomer')),date=value('groomDate'),select=document.getElementById('groomTime'),duration=selectedGroomDuration();
+            if(!duration){select.disabled=true;select.innerHTML='<option value="">Select one or more services first</option>';return;}
+            if(!groomer||!date){select.disabled=true;select.innerHTML='<option value="">Select groomer and date first</option>';return;}
+            select.disabled=true;
+            select.innerHTML='<option value="">Loading available times…</option>';
+            try{
+                const slots=await api.getAvailableSlots(groomer,date,'groomer',editingGroomId,duration);
+                if(requestSeq!==groomingSlotRequestSeq)return;
+                if(!Array.isArray(slots)||!slots.length){select.innerHTML='<option value="">No time slot fits these services on this date</option>';select.disabled=true;return;}
+                select.innerHTML='<option value="">Choose time</option>'+slots.map(t=>`<option value="${t}">${t}</option>`).join('');
+                select.disabled=false;
+            } catch(e){
+                if(requestSeq!==groomingSlotRequestSeq)return;
+                select.innerHTML='<option value="">Unable to load times</option>';select.disabled=true;
+                const now=Date.now();
+                if(now-lastGroomSlotErrorAt>3500){
+                    lastGroomSlotErrorAt=now;
+                    const message=e?.status>=500?'Unable to load available grooming times. Please try again.':(e.message||'Unable to load grooming times.');
+                    showToast(message,'error');
+                }
+            }
+        }
+        document.getElementById('groomGroomer').addEventListener('change',()=>{updateSelectedGroomer();scheduleGroomingSlots(75);});
+        document.getElementById('groomDate').addEventListener('change',()=>scheduleGroomingSlots(75));
+        async function loadGroom(page=0) {
+            try {
+                const data = await api.getMyGrooming(page);
+                renderPager("groomTable",data,loadGroom);
+                document.getElementById('groomTable').innerHTML = (data.content||[]).map(g => `
+                    <tr><td class="fw-semibold">${escapeHtml(g.petName)}</td><td>${escapeHtml(g.serviceName)}</td><td><div class="d-flex align-items-center gap-2">${g.groomerProfileImage?`<img src="${escapeHtml(g.groomerProfileImage)}" alt="" class="table-avatar">`:''}<span>${escapeHtml(g.groomerName||'-')}</span></div></td><td>${formatDate(g.appointmentDate)} ${g.appointmentTime}<small class="d-block text-muted">${g.totalDurationMinutes||''}${g.totalDurationMinutes?' min':''}</small></td>
+                    <td>${formatCurrency(g.totalPrice)}</td><td>${statusBadge(g.status)}${g.status==='IN_PROGRESS'?`<small class="d-block mt-1 text-muted">${escapeHtml(g.progressLabel||'In progress')}</small>`:''}${g.nextVisitDate?`<small class="d-block mt-1 text-muted">Next visit: ${formatDate(g.nextVisitDate)}</small>`:''}</td><td><button class="btn btn-sm btn-pawcare-outline mb-1" onclick="openGroomingVisit(${g.id})">View visit</button> ${g.status==='COMPLETED'?`<button class="btn btn-sm btn-pawcare-outline mb-1" onclick="repeatGroomingBooking(${g.id},this)">Book again</button> <button class="btn btn-sm btn-pawcare-outline" onclick="openServiceReview(${g.id},'${encodeURIComponent(g.serviceName||'Service')}','${encodeURIComponent(g.groomerName||'Groomer')}','${encodeURIComponent(g.petName||'Pet')}')"><i class="bi bi-star me-1"></i>Review</button>`:ownerAppointmentActions(g,true)}</td></tr>
+                `).join('') || '<tr><td colspan="7" class="empty-state">No grooming bookings</td></tr>';
+            } catch(e) { showToast(e.message || 'Unable to load data. Please try again.','error'); }
+        }
+        async function bookGroom() {
+            const serviceIds=selectedGroomServiceIds();
+            if(!serviceIds.length){showToast('Choose at least one grooming service.','warning');document.getElementById('groomServiceOptions').scrollIntoView({behavior:'smooth',block:'center'});return;}
+            if(document.getElementById('groomTime').disabled){showToast('Wait for an available time, then select it.','warning');return;}
+            if (!validateFields(['groomPet','groomGroomer','groomDate','groomTime']) || !validateBooking('groomDate','groomTime')) return;
+            try {
+                await (editingGroomId ? data=>api.updateGrooming(editingGroomId,data) : api.createGrooming)({ appointmentTime: document.getElementById('groomTime').value, petId: parseInt(document.getElementById('groomPet').value), serviceIds, groomerId: parseInt(document.getElementById('groomGroomer').value), appointmentDate: document.getElementById('groomDate').value, specialInstructions:value('groomInstructions'), comfortProfile:value('groomComfort'), preferredFinish:value('groomFinish') });
+                showToast(editingGroomId?'Grooming updated!':'Grooming booked!', 'success'); resetAppointmentEditor(true); loadGroom();
+            } catch(e) { showToast(e.message, 'error'); }
+        }
+
+        async function loadOrders(page=0) {
+            try {
+                const data = await api.getMyOrders(page);
+                renderPager("ordersTable",data,loadOrders);
+                document.getElementById('ordersTable').innerHTML = (data.content||[]).map(o => `
+                    <tr><td class="fw-semibold">${escapeHtml(o.orderNumber)}</td><td>${formatCurrency(o.totalAmount)}</td>
+                    <td>${statusBadge(o.status)}</td><td>${formatDate(o.createdAt)}</td><td>${(o.items||[]).map(i=>{
+                        const canReview=o.status==='DELIVERED' || !!i.reviewId;
+                        const reviewLabel=i.reviewId?'View Review':'Add Review';
+                        const reviewClass=i.reviewId?'btn-pawcare-outline':'btn-pawcare';
+                        const reviewAction=canReview?`<button class="btn btn-sm ${reviewClass} ms-1" onclick="openProductReview(${o.id},${i.productId},'${encodeURIComponent(i.productName)}')"><i class="bi ${i.reviewId?'bi-eye':'bi-star'} me-1"></i>${reviewLabel}</button>`:`<span class="badge bg-light text-muted ms-1"><i class="bi bi-lock me-1"></i>Review after delivery</span>`;
+                        return `<div class="order-review-item mb-2"><div class="d-flex flex-wrap align-items-center gap-1"><span>${escapeHtml(i.productName)}</span>${reviewAction}</div></div>`;
+                    }).join('')||'-'}</td><td>${o.status==="PENDING"?`<button class="btn btn-sm btn-pawcare" onclick="payMyOrder(${o.id},this)">Choose Payment</button>`:`<button type="button" class="btn btn-sm btn-pawcare-outline pc-invoice-download" data-payment-order="${Number(o.id)}" onclick="downloadPaymentSlip(${Number(o.id)},'${encodeURIComponent(o.orderNumber).replace(/'/g,'%27')}',this)"><i class="bi bi-download me-1" aria-hidden="true"></i><span>Download Invoice</span></button>`}</td></tr>
+                `).join('') || '<tr><td colspan="6" class="empty-state">No orders yet</td></tr>';
+            } catch(e) { showToast(e.message || 'Unable to load data. Please try again.','error'); }
+        }
+
+        const petWeightLimits = { dog:120, cat:25, bird:5, rabbit:15, fish:50, hamster:1 };
+        function selectedSpeciesName() {
+            const select=document.getElementById('petSpecies');
+            if(!select || !select.value || select.value==='__custom__') return '';
+            return (select.options[select.selectedIndex]?.text || '').trim();
+        }
+        function updatePetWeightLimit() {
+            const input=document.getElementById('petWeight'), hint=document.getElementById('petWeightHint');
+            const species=selectedSpeciesName(), max=petWeightLimits[species.toLowerCase()] || 200;
+            input.max=String(max);
+            hint.textContent=species ? `${species} weight must be greater than 0 and at most ${max} kg.` : 'Custom species weight must be greater than 0 and at most 200 kg.';
+            if(input.value) checkField(input);
+        }
+        function validatePetSpecificFields() {
+            const name=document.getElementById('petName'), weight=document.getElementById('petWeight');
+            const normalized=name.value.trim().replace(/\s+/g,' '); name.value=normalized;
+            if(normalized && !/^[\p{L}]+(?: [\p{L}]+)*$/u.test(normalized)) {
+                name.classList.add('is-invalid'); showToast('Pet name may contain letters and spaces only.','error'); name.focus(); return false;
+            }
+            if(weight.value) {
+                const max=Number(weight.max||200), n=Number(weight.value);
+                if(!Number.isFinite(n) || n<=0 || n>max) {
+                    weight.classList.add('is-invalid'); showToast(`Enter a weight greater than 0 and at most ${max} kg for this species.`,'error'); weight.focus(); return false;
+                }
+            }
+            return validateFields(['petName','petSpecies','petBreed','petCustomSpecies','petCustomBreed','petDob','petGender','petWeight','petColor','petPhoto']);
+        }
+
+        async function loadSpecies() {
+            const select=document.getElementById('petSpecies');
+            select.disabled=true; setOptions('petSpecies',[],'Loading species...');
+            try {
+                const species=await api.getSpecies();
+                setOptions('petSpecies',species,species.length?'Choose species':'No species available');
+                select.add(new Option('Other / Custom Species','__custom__'));
+                select.disabled=false; updatePetWeightLimit(); await loadBreeds();
+            } catch(e) { setOptions('petSpecies',[],'Unable to load species'); showToast(e.message,'error'); }
+        }
+        let breedRequest=0;
+        async function loadBreeds() {
+            const request=++breedRequest, id=document.getElementById('petSpecies').value;
+            if(id==='__custom__'){setOptions('petBreed',[],'Choose custom species first');document.getElementById('petBreed').add(new Option('Other / Custom Breed','__custom__'));document.getElementById('petBreed').disabled=false;handleBreedChange();return;}
+            const select=document.getElementById('petBreed'); select.disabled=true;
+            setOptions('petBreed',[],id?'Loading breeds...':'Choose species first');
+            if(!id) return;
+            try {
+                const breeds=await api.getBreeds(id);
+                if(request!==breedRequest) return;
+                setOptions('petBreed',breeds,'Unknown / mixed (optional)'); select.add(new Option('Other / Custom Breed','__custom__')); select.disabled=false;
+            } catch(e) { if(request===breedRequest) {setOptions('petBreed',[],'Unable to load breeds'); showToast(e.message,'error');} }
+        }
+        function handleSpeciesChange(){const custom=document.getElementById('petSpecies').value==='__custom__';const input=document.getElementById('petCustomSpecies');input.hidden=!custom;input.required=custom;if(!custom)input.value='';updatePetWeightLimit();loadBreeds();}
+        function handleBreedChange(){const custom=document.getElementById('petBreed').value==='__custom__';const input=document.getElementById('petCustomBreed');input.hidden=!custom;input.required=custom;if(!custom)input.value='';}
+        async function savePet() {
+            if(!validatePetSpecificFields()) return;
+            const btn=document.getElementById('savePetBtn'); if(btn.disabled) return;
+            btn.disabled=true;
+            try {
+                const savedPet=await (editingPetId ? (data,file)=>api.updatePetConfirmed(editingPetId,data,file,editingPetPassword) : api.createPet)({
+                    name:value('petName'),speciesId:value('petSpecies')==='__custom__'?null:Number(value('petSpecies')),customSpeciesName:value('petSpecies')==='__custom__'?value('petCustomSpecies'):null,breedId:value('petBreed')&&value('petBreed')!=='__custom__'?Number(value('petBreed')):null,customBreedName:value('petBreed')==='__custom__'?value('petCustomBreed'):null,
+                    dateOfBirth:value('petDob')||null,gender:value('petGender'),weight:value('petWeight')?Number(value('petWeight')):null,color:value('petColor'),clearBreed:!value('petBreed'),clearDateOfBirth:!value('petDob'),clearWeight:!value('petWeight')
+                },document.getElementById('petPhoto').files[0]);
+                showToast(editingPetId?'Pet updated!':'Pet added!','success'); editingPetId=null; editingPetPassword=null;
+                ['petName','petDob','petWeight','petColor','petPhoto'].forEach(id=>document.getElementById(id).value='');
+                document.getElementById('petPreview').hidden=true;
+                if(GroomingBooking.petAdded(savedPet.id))await showSection('grooming');else await showSection('pets');
+            } catch(e) { showToast(e.message,'error'); }
+            finally {btn.disabled=false;}
+        }
+        const initialSection=(location.hash||'').replace('#','');
+        window.addEventListener('hashchange',()=>{
+            const section=location.hash.slice(1);
+            if(['overview','pets','appointments','grooming','orders','addPet'].includes(section))showSection(section);
+        });
+        document.addEventListener('DOMContentLoaded',()=>{
+            if(document.body.dataset.initialSectionLoaded)return;
+            if(['overview','pets','appointments','grooming','orders','addPet'].includes(initialSection)) showSection(initialSection);
+            else showSection('overview');
+        },{once:true});
+    </script>
+    <script>{ const original=bookAppt; let busy=false; bookAppt=async function(...args) {if(busy)return;busy=true;try{return await original(...args);}finally{busy=false;}}; }</script>
+    <script>{ const original=bookGroom; let busy=false; bookGroom=async function(...args) {if(busy)return;busy=true;const btn=document.getElementById('groomBookButton');btn.disabled=true;btn.textContent='Saving…';try{return await original(...args);}finally{busy=false;btn.disabled=false;btn.innerHTML=editingGroomId?'Save changes':'Book Grooming';}}; }</script>
+    <script src="/js/payment-flow.js?v=20261016-2"></script>
+    <script src="/js/owner-actions.js?v=20261015-17"></script>
+    <script src="/js/grooming-studio.js?v=20261015-17"></script>
+    <script src="/js/grooming-booking.js?v=20261015-18"></script>
+    <script src="/js/reviews.js?v=20260921-2"></script>
+    <script src="/js/secure-messaging.js"></script>
+    <script src="/js/groomer-fields.js?v=20261015-17"></script>
+<script src="/js/account.js?v=20261015-26"></script>
+    <script src="/js/ui.js?v=20261015-5"></script>
+    <script src="/js/pawcare2.js?v=20261015-26"></script>
+<script src="/js/assistant-widget.js?v=1.1"></script>
+<script src="/js/site-shell.js?v=20261014-5"></script>
+</body>
+</html>

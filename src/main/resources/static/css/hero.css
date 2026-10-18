@@ -1,0 +1,1124 @@
+
+:root {
+    --font-hero-main: 'Plus Jakarta Sans', 'Outfit', system-ui, -apple-system, sans-serif;
+    --font-hero-script: 'Caveat', cursive, sans-serif;
+    --hero-purple: #5b3b7e;
+    --hero-purple-hover: #4a2d6c;
+    --hero-purple-light: #ece4f8;
+    --hero-purple-card-bg: #f4ecfc;
+    --hero-text-dark: #1c1524;
+    --hero-text-muted: #6a5a76;
+    --hero-label-muted: #7f6e8c;
+    --hero-cream-bg: #faf6f2;
+}
+
+/* Base Home styling */
+.home-page {
+    background-color: var(--hero-cream-bg);
+    font-family: var(--font-hero-main);
+    color: var(--hero-text-dark);
+}
+
+/* ==========================================================================
+   1. FLOATING PILL NAVBAR
+   ========================================================================== */
+/* ==========================================================================
+   1. FLOATING FROSTED GLASS PILL NAVBAR
+   ========================================================================== */
+.navbar-pawcare {
+    position: fixed;
+    top: 16px !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 20px !important;
+    background: transparent !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    z-index: 1050;
+    pointer-events: none;
+    transition: top 0.24s cubic-bezier(0.16, 1, 0.3, 1), padding 0.24s ease;
+    animation: heroFadeDown 0.56s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.navbar-pawcare.scrolled {
+    top: 10px !important;
+    background: transparent !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+.navbar-pill-container,
+.navbar-pawcare>.container {
+    pointer-events: auto;
+    max-width: 1180px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.78) !important;
+    backdrop-filter: blur(20px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+    border-radius: 999px !important;
+    padding: 7px 18px 7px 22px !important;
+    box-shadow: 0 10px 32px rgba(91, 59, 126, 0.08), inset 0 1px 1.5px rgba(255, 255, 255, 0.95) !important;
+    border: 1px solid rgba(255, 255, 255, 0.88) !important;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: all 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.navbar-pawcare.scrolled .navbar-pill-container,
+.navbar-pawcare.scrolled>.container {
+    background: rgba(255, 255, 255, 0.92) !important;
+    box-shadow: 0 12px 36px rgba(91, 59, 126, 0.12), inset 0 1px 1.5px rgba(255, 255, 255, 0.98) !important;
+    border-color: rgba(255, 255, 255, 0.98) !important;
+}
+
+/* Brand */
+.navbar-brand-pawcare {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    padding: 0;
+    margin: 0;
+}
+
+.brand-paw-icon {
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+    filter: drop-shadow(0 2px 4px rgba(91, 59, 126, 0.15));
+}
+
+.brand-title {
+    font-family: var(--font-hero-main);
+    font-weight: 800;
+    font-size: 1.28rem;
+    color: #21132e !important;
+    letter-spacing: -0.03em;
+}
+
+/* Nav Links in Center */
+.navbar-pawcare .navbar-nav {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    margin: 0;
+}
+
+.navbar-pawcare .nav-link {
+    font-family: var(--font-hero-main);
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: #433352 !important;
+    padding: 7px 16px !important;
+    border-radius: 999px;
+    transition: all 0.16s ease;
+    text-decoration: none;
+    line-height: 1.3;
+}
+
+.navbar-pawcare .nav-link:hover {
+    color: var(--hero-purple) !important;
+    background: rgba(236, 228, 248, 0.55);
+}
+
+.navbar-pawcare .nav-link.active-pill,
+.navbar-pawcare .nav-link.active {
+    background: #ece4f8 !important;
+    color: var(--hero-purple) !important;
+    font-weight: 650 !important;
+    padding: 7px 18px !important;
+    box-shadow: 0 1px 4px rgba(91, 59, 126, 0.08);
+}
+
+/* Right Actions */
+#authButtons {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.nav-search-btn {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #554863;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: all 0.16s ease;
+    background: transparent;
+    border: none;
+}
+
+.nav-search-btn:hover {
+    background: var(--hero-purple-light);
+    color: var(--hero-purple);
+    transform: scale(1.05);
+}
+
+.btn-login-pill {
+    background: #ffffff !important;
+    border: 1.5px solid #e3d9ec !important;
+    color: #21132e !important;
+    border-radius: 999px !important;
+    padding: 7px 22px !important;
+    font-size: 0.85rem !important;
+    font-weight: 600 !important;
+    transition: all 0.16s ease !important;
+    text-decoration: none;
+    box-shadow: 0 2px 6px rgba(100, 68, 128, 0.04) !important;
+}
+
+.btn-login-pill:hover {
+    background: #f7f2fb !important;
+    border-color: #d1c0e0 !important;
+    color: var(--hero-purple) !important;
+    transform: translateY(-1px);
+}
+
+.btn-signup-pill {
+    background: var(--hero-purple) !important;
+    border: none !important;
+    color: #ffffff !important;
+    border-radius: 999px !important;
+    padding: 7px 24px !important;
+    font-size: 0.85rem !important;
+    font-weight: 600 !important;
+    box-shadow: 0 4px 14px rgba(91, 59, 126, 0.28) !important;
+    transition: all 0.16s ease !important;
+    text-decoration: none;
+}
+
+.btn-signup-pill:hover {
+    background: var(--hero-purple-hover) !important;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 18px rgba(91, 59, 126, 0.35) !important;
+    color: #ffffff !important;
+}
+
+/* ==========================================================================
+   2. HERO SECTION LAYOUT & BACKGROUND
+   ========================================================================== */
+.home-hero {
+    position: relative;
+    padding: 72px 0 20px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    overflow: hidden;
+    background-color: #faf5f0;
+    background-image:
+        radial-gradient(ellipse 65% 55% at 50% 32%, #ffffff 0%, #fdf8f4 50%, #f7eff6 85%, #eddff5 100%),
+        radial-gradient(ellipse 48% 58% at 0% 28%, #ecddf6 0%, #f7eff6 50%, transparent 100%),
+        radial-gradient(ellipse 48% 58% at 100% 28%, #f3e6ed 0%, #f9f0f2 50%, transparent 100%);
+}
+
+/* Background Canvas (Organic shapes, paws, pet bed, leaves) */
+.hero-bg-canvas {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.bg-shape {
+    position: absolute;
+    pointer-events: none;
+}
+
+.wave-top-left {
+    top: -20px;
+    left: -40px;
+    width: clamp(380px, 38vw, 640px);
+    height: auto;
+    opacity: 0.95;
+}
+
+.wave-top-right {
+    top: -30px;
+    right: -30px;
+    width: clamp(400px, 40vw, 680px);
+    height: auto;
+    opacity: 0.95;
+}
+
+.ground-curve {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: clamp(140px, 18vw, 260px);
+    z-index: 1;
+}
+
+/* Floating Paw Prints - Translucent Lilac Stamps */
+.bg-paw {
+    position: absolute;
+    pointer-events: none;
+    opacity: 0.6;
+}
+
+.paw-top-left {
+    top: 108px;
+    left: clamp(24px, 5.5vw, 90px);
+    width: clamp(75px, 6.5vw, 105px);
+    height: auto;
+    transform: rotate(-14deg);
+    fill: #d2bee3;
+}
+
+.paw-top-right {
+    top: 130px;
+    right: clamp(30px, 6vw, 110px);
+    width: clamp(70px, 6vw, 95px);
+    height: auto;
+    transform: rotate(18deg);
+    fill: #d9c6e3;
+}
+
+/* Cozy Pet Bed on Bottom-Left */
+.decor-pet-bed {
+    position: absolute;
+    left: -20px;
+    bottom: 10px;
+    width: clamp(170px, 16vw, 240px);
+    height: auto;
+    z-index: 3;
+    pointer-events: none;
+}
+
+.decor-pet-bed svg {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Tropical Leaf Silhouettes */
+.decor-leaves.right {
+    position: absolute;
+    right: -10px;
+    bottom: 0;
+    width: clamp(150px, 14vw, 220px);
+    height: auto;
+    z-index: 3;
+    pointer-events: none;
+}
+
+.decor-leaves.left {
+    position: absolute;
+    left: -15px;
+    top: 380px;
+    width: clamp(100px, 9vw, 150px);
+    height: auto;
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* ==========================================================================
+   3. HERO CONTENT: EYEBROW & HIGH-POSITIONED PAWCARE WORDMARK
+   ========================================================================== */
+
+/* Header group tightly couples eyebrow + wordmark with zero extra space */
+.hero-header-group {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.hero-top-eyebrow {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin: 0 auto 0;
+    max-width: 600px;
+    padding: 0 20px;
+    animation: heroFadeDown 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.08s both;
+}
+
+.eyebrow-rule {
+    flex: 1;
+    height: 1.5px;
+    background: #ab95bf;
+    max-width: 60px;
+    border-radius: 2px;
+}
+
+.eyebrow-text {
+    font-family: var(--font-hero-main) !important;
+    font-size: 0.65rem;
+    font-weight: 750;
+    letter-spacing: 2.8px;
+    text-transform: uppercase;
+    color: var(--hero-label-muted);
+}
+
+/* PAWCARE Wordmark Container — Sits immediately under eyebrow, no layout gap */
+.hero-wordmark-container {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    text-align: center;
+    margin: 0 auto;
+    padding: 0;
+    overflow: visible;
+    pointer-events: none;
+    user-select: none;
+    /* Negative margin pulls the stage up so pets overlap the wordmark */
+    margin-bottom: clamp(-180px, -13vw, -70px);
+}
+
+/* The Combined Wordmark in Soft Pastel Lilac Gradient */
+.hero-wordmark {
+    display: block;
+    position: relative !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: auto !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    font-family: var(--font-hero-main) !important;
+    font-size: clamp(120px, 17.5vw, 275px) !important;
+    font-weight: 800 !important;
+    letter-spacing: -0.05em !important;
+    line-height: 0.82 !important;
+    text-align: center !important;
+    color: #ad94c8 !important;
+    background: linear-gradient(180deg, #9b7ec0 0%, #b397cd 42%, #cab2dd 100%) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
+    filter: drop-shadow(0 4px 18px rgba(155, 126, 192, 0.18)) !important;
+    transform: none;
+    animation: heroWordmarkEnter 0.84s cubic-bezier(0.16, 1, 0.3, 1) 0.14s both;
+}
+
+/* ==========================================================================
+   4. THREE-COLUMN HERO STAGE
+   ========================================================================== */
+.hero-stage {
+    position: relative;
+    z-index: 2;
+    max-width: 1340px;
+    width: calc(100% - clamp(32px, 4vw, 80px));
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: minmax(260px, 320px) minmax(380px, 1fr) minmax(250px, 300px);
+    column-gap: clamp(16px, 2.5vw, 36px);
+    align-items: end;
+    padding-top: clamp(30px, 4vw, 60px);
+    flex: 1;
+}
+
+/* Micro Labels */
+.section-micro-label {
+    display: block;
+    font-family: var(--font-hero-main) !important;
+    font-size: 0.65rem !important;
+    font-weight: 750 !important;
+    letter-spacing: 2.2px !important;
+    text-transform: uppercase !important;
+    color: var(--hero-label-muted) !important;
+    margin-bottom: 12px;
+}
+
+/* Left Column */
+.hero-col-left {
+    padding-bottom: 28px;
+    align-self: end;
+}
+
+.hero-col-left .section-micro-label {
+    animation: heroFadeUp 0.64s cubic-bezier(0.16, 1, 0.3, 1) 0.24s both;
+}
+
+.hero-main-heading {
+    font-family: var(--font-hero-main) !important;
+    font-size: clamp(2.1rem, 2.7vw, 3.2rem) !important;
+    font-weight: 800 !important;
+    line-height: 1.1 !important;
+    letter-spacing: -0.04em !important;
+    color: var(--hero-text-dark) !important;
+    margin: 0 0 14px;
+    animation: heroFadeUp 0.68s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both;
+}
+
+.highlight-purple {
+    color: var(--hero-purple) !important;
+}
+
+.hero-main-desc {
+    font-family: var(--font-hero-main) !important;
+    font-size: clamp(0.82rem, 0.9vw, 0.92rem) !important;
+    line-height: 1.65 !important;
+    color: var(--hero-text-muted) !important;
+    max-width: 320px;
+    margin: 0 0 24px;
+    animation: heroFadeUp 0.68s cubic-bezier(0.16, 1, 0.3, 1) 0.37s both;
+}
+
+.hero-col-left .hero-pill-badge {
+    animation: heroFadeUp 0.72s cubic-bezier(0.16, 1, 0.3, 1) 0.43s both;
+}
+
+/* Right Column */
+.hero-col-right {
+    padding-bottom: 28px;
+    align-self: end;
+}
+
+.hero-col-right .section-micro-label {
+    animation: heroFadeUp 0.64s cubic-bezier(0.16, 1, 0.3, 1) 0.26s both;
+}
+
+.hero-side-heading {
+    font-family: var(--font-hero-main) !important;
+    font-size: clamp(1.15rem, 1.4vw, 1.4rem) !important;
+    font-weight: 750 !important;
+    color: var(--hero-text-dark) !important;
+    letter-spacing: -0.03em !important;
+    margin: 0 0 8px;
+    line-height: 1.25 !important;
+    animation: heroFadeUp 0.68s cubic-bezier(0.16, 1, 0.3, 1) 0.32s both;
+}
+
+.hero-side-desc {
+    font-family: var(--font-hero-main) !important;
+    font-size: clamp(0.8rem, 0.88vw, 0.88rem) !important;
+    line-height: 1.6 !important;
+    color: var(--hero-text-muted) !important;
+    margin: 0 0 18px;
+    animation: heroFadeUp 0.68s cubic-bezier(0.16, 1, 0.3, 1) 0.38s both;
+}
+
+/* Paw Feature Bullet List */
+.paw-feature-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.paw-feature-list li {
+    font-family: var(--font-hero-main) !important;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: clamp(0.78rem, 0.85vw, 0.86rem) !important;
+    font-weight: 600 !important;
+    color: #3b2e49 !important;
+}
+
+.paw-feature-list li:nth-child(1) {
+    animation: heroFadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.42s both;
+}
+
+.paw-feature-list li:nth-child(2) {
+    animation: heroFadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.46s both;
+}
+
+.paw-feature-list li:nth-child(3) {
+    animation: heroFadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.51s both;
+}
+
+.paw-feature-list li:nth-child(4) {
+    animation: heroFadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.56s both;
+}
+
+.paw-bullet-svg {
+    width: 17px;
+    height: 17px;
+    flex-shrink: 0;
+    color: #8c6ca6;
+}
+
+/* Glass Pill Badges (Left & Right) */
+.hero-pill-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: #ffffffdd;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid #ffffff;
+    border-radius: 999px;
+    padding: 9px 18px 9px 12px;
+    box-shadow: 0 8px 24px rgba(100, 68, 128, 0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hero-col-right .hero-pill-badge {
+    animation: heroFadeUp 0.72s cubic-bezier(0.16, 1, 0.3, 1) 0.62s both;
+}
+
+.hero-pill-badge:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px rgba(100, 68, 128, 0.12);
+}
+
+.badge-icon-wrap {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    font-size: 1rem;
+    flex-shrink: 0;
+}
+
+.badge-icon-wrap.heart-bg {
+    background: var(--hero-purple-light);
+    color: var(--hero-purple);
+}
+
+.badge-icon-wrap.shield-bg {
+    background: var(--hero-purple-light);
+    color: var(--hero-purple);
+    border-radius: 12px;
+}
+
+.badge-text-wrap strong {
+    font-family: var(--font-hero-main) !important;
+    display: block;
+    font-size: 0.76rem !important;
+    font-weight: 750 !important;
+    color: var(--hero-text-dark) !important;
+    line-height: 1.35;
+}
+
+.badge-text-wrap small {
+    font-family: var(--font-hero-main) !important;
+    display: block;
+    font-size: 0.66rem !important;
+    color: var(--hero-text-muted) !important;
+    line-height: 1.4;
+    margin-top: 2px;
+}
+
+/* ==========================================================================
+   5. CENTER PET STAGE & CTA
+   ========================================================================== */
+.hero-col-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    position: relative;
+}
+
+.pet-stage-box {
+    position: relative;
+    width: 100%;
+    max-width: 530px;
+    margin: 0 auto;
+}
+
+/* Doodles around the pets */
+.doodle-whiskers {
+    position: absolute;
+    left: -24px;
+    top: 38%;
+    width: clamp(40px, 4vw, 55px);
+    height: auto;
+    z-index: 4;
+    animation: heroDoodlePop 0.72s cubic-bezier(0.16, 1, 0.3, 1) 0.42s both;
+}
+
+.doodle-heart {
+    position: absolute;
+    right: 28%;
+    top: 14%;
+    width: clamp(26px, 2.5vw, 36px);
+    height: auto;
+    z-index: 4;
+    transform: rotate(12deg);
+    animation: heroDoodlePop 0.72s cubic-bezier(0.16, 1, 0.3, 1) 0.46s both;
+}
+
+.doodle-script {
+    position: absolute;
+    right: -14px;
+    top: 13%;
+    z-index: 4;
+    font-family: 'Caveat', cursive, sans-serif !important;
+    font-size: clamp(1.45rem, 1.85vw, 2.1rem) !important;
+    line-height: 1.0 !important;
+    color: #8d6ba7 !important;
+    font-weight: 700 !important;
+    transform: rotate(8deg);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    user-select: none;
+    letter-spacing: 0.5px;
+    animation: heroDoodlePop 0.76s cubic-bezier(0.16, 1, 0.3, 1) 0.51s both;
+}
+
+.script-heart-symbol {
+    font-size: 1.3em;
+    display: inline-block;
+    margin-left: 2px;
+}
+
+/* Pet Photo Wrapper */
+.pet-photo-wrap {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1224 / 1179;
+    z-index: 3;
+    animation: heroPetReveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.26s both;
+}
+
+.hero-pet-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center bottom;
+    display: block;
+    position: relative;
+    z-index: 2;
+    filter: drop-shadow(0 14px 28px rgba(100, 68, 128, 0.12));
+}
+
+.pet-contact-shadow {
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 90%;
+    height: 12%;
+    border-radius: 50%;
+    background: radial-gradient(ellipse at center, rgba(100, 68, 130, 0.3) 0%, rgba(100, 68, 130, 0.08) 50%, transparent 75%);
+    filter: blur(6px);
+    z-index: 1;
+}
+
+/* Center CTA Buttons directly below pets */
+.hero-center-cta {
+    position: relative;
+    z-index: 4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin-top: 14px;
+    margin-bottom: 6px;
+    animation: heroFadeUp 0.68s cubic-bezier(0.16, 1, 0.3, 1) 0.54s both;
+}
+
+.btn-hero-primary {
+    background: var(--hero-purple);
+    color: #ffffff !important;
+    text-decoration: none;
+    font-family: var(--font-hero-main);
+    font-size: clamp(0.82rem, 0.9vw, 0.92rem);
+    font-weight: 650;
+    border-radius: 999px;
+    padding: 12px 28px;
+    box-shadow: 0 8px 24px rgba(91, 59, 126, 0.32);
+    display: inline-flex;
+    align-items: center;
+    transition: all 0.2s ease;
+}
+
+.btn-hero-primary:hover {
+    background: var(--hero-purple-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px rgba(91, 59, 126, 0.42);
+}
+
+.btn-hero-secondary {
+    background: #ffffff;
+    color: var(--hero-text-dark) !important;
+    text-decoration: none;
+    font-family: var(--font-hero-main);
+    font-size: clamp(0.82rem, 0.9vw, 0.92rem);
+    font-weight: 650;
+    border-radius: 999px;
+    padding: 12px 28px;
+    border: 1.5px solid #ebdff4;
+    box-shadow: 0 6px 20px rgba(100, 68, 128, 0.06);
+    display: inline-flex;
+    align-items: center;
+    transition: all 0.2s ease;
+}
+
+.btn-hero-secondary:hover {
+    background: #faf6fd;
+    border-color: #d8c2e8;
+    transform: translateY(-2px);
+}
+
+/* ==========================================================================
+   6. HERO BOTTOM FOOTER STRIP
+   ========================================================================== */
+.hero-bottom-strip {
+    position: relative;
+    z-index: 3;
+    max-width: 1360px;
+    width: calc(100% - clamp(32px, 4vw, 80px));
+    margin: auto auto 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 8px 0;
+    flex-shrink: 0;
+    animation: heroFadeUp 0.68s cubic-bezier(0.16, 1, 0.3, 1) 0.68s both;
+}
+
+.strip-left {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 1.8px;
+    color: var(--hero-label-muted);
+}
+
+.strip-sep {
+    margin: 0 6px;
+    opacity: 0.5;
+}
+
+/* Center Scroll Cue */
+.strip-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.scroll-link {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: var(--hero-label-muted);
+    transition: color 0.16s;
+}
+
+.scroll-link:hover {
+    color: var(--hero-purple);
+}
+
+.scroll-rule {
+    display: inline-block;
+    width: 28px;
+    height: 1.5px;
+    background: #b59ecb;
+    border-radius: 2px;
+}
+
+.scroll-text {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.64rem;
+    font-weight: 700;
+    letter-spacing: 2.2px;
+    text-transform: uppercase;
+    margin: 0 10px;
+}
+
+.scroll-paw-icon {
+    width: 14px;
+    height: 14px;
+    color: var(--hero-purple);
+}
+
+.scroll-down-arrow {
+    font-size: 0.78rem;
+    margin-top: 2px;
+    animation: bounceDown 1.6s infinite;
+}
+
+@keyframes bounceDown {
+
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
+        transform: translateY(0);
+    }
+
+    40% {
+        transform: translateY(4px);
+    }
+
+    60% {
+        transform: translateY(2px);
+    }
+}
+
+/* Social Buttons */
+.hero-social-circles {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.social-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #ffffff99;
+    border: 1px solid #ebdff4;
+    display: grid;
+    place-items: center;
+    color: #634b79;
+    font-size: 0.85rem;
+    text-decoration: none;
+    transition: all 0.16s ease;
+}
+
+.social-btn:hover {
+    background: var(--hero-purple);
+    color: #ffffff;
+    border-color: var(--hero-purple);
+    transform: translateY(-2px);
+}
+
+/* ==========================================================================
+   7. ENTRANCE KEYFRAME ANIMATIONS FOR FONTS & ELEMENTS
+   ========================================================================== */
+@keyframes heroFadeUp {
+    0% {
+        opacity: 0;
+        transform: translateY(22px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes heroFadeDown {
+    0% {
+        opacity: 0;
+        transform: translateY(-16px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes heroWordmarkEnter {
+    0% {
+        opacity: 0;
+        transform: translateY(22px) scale(0.97);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes heroPetReveal {
+    0% {
+        opacity: 0;
+        transform: translateY(28px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes heroDoodlePop {
+    0% {
+        opacity: 0;
+        transform: scale(0.85);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* ==========================================================================
+   8. RESPONSIVE MEDIA QUERIES
+   ========================================================================== */
+@media (max-width: 1200px) {
+    .hero-stage {
+        grid-template-columns: 280px 1fr 270px;
+        column-gap: 16px;
+    }
+
+    .doodle-script {
+        right: -8px;
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 991px) {
+    .navbar-pawcare {
+        padding: 8px 14px 0 !important;
+    }
+
+    .navbar-pill-container,
+    .navbar-pawcare>.container {
+        border-radius: 26px !important;
+        padding: 10px 18px !important;
+        background: rgba(255, 255, 255, 0.94) !important;
+        box-shadow: 0 12px 32px rgba(91, 59, 126, 0.12) !important;
+    }
+
+    .navbar-collapse {
+        margin-top: 10px;
+        padding: 14px 4px 10px;
+        border-top: 1px solid rgba(227, 214, 240, 0.6);
+        max-height: calc(100vh - 100px);
+        overflow-y: auto;
+    }
+
+    .navbar-pawcare .navbar-nav {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 6px;
+        margin-bottom: 14px;
+    }
+
+    .navbar-pawcare .nav-link {
+        padding: 10px 16px !important;
+        border-radius: 14px;
+        text-align: left;
+    }
+
+    #authButtons {
+        flex-direction: row;
+        align-items: center;
+        gap: 8px;
+        width: 100%;
+    }
+
+    #authButtons .btn-login-pill,
+    #authButtons .btn-signup-pill {
+        flex: 1;
+        text-align: center;
+        padding: 9px 16px !important;
+    }
+
+    .home-hero {
+        padding-top: 72px;
+        min-height: auto;
+    }
+
+    .hero-header-group {
+        margin-bottom: 0;
+    }
+
+    .hero-wordmark-container {
+        position: relative;
+        top: auto;
+        left: auto;
+        transform: none;
+        margin-top: 2px;
+        margin-bottom: -30px;
+    }
+
+    .hero-wordmark {
+        font-size: clamp(75px, 18vw, 140px) !important;
+        line-height: 0.82 !important;
+        transform: none !important;
+    }
+
+    .hero-stage {
+        padding-top: 0 !important;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 28px;
+        margin-top: 10px;
+        flex: 1;
+    }
+
+    .hero-col-left,
+    .hero-col-right {
+        text-align: center;
+        padding-bottom: 0;
+        width: 100%;
+        max-width: 500px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .hero-main-desc,
+    .hero-side-desc {
+        max-width: 440px;
+    }
+
+    .paw-feature-list {
+        align-items: center;
+    }
+
+    .hero-col-center {
+        order: -1;
+        width: 100%;
+        max-width: 460px;
+    }
+
+    .decor-pet-bed,
+    .decor-leaves {
+        display: none;
+    }
+
+    .hero-bottom-strip {
+        flex-direction: column;
+        gap: 14px;
+        text-align: center;
+        margin-top: 30px;
+        padding-bottom: 15px;
+    }
+}
+
+@media (max-width: 600px) {
+    .hero-main-heading {
+        font-size: 2.0rem;
+    }
+
+    .hero-center-cta {
+        flex-direction: column;
+        width: 100%;
+        padding: 0 20px;
+    }
+
+    .btn-hero-primary,
+    .btn-hero-secondary {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .doodle-script {
+        display: none;
+    }
+
+    .doodle-whiskers,
+    .doodle-heart {
+        display: none;
+    }
+}

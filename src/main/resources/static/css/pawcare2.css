@@ -1,0 +1,700 @@
+/* ================================================================
+   PawCare 2.0 — premium sub-page design system
+   Loaded ONLY on sub-pages. The approved Home page does not load it.
+   ================================================================ */
+
+body.pc2-page {
+    --pc2-ink:#222033;
+    --pc2-ink-2:#4f4a61;
+    --pc2-muted:#787386;
+    --pc2-violet:#6953b5;
+    --pc2-violet-deep:#46337d;
+    --pc2-violet-soft:#eee9fb;
+    --pc2-mint:#4e9f91;
+    --pc2-mint-deep:#2d776d;
+    --pc2-mint-soft:#eaf7f4;
+    --pc2-coral:#ee9a6c;
+    --pc2-coral-soft:#fff0e6;
+    --pc2-gold:#d6a84f;
+    --pc2-red:#c45466;
+    --pc2-sky:#5e84c9;
+    --pc2-bg:#f5f4f8;
+    --pc2-surface:#ffffff;
+    --pc2-surface-2:#fbfafc;
+    --pc2-line:#e7e3ed;
+    --pc2-line-strong:#d8d1e2;
+    --pc2-shadow-sm:0 8px 28px rgba(45,36,66,.07);
+    --pc2-shadow:0 22px 55px rgba(45,36,66,.10);
+    --pc2-shadow-lg:0 36px 90px rgba(45,36,66,.16);
+    --pc2-radius:24px;
+    --pc2-radius-lg:34px;
+    --pc2-ease:cubic-bezier(.2,.8,.2,1);
+    min-height:100vh;
+    color:var(--pc2-ink);
+    background:
+      radial-gradient(circle at 84% 8%, rgba(105,83,181,.09), transparent 26rem),
+      radial-gradient(circle at 11% 92%, rgba(78,159,145,.08), transparent 28rem),
+      var(--pc2-bg);
+    font-family:'DM Sans','Plus Jakarta Sans',system-ui,sans-serif;
+    overflow-x:hidden;
+}
+body.pc2-page::before {
+    content:"";
+    position:fixed;
+    inset:0;
+    z-index:-2;
+    pointer-events:none;
+    background-image:radial-gradient(rgba(63,52,86,.045) .8px,transparent .8px);
+    background-size:22px 22px;
+    mask-image:linear-gradient(to bottom,rgba(0,0,0,.6),transparent 75%);
+}
+body.pc2-page h1,body.pc2-page h2,body.pc2-page h3,body.pc2-page h4,body.pc2-page h5,body.pc2-page h6 {
+    font-family:'Manrope','Plus Jakarta Sans',system-ui,sans-serif;
+    color:var(--pc2-ink);
+    letter-spacing:-.035em;
+}
+body.pc2-page .text-muted{color:var(--pc2-muted)!important}
+body.pc2-page a{transition:color 0.18s ease,opacity 0.18s ease,transform 0.18s ease}
+body.pc2-page :focus-visible{outline:3px solid rgba(105,83,181,.38)!important;outline-offset:3px}
+
+/* Ambient layer */
+.pc2-ambient {
+    position:fixed; inset:0; z-index:-1; pointer-events:none; overflow:hidden;
+}
+.pc2-ambient::before,.pc2-ambient::after {
+    content:""; position:absolute; border-radius:999px; filter:blur(2px); opacity:.55;
+    animation:pc2AmbientDrift 9.6s var(--pc2-ease) infinite alternate;
+}
+.pc2-ambient::before{width:420px;height:420px;right:-220px;top:18%;background:radial-gradient(circle,#d9cdf7 0,rgba(217,205,247,.18) 55%,transparent 70%)}
+.pc2-ambient::after{width:340px;height:340px;left:-190px;bottom:8%;background:radial-gradient(circle,#c8e9e2 0,rgba(200,233,226,.14) 56%,transparent 72%);animation-delay:-4s}
+@keyframes pc2AmbientDrift{to{transform:translate3d(0,40px,0) scale(1.08)}}
+
+/* ---------------------------------------------------------------
+   Workspace shell / dashboards
+   --------------------------------------------------------------- */
+body.pc2-page.workspace-page {
+    --workspace-surface:rgba(255,255,255,.92);
+    background:#f5f4f8;
+}
+body.pc2-page.workspace-page .dashboard-sidebar {
+    width:288px;
+    position:fixed;
+    left:18px; top:18px; bottom:18px;
+    height:auto;
+    border-radius:30px;
+    overflow:hidden;
+    background:
+      linear-gradient(165deg,rgba(42,34,65,.98),rgba(61,47,92,.98) 56%,rgba(43,67,72,.98));
+    box-shadow:0 28px 70px rgba(30,24,45,.22);
+    border:1px solid rgba(255,255,255,.08);
+    z-index:1000;
+    color:#fff;
+}
+body.pc2-page.workspace-page .dashboard-sidebar::before {
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background:
+      radial-gradient(circle at 10% 0%,rgba(158,133,232,.28),transparent 31%),
+      radial-gradient(circle at 90% 100%,rgba(91,184,167,.20),transparent 34%);
+}
+body.pc2-page.workspace-page .dashboard-sidebar::after {
+    content:"";position:absolute;right:-30px;bottom:86px;width:160px;height:160px;opacity:.055;
+    background:url('/images/paw.svg') center/contain no-repeat;transform:rotate(-15deg);pointer-events:none;
+}
+body.pc2-page.workspace-page .sidebar-brand {
+    position:relative;z-index:1;padding:30px 24px 22px;border-bottom:1px solid rgba(255,255,255,.09);
+}
+body.pc2-page.workspace-page .sidebar-brand h4{color:#fff!important;font-size:1.36rem;margin:0;display:flex;align-items:center;font-weight:800;letter-spacing:-.04em}
+body.pc2-page.workspace-page .sidebar-brand small{display:inline-flex;margin-top:8px;padding:5px 10px;border:1px solid rgba(255,255,255,.12);border-radius:999px;background:rgba(255,255,255,.07);font-size:.65rem;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.64)!important}
+body.pc2-page.workspace-page .sidebar-nav{position:relative;z-index:1;padding:16px 12px 20px;height:calc(100% - 106px);overflow:auto;scrollbar-width:none}
+body.pc2-page.workspace-page .sidebar-nav::-webkit-scrollbar{display:none}
+body.pc2-page.workspace-page .sidebar-nav .nav-item{margin:3px 0}
+body.pc2-page.workspace-page .sidebar-nav .nav-link {
+    display:flex;align-items:center;gap:12px;min-height:46px;padding:10px 12px;border-radius:15px;
+    color:rgba(255,255,255,.68)!important;font-size:.82rem;font-weight:650;letter-spacing:-.01em;
+    position:relative;overflow:hidden;
+}
+body.pc2-page.workspace-page .sidebar-nav .nav-link i{width:29px;height:29px;display:grid;place-items:center;border-radius:10px;background:rgba(255,255,255,.07);font-size:.9rem;color:rgba(255,255,255,.78)}
+body.pc2-page.workspace-page .sidebar-nav .nav-link:hover{background:rgba(255,255,255,.08);color:#fff!important;transform:translateX(2px)}
+body.pc2-page.workspace-page .sidebar-nav .nav-link.active,
+body.pc2-page.workspace-page .sidebar-nav .nav-link[aria-current="page"]{
+    background:linear-gradient(115deg,rgba(255,255,255,.17),rgba(255,255,255,.09));color:#fff!important;box-shadow:inset 0 0 0 1px rgba(255,255,255,.11),0 10px 28px rgba(0,0,0,.10)
+}
+body.pc2-page.workspace-page .sidebar-nav .nav-link.active::after,
+body.pc2-page.workspace-page .sidebar-nav .nav-link[aria-current="page"]::after{content:"";position:absolute;right:9px;width:7px;height:7px;border-radius:50%;background:#9ce3d3;box-shadow:0 0 0 5px rgba(156,227,211,.10)}
+body.pc2-page.workspace-page .sidebar-nav hr{opacity:.35;margin:12px 8px!important}
+body.pc2-page.workspace-page .sidebar-close{background:rgba(255,255,255,.08)!important;color:#fff!important;border:1px solid rgba(255,255,255,.11)!important}
+
+body.pc2-page.workspace-page .dashboard-content {
+    margin-left:324px!important;
+    max-width:none!important;
+    min-height:100vh;
+    padding:18px 30px 60px!important;
+}
+body.pc2-page.workspace-page .dashboard-header {
+    position:sticky!important;top:12px!important;z-index:50;
+    margin:0 0 18px!important;padding:11px 14px 11px 18px!important;
+    min-height:62px;
+    border:1px solid rgba(255,255,255,.86)!important;
+    background:rgba(250,249,252,.76)!important;
+    box-shadow:0 10px 35px rgba(44,36,64,.07)!important;
+    border-radius:20px!important;
+    backdrop-filter:blur(20px) saturate(1.25);
+    display:flex;align-items:center;justify-content:space-between;
+}
+body.pc2-page.workspace-page .dashboard-header h4{font-size:1.02rem!important}
+body.pc2-page.workspace-page .workspace-caption{font-size:.58rem!important;color:var(--pc2-mint-deep)!important;letter-spacing:.14em!important}
+
+.pc2-workspace-hero {
+    position:relative;
+    min-height:238px;
+    margin:0 0 22px;
+    border-radius:34px;
+    overflow:hidden;
+    display:grid;
+    grid-template-columns:minmax(0,1.15fr) minmax(300px,.85fr);
+    background:linear-gradient(128deg,#2d2840 0%,#514078 50%,#3f786f 110%);
+    box-shadow:0 30px 70px rgba(52,39,82,.20);
+    border:1px solid rgba(255,255,255,.1);
+    color:#fff;
+}
+.pc2-workspace-hero::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 84% 18%,rgba(255,255,255,.16),transparent 25%),radial-gradient(circle at 10% 112%,rgba(244,177,127,.18),transparent 35%);pointer-events:none}
+.pc2-workspace-hero-copy{position:relative;z-index:2;padding:34px 38px;display:flex;flex-direction:column;justify-content:center;align-items:flex-start}
+.pc2-eyebrow{display:inline-flex;align-items:center;gap:8px;padding:7px 11px;border-radius:999px;background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.11);font-size:.65rem;font-weight:800;text-transform:uppercase;letter-spacing:.12em;color:rgba(255,255,255,.78)}
+.pc2-workspace-hero h1{font-size:clamp(1.85rem,3vw,3rem)!important;line-height:1.02;color:#fff!important;margin:15px 0 11px!important;letter-spacing:-.055em!important;max-width:640px}
+.pc2-workspace-hero p{margin:0;color:rgba(255,255,255,.72);max-width:590px;font-size:.9rem}
+.pc2-hero-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.pc2-hero-chip{display:inline-flex;align-items:center;gap:7px;padding:8px 11px;border-radius:12px;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.08);font-size:.7rem;color:rgba(255,255,255,.82)}
+.pc2-hero-chip i{color:#b8f0e4}
+.pc2-workspace-hero-art{position:relative;min-height:230px;overflow:hidden}
+.pc2-workspace-hero-art img{position:absolute;width:min(520px,115%);height:auto;right:-24px;top:50%;transform:translateY(-50%);opacity:.92;filter:saturate(.88) brightness(1.04);mix-blend-mode:screen}
+.pc2-workspace-hero-art::after{content:"";position:absolute;left:10%;bottom:-80px;width:280px;height:210px;border-radius:50%;background:rgba(255,255,255,.07);filter:blur(1px)}
+
+.pc2-section-shell{animation:pc2SectionIn 0.3s var(--pc2-ease) both;transform-origin:top center}
+@keyframes pc2SectionIn{from{opacity:0;transform:translateY(10px) scale(.995)}to{opacity:1;transform:none}}
+.pc2-section-enter{animation:pc2SectionIn 0.3s var(--pc2-ease) both!important}
+.pc2-section-heading{display:flex;align-items:end;justify-content:space-between;gap:18px;margin:7px 0 18px}
+.pc2-section-heading .pc2-copy{max-width:690px}
+.pc2-section-kicker{display:block;color:var(--pc2-mint-deep);font-size:.62rem;font-weight:800;text-transform:uppercase;letter-spacing:.13em;margin-bottom:5px}
+.pc2-section-heading h5{font-size:1.45rem!important;margin:0!important;letter-spacing:-.045em!important}
+.pc2-section-heading p{margin:5px 0 0;color:var(--pc2-muted);font-size:.82rem}
+
+/* Bento/dashboard blocks */
+body.pc2-page .stat-card,
+body.pc2-page .card-pawcare {
+    border:1px solid rgba(229,225,236,.92)!important;
+    background:rgba(255,255,255,.91)!important;
+    box-shadow:var(--pc2-shadow-sm)!important;
+    border-radius:24px!important;
+    backdrop-filter:blur(16px);
+    transition:transform 0.24s var(--pc2-ease),box-shadow 0.24s var(--pc2-ease),border-color 0.24s ease!important;
+}
+body.pc2-page .stat-card:hover,
+body.pc2-page .card-pawcare:hover{transform:translateY(-3px);box-shadow:var(--pc2-shadow)!important;border-color:#dcd4e8!important}
+body.pc2-page .stat-card{position:relative;overflow:hidden}
+body.pc2-page .stat-card::after{content:"";position:absolute;right:-30px;top:-40px;width:110px;height:110px;border-radius:50%;background:linear-gradient(145deg,rgba(105,83,181,.12),rgba(78,159,145,.08));pointer-events:none}
+body.pc2-page .stat-icon{border-radius:16px!important;box-shadow:none!important}
+
+/* Buttons */
+body.pc2-page .btn{border-radius:13px;font-weight:700;letter-spacing:-.01em;transition:transform 0.16s var(--pc2-ease),box-shadow 0.16s ease,background 0.16s ease,border-color 0.16s ease}
+body.pc2-page .btn:hover{transform:translateY(-1px)}
+body.pc2-page .btn:active{transform:translateY(0) scale(.985)}
+body.pc2-page .btn-pawcare{background:linear-gradient(120deg,var(--pc2-violet),#765fc0)!important;border-color:transparent!important;color:#fff!important;box-shadow:0 9px 20px rgba(105,83,181,.22)!important}
+body.pc2-page .btn-pawcare:hover{box-shadow:0 13px 26px rgba(105,83,181,.29)!important}
+body.pc2-page .btn-pawcare-outline{background:#fff!important;border:1px solid var(--pc2-line-strong)!important;color:var(--pc2-violet-deep)!important;box-shadow:0 5px 14px rgba(45,36,66,.05)}
+body.pc2-page .btn-pawcare-outline:hover{border-color:#b9acd7!important;background:#f7f4fd!important}
+body.pc2-page .btn-secondary-pawcare{background:linear-gradient(120deg,var(--pc2-mint),#5eab9e)!important;color:#fff!important;border:0!important;box-shadow:0 9px 20px rgba(78,159,145,.2)}
+body.pc2-page .btn-danger{box-shadow:0 8px 18px rgba(196,84,102,.14)}
+
+/* Forms */
+body.pc2-page .form-label{font-size:.76rem!important;color:#514b60!important;font-weight:700!important;letter-spacing:-.01em}
+body.pc2-page .form-control,
+body.pc2-page .form-select,
+body.pc2-page .form-control-pawcare{
+    min-height:48px!important;
+    border-radius:14px!important;
+    border:1px solid #ded9e6!important;
+    background:rgba(250,249,252,.95)!important;
+    color:var(--pc2-ink)!important;
+    padding-left:14px;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.9)!important;
+    transition:border-color 0.16s ease,box-shadow 0.16s ease,background 0.16s ease,transform 0.16s ease!important;
+}
+body.pc2-page textarea.form-control,body.pc2-page textarea.form-control-pawcare{min-height:110px!important}
+body.pc2-page .form-control:focus,
+body.pc2-page .form-select:focus,
+body.pc2-page .form-control-pawcare:focus{border-color:#9b89c8!important;background:#fff!important;box-shadow:0 0 0 4px rgba(105,83,181,.10)!important;transform:translateY(-1px)}
+body.pc2-page .form-control[type=file]{padding:10px 12px}
+body.pc2-page .field-validation-message{font-size:.68rem!important;font-weight:700!important;min-height:16px!important}
+body.pc2-page .field-counter{font-size:.63rem!important}
+body.pc2-page .is-invalid{border-color:rgba(196,84,102,.66)!important;box-shadow:0 0 0 3px rgba(196,84,102,.07)!important}
+body.pc2-page .is-valid{border-color:rgba(78,159,145,.65)!important;box-shadow:0 0 0 3px rgba(78,159,145,.06)!important}
+
+/* Tables */
+body.pc2-page .table-responsive{border-radius:22px;overflow:auto}
+body.pc2-page .table-pawcare{border-collapse:separate!important;border-spacing:0 7px!important;padding:8px 10px!important;background:transparent!important}
+body.pc2-page .table-pawcare thead th{background:transparent!important;border:0!important;padding:8px 13px!important;color:#7a7387!important;font-size:.61rem!important;text-transform:uppercase;letter-spacing:.11em;font-weight:800!important;white-space:nowrap}
+body.pc2-page .table-pawcare tbody tr{background:#fbfafc;box-shadow:0 4px 13px rgba(42,34,61,.035);transition:transform 0.16s ease,box-shadow 0.16s ease,background 0.16s ease}
+body.pc2-page .table-pawcare tbody tr:hover{background:#fff;transform:translateY(-1px);box-shadow:0 8px 21px rgba(42,34,61,.06)}
+body.pc2-page .table-pawcare tbody td{padding:13px!important;border-top:1px solid #eeebf2!important;border-bottom:1px solid #eeebf2!important;vertical-align:middle!important;font-size:.79rem}
+body.pc2-page .table-pawcare tbody td:first-child{border-left:1px solid #eeebf2!important;border-radius:13px 0 0 13px}
+body.pc2-page .table-pawcare tbody td:last-child{border-right:1px solid #eeebf2!important;border-radius:0 13px 13px 0}
+body.pc2-page .badge{border-radius:999px;padding:.48em .72em;font-size:.62rem;letter-spacing:.02em}
+body.pc2-page .empty-state{padding:52px 24px!important;background:linear-gradient(180deg,#fcfbfd,#f8f6fb)!important;border-radius:18px!important;color:var(--pc2-muted)!important}
+body.pc2-page .empty-state::before{content:""!important;width:70px;height:54px;margin:0 auto 9px!important;display:block!important;background:url('/images/pawcare2/empty-pets.svg') center/contain no-repeat!important;filter:none!important}
+
+/* Add/edit pet onboarding */
+body.pc2-page #section-addPet .card-pawcare{max-width:none!important;padding:30px!important;position:relative;overflow:hidden}
+body.pc2-page #section-addPet .card-pawcare::before{content:"Pet profile";display:inline-flex;margin-bottom:20px;padding:6px 10px;border-radius:999px;background:var(--pc2-mint-soft);color:var(--pc2-mint-deep);font-size:.62rem;font-weight:800;text-transform:uppercase;letter-spacing:.11em}
+body.pc2-page #section-addPet .card-pawcare::after{content:"";position:absolute;right:-34px;top:-15px;width:230px;height:175px;background:url('/images/pawcare2/pawcare-orbit.svg?v=20261015-26') center/contain no-repeat;opacity:.10;pointer-events:none}
+body.pc2-page #section-addPet .photo-preview-polished,
+body.pc2-page #section-addPet #petPreview{width:150px!important;height:150px!important;border-radius:26px!important;padding:5px;background:#fff;box-shadow:0 14px 28px rgba(45,36,66,.12);border:1px solid var(--pc2-line)}
+
+/* ---------------------------------------------------------------
+   Public sub-pages
+   --------------------------------------------------------------- */
+body.pc2-page:not(.workspace-page) .navbar-pawcare {
+    top:16px!important;
+    max-width:1180px!important;
+    border-radius:999px!important;
+    background:rgba(255,255,255,.18)!important;
+    border:1px solid rgba(255,255,255,.35)!important;
+    box-shadow:0 10px 32px rgba(91,59,126,.08), inset 0 1px 1.5px rgba(255,255,255,.5)!important;
+    backdrop-filter:blur(22px) saturate(180%)!important;
+    -webkit-backdrop-filter:blur(22px) saturate(180%)!important;
+    padding:7px 18px 7px 22px!important;
+}
+body.pc2-page:not(.workspace-page) .navbar-pawcare.scrolled {
+    background:rgba(255,255,255,.72)!important;
+    box-shadow:0 12px 36px rgba(91,59,126,.12), inset 0 1px 1.5px rgba(255,255,255,.95)!important;
+    border-color:rgba(255,255,255,.88)!important;
+}
+body.pc2-page:not(.workspace-page) .navbar-pawcare .nav-link{font-weight:650!important}
+body.pc2-page:not(.workspace-page) .navbar-pawcare .nav-link:hover{background:#f1edf9!important;color:var(--pc2-violet)!important}
+body.pc2-page:not(.workspace-page) .page-masthead {
+    position:relative;overflow:hidden;
+    min-height:390px;
+    display:flex;align-items:center;
+    padding-top:120px!important;padding-bottom:78px!important;
+    background:linear-gradient(130deg,#2f2942,#5f4d89 55%,#3c756d)!important;
+    border-radius:0 0 52px 52px;
+}
+body.pc2-page:not(.workspace-page) .page-masthead::before{content:"";position:absolute;inset:0;background:url('/images/pawcare2/pawcare-orbit.svg?v=20261015-26') 93% 52%/520px auto no-repeat;opacity:.18;mix-blend-mode:screen}
+body.pc2-page:not(.workspace-page) .page-masthead::after{content:"";position:absolute;left:-5%;bottom:-58%;width:55%;height:90%;border-radius:50%;background:rgba(255,255,255,.055)}
+body.pc2-page:not(.workspace-page) .page-masthead>.container{position:relative;z-index:2}
+body.pc2-page:not(.workspace-page) .page-masthead h1{font-size:clamp(2.35rem,5vw,4.6rem)!important;letter-spacing:-.06em!important;line-height:.96!important;text-wrap:balance}
+body.pc2-page:not(.workspace-page) .page-masthead .lead{font-size:.98rem!important;color:rgba(255,255,255,.72)!important;max-width:660px!important}
+
+/* Photo mastheads: Grooming, Veterinarians, Pet Store */
+body.pc2-page:not(.workspace-page) .page-masthead.masthead-grooming,
+body.pc2-page:not(.workspace-page) .page-masthead.masthead-vet,
+body.pc2-page:not(.workspace-page) .page-masthead.masthead-store {
+    min-height: 440px !important;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+    background-position: right center !important;
+    display: flex !important;
+    align-items: center !important;
+}
+
+body.pc2-page:not(.workspace-page) .page-masthead.masthead-grooming::before,
+body.pc2-page:not(.workspace-page) .page-masthead.masthead-grooming::after,
+body.pc2-page:not(.workspace-page) .page-masthead.masthead-vet::before,
+body.pc2-page:not(.workspace-page) .page-masthead.masthead-vet::after,
+body.pc2-page:not(.workspace-page) .page-masthead.masthead-store::before,
+body.pc2-page:not(.workspace-page) .page-masthead.masthead-store::after,
+body.pc2-page:not(.workspace-page) .page-masthead.masthead-store .pc2-store-art {
+    display: none !important;
+}
+
+/* Grooming masthead */
+body.pc2-page:not(.workspace-page) .page-masthead.masthead-grooming {
+    background-color: #554188 !important;
+    background-image: linear-gradient(90deg, rgba(62, 45, 102, 0.45) 0%, rgba(62, 45, 102, 0) 55%), url('/images/grooming.png') !important;
+}
+
+/* Vet masthead */
+body.pc2-page:not(.workspace-page) .page-masthead.masthead-vet {
+    background-color: #d8cbeb !important;
+    background-image: linear-gradient(90deg, rgba(230, 221, 245, 0.6) 0%, rgba(230, 221, 245, 0) 55%), url('/images/vet.png') !important;
+}
+body.pc2-page:not(.workspace-page) .page-masthead.masthead-vet h1 {
+    color: #271a41 !important;
+}
+body.pc2-page:not(.workspace-page) .page-masthead.masthead-vet .lead {
+    color: #453561 !important;
+    opacity: 0.95 !important;
+}
+body.pc2-page:not(.workspace-page) .page-masthead.masthead-vet .section-badge {
+    background: rgba(85, 57, 137, 0.12) !important;
+    color: #482f77 !important;
+    border: 1px solid rgba(85, 57, 137, 0.22) !important;
+}
+
+/* Store masthead */
+body.pc2-page:not(.workspace-page) .page-masthead.masthead-store {
+    background-color: #523e85 !important;
+    background-image: linear-gradient(90deg, rgba(60, 42, 100, 0.45) 0%, rgba(60, 42, 100, 0) 55%), url('/images/petstore.png') !important;
+}
+
+/* Masthead text block positioned on left side of banner */
+body.pc2-page:not(.workspace-page) .page-masthead .masthead-text {
+    max-width: 580px;
+    text-align: left;
+    position: relative;
+    z-index: 3;
+}
+
+@media (max-width: 991px) {
+    body.pc2-page:not(.workspace-page) .page-masthead.masthead-grooming {
+        background-image: linear-gradient(90deg, rgba(60, 43, 100, 0.94) 0%, rgba(60, 43, 100, 0.82) 55%, rgba(60, 43, 100, 0.4) 100%), url('/images/grooming.png') !important;
+        background-position: 70% center !important;
+    }
+    body.pc2-page:not(.workspace-page) .page-masthead.masthead-vet {
+        background-image: linear-gradient(90deg, rgba(230, 221, 245, 0.96) 0%, rgba(230, 221, 245, 0.85) 55%, rgba(230, 221, 245, 0.45) 100%), url('/images/vet.png') !important;
+        background-position: 70% center !important;
+    }
+    body.pc2-page:not(.workspace-page) .page-masthead.masthead-store {
+        background-image: linear-gradient(90deg, rgba(60, 42, 100, 0.94) 0%, rgba(60, 42, 100, 0.82) 55%, rgba(60, 42, 100, 0.4) 100%), url('/images/petstore.png') !important;
+        background-position: 70% center !important;
+    }
+    body.pc2-page:not(.workspace-page) .page-masthead .masthead-text {
+        max-width: 100%;
+    }
+}
+@media (max-width: 575px) {
+    body.pc2-page:not(.workspace-page) .page-masthead.masthead-grooming,
+    body.pc2-page:not(.workspace-page) .page-masthead.masthead-vet,
+    body.pc2-page:not(.workspace-page) .page-masthead.masthead-store {
+        min-height: 350px !important;
+        padding-top: 116px !important;
+        padding-bottom: 50px !important;
+    }
+}
+
+body.pc2-page:not(.workspace-page) .section-padding{padding-top:86px!important;padding-bottom:86px!important}
+body.pc2-page:not(.workspace-page) .page-content-white{background:rgba(255,255,255,.72)!important;border-top:1px solid rgba(230,226,237,.8);border-bottom:1px solid rgba(230,226,237,.8)}
+body.pc2-page:not(.workspace-page) .footer-section{background:#262235!important;position:relative;overflow:hidden}
+body.pc2-page:not(.workspace-page) .footer-section::before{content:"";position:absolute;right:-80px;top:-100px;width:340px;height:340px;background:url('/images/paw.svg') center/contain no-repeat;opacity:.025;transform:rotate(-20deg)}
+
+/* Store / ecommerce */
+body.pc2-page.pc2-store .store-toolbar{border-radius:22px!important;border:1px solid var(--pc2-line)!important;background:rgba(255,255,255,.9)!important;box-shadow:var(--pc2-shadow-sm)!important;padding:15px!important;position:sticky;top:94px;z-index:30;backdrop-filter:blur(18px)}
+body.pc2-page.pc2-store .product-card{border-radius:25px!important;overflow:hidden!important;border:1px solid #e6e1eb!important;background:#fff!important;box-shadow:0 12px 35px rgba(47,37,67,.07)!important;transition:transform 0.24s var(--pc2-ease),box-shadow 0.24s ease!important}
+body.pc2-page.pc2-store .product-card:hover{transform:translateY(-7px)!important;box-shadow:0 24px 52px rgba(47,37,67,.13)!important}
+body.pc2-page.pc2-store .product-card img{transition:transform 0.4s var(--pc2-ease)!important}
+body.pc2-page.pc2-store .product-card:hover img{transform:scale(1.045)}
+body.pc2-page.pc2-store .product-card .btn{border-radius:12px!important}
+
+/* Auth pages */
+body.pc2-page.pc2-auth{background:#efedf4!important;min-height:100vh}
+body.pc2-page.pc2-auth .auth-left{
+    width:54%!important;
+    padding:3.6rem clamp(2.2rem,5vw,5.5rem)!important;
+    align-items:flex-start!important;
+    justify-content:center!important;
+    background:linear-gradient(140deg,#2c273d 0%,#55427d 54%,#38746c 110%)!important;
+    overflow:hidden;
+    isolation:isolate;
+}
+body.pc2-page.pc2-auth .auth-left::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(31,28,43,.26),rgba(31,28,43,.07)),radial-gradient(circle at 70% 18%,rgba(255,255,255,.14),transparent 28%);z-index:-1}
+body.pc2-page.pc2-auth .pc2-auth-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.28;z-index:-2;filter:saturate(.8) contrast(.95)}
+body.pc2-page.pc2-auth .auth-left>div:first-of-type{display:none}
+body.pc2-page.pc2-auth .auth-left h2{color:#fff!important;font-size:clamp(2.5rem,4.6vw,4.8rem)!important;line-height:.94!important;letter-spacing:-.065em!important;max-width:650px;margin-bottom:1.5rem!important}
+body.pc2-page.pc2-auth .auth-left p{font-size:.98rem!important;text-align:left!important;max-width:560px!important;line-height:1.7;color:rgba(255,255,255,.72)!important}
+body.pc2-page.pc2-auth .auth-left .btn{border-color:rgba(255,255,255,.28)!important;background:rgba(255,255,255,.08)!important;color:#fff!important;backdrop-filter:blur(10px)}
+body.pc2-page.pc2-auth .auth-pets{right:-12%!important;left:auto!important;bottom:-7%!important;width:76%!important;height:50%!important;opacity:.82!important;filter:saturate(.85)}
+body.pc2-page.pc2-auth .auth-right{margin-left:54%!important;background:transparent!important;padding:4rem clamp(2rem,5vw,5rem)!important}
+body.pc2-page.pc2-auth .auth-form-card{max-width:500px!important;background:rgba(255,255,255,.78);border:1px solid rgba(255,255,255,.9);border-radius:32px;padding:34px!important;box-shadow:0 30px 80px rgba(43,34,61,.13);backdrop-filter:blur(24px)}
+body.pc2-page.pc2-auth .auth-form-card::before{content:"Secure PawCare access";display:inline-flex;padding:6px 10px;border-radius:999px;background:var(--pc2-mint-soft);color:var(--pc2-mint-deep);font-size:.6rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;margin-bottom:18px}
+body.pc2-page.pc2-auth .auth-form-card h3{font-size:2rem!important}
+body.pc2-page.pc2-auth .demo-acc-item{border-radius:8px;transition:background 0.14s ease,padding 0.14s ease}
+body.pc2-page.pc2-auth .demo-acc-item:hover{background:#f4f1f8;padding-left:7px!important}
+
+/* Register card variant */
+body.pc2-page.pc2-register .reg-page{background:transparent!important;min-height:100vh;padding:56px 24px!important;position:relative}
+body.pc2-page.pc2-register .reg-page::before{content:"";position:fixed;inset:0;z-index:-2;background:linear-gradient(122deg,#f1eff7 0%,#f7f6f9 50%,#edf7f4 100%)}
+body.pc2-page.pc2-register .reg-page::after{content:"";position:fixed;left:-130px;bottom:-140px;width:520px;height:520px;z-index:-1;background:url('/images/pawcare2/pawcare-orbit.svg?v=20261015-26') center/contain no-repeat;opacity:.18}
+body.pc2-page.pc2-register .reg-card{max-width:720px!important;border-radius:34px!important;padding:34px!important;background:rgba(255,255,255,.86)!important;border:1px solid rgba(255,255,255,.94);box-shadow:0 34px 90px rgba(43,34,61,.12)!important;backdrop-filter:blur(22px)}
+body.pc2-page.pc2-register .role-option{border:1px solid #dfd9e8!important;border-radius:16px!important;background:#fbfafc;min-height:58px}
+body.pc2-page.pc2-register .role-option.selected{border-color:#9a88c7!important;background:#f3effb!important;box-shadow:0 0 0 3px rgba(105,83,181,.07)}
+
+/* Account modal upgrade */
+body.pc2-page .modal-content{border:1px solid rgba(255,255,255,.88)!important;border-radius:28px!important;box-shadow:0 35px 100px rgba(39,31,56,.22)!important;background:rgba(255,255,255,.94)!important;backdrop-filter:blur(22px)}
+body.pc2-page .modal-header,body.pc2-page .modal-footer{border-color:#ece8f0!important}
+
+/* Signature loader / page transition */
+.pc2-loader {
+    position:fixed;inset:0;z-index:99999;display:grid;place-items:center;
+    background:rgba(246,245,249,.96);backdrop-filter:blur(18px);
+    opacity:1;visibility:visible;transition:opacity 0.26s ease,visibility 0.26s ease;
+}
+.pc2-loader.is-leaving{opacity:0;visibility:hidden;pointer-events:none}
+.pc2-loader-stage{width:min(390px,86vw);display:grid;justify-items:center;text-align:center}
+.pc2-loader-track{position:relative;width:230px;height:82px;margin-bottom:7px}
+.pc2-loader-pet{position:absolute;left:8px;top:7px;width:56px;height:56px;border-radius:19px;background:linear-gradient(140deg,#725cb7,#4d3b84);box-shadow:0 14px 28px rgba(77,59,132,.23);display:grid;place-items:center;animation:pc2PetWalk 0.84s var(--pc2-ease) infinite alternate}
+.pc2-loader-pet::before{content:"";width:30px;height:30px;background:url('/images/paw.svg') center/contain no-repeat;filter:brightness(0) invert(1);opacity:.92}
+.pc2-loader-paws{position:absolute;left:70px;right:0;top:34px;display:flex;justify-content:space-between;align-items:center}
+.pc2-loader-paws span{width:17px;height:17px;background:url('/images/paw.svg') center/contain no-repeat;opacity:.16;animation:pc2PawGlow 0.96s ease-in-out infinite}
+.pc2-loader-paws span:nth-child(2){animation-delay:0.12s}.pc2-loader-paws span:nth-child(3){animation-delay:0.24s}.pc2-loader-paws span:nth-child(4){animation-delay:0.36s}.pc2-loader-paws span:nth-child(5){animation-delay:0.48s}
+.pc2-loader-title{font-size:1rem;font-weight:800;letter-spacing:-.02em;color:var(--pc2-violet-deep)}
+.pc2-loader-copy{font-size:.72rem;color:var(--pc2-muted);margin-top:3px}
+@keyframes pc2PetWalk{from{transform:translateX(0) rotate(-2deg)}to{transform:translateX(138px) rotate(2deg)}}
+@keyframes pc2PawGlow{0%,100%{opacity:.12;transform:scale(.8) rotate(-8deg)}50%{opacity:.55;transform:scale(1) rotate(5deg)}}
+
+/* Entrance/micro animation */
+.pc2-page-ready .pc2-reveal{animation:pc2Reveal 0.4s var(--pc2-ease) both;animation-delay:var(--pc2-delay,0ms)}
+@keyframes pc2Reveal{from{opacity:0;transform:translateY(13px)}to{opacity:1;transform:none}}
+.pc2-float{animation:pc2Float 4s ease-in-out infinite}
+@keyframes pc2Float{50%{transform:translateY(-8px)}}
+
+/* Toasts if existing app uses .toast-container / generated .pawcare-toast */
+body.pc2-page .toast,body.pc2-page .pawcare-toast{border-radius:17px!important;box-shadow:0 18px 45px rgba(40,33,57,.16)!important;border:1px solid rgba(255,255,255,.8)!important;backdrop-filter:blur(18px)}
+
+/* Responsive */
+@media (max-width:1199px){
+ body.pc2-page.workspace-page .dashboard-sidebar{width:258px}
+ body.pc2-page.workspace-page .dashboard-content{margin-left:292px!important;padding-left:22px!important;padding-right:22px!important}
+ .pc2-workspace-hero{grid-template-columns:1fr .7fr}
+ .pc2-workspace-hero-copy{padding:30px}
+}
+@media (max-width:991.98px){
+ body.pc2-page.workspace-page .dashboard-sidebar{left:14px!important;top:14px!important;bottom:14px!important;width:min(304px,calc(100vw - 44px))!important;transform:translateX(calc(-100% - 28px));transition:transform 0.26s var(--pc2-ease)!important}
+ body.pc2-page.workspace-page .dashboard-sidebar.show{transform:none!important}
+ body.pc2-page.workspace-page .dashboard-content{margin-left:0!important;padding:12px 18px 90px!important}
+ body.pc2-page.workspace-page .dashboard-header{top:8px!important}
+ .pc2-workspace-hero{grid-template-columns:1fr;min-height:unset}
+ .pc2-workspace-hero-art{position:absolute;right:0;top:0;width:44%;height:100%;opacity:.45}
+ .pc2-workspace-hero-copy{padding:34px;max-width:80%;position:relative;z-index:3}
+ body.pc2-page.pc2-auth .auth-left{display:none!important}
+ body.pc2-page.pc2-auth .auth-right{margin-left:0!important;min-height:100vh!important;padding:34px 18px!important;background:linear-gradient(140deg,#f0edf7,#f8f7fa 48%,#eef8f5)!important}
+ body.pc2-page.pc2-auth .auth-form-card{margin:auto}
+ body.pc2-page:not(.workspace-page) .page-masthead{border-radius:0 0 34px 34px;min-height:340px}
+}
+@media (max-width:767.98px){
+ body.pc2-page.workspace-page .dashboard-content{padding:10px 12px 90px!important}
+ body.pc2-page.workspace-page .dashboard-header{border-radius:16px!important;margin-bottom:12px!important}
+ .pc2-workspace-hero{border-radius:24px;margin-bottom:16px}
+ .pc2-workspace-hero-copy{padding:26px 22px;max-width:100%}
+ .pc2-workspace-hero-art{opacity:.18;width:70%}
+ .pc2-workspace-hero h1{font-size:2rem!important}
+ .pc2-hero-chips{gap:6px}.pc2-hero-chip{font-size:.64rem;padding:7px 9px}
+ .pc2-section-heading{align-items:flex-start;flex-direction:column;margin-bottom:14px}
+ body.pc2-page .card-pawcare{border-radius:19px!important}
+ body.pc2-page #section-addPet .card-pawcare{padding:20px!important}
+ body.pc2-page .table-pawcare{min-width:660px}
+ body.pc2-page:not(.workspace-page) .section-padding{padding-top:62px!important;padding-bottom:62px!important}
+ body.pc2-page:not(.workspace-page) .page-masthead{padding-top:116px!important;padding-bottom:56px!important;min-height:315px}
+ body.pc2-page.pc2-register .reg-card{padding:24px 18px!important;border-radius:24px!important}
+ body.pc2-page.pc2-auth .auth-form-card{padding:26px 20px!important;border-radius:24px}
+}
+@media (max-width:480px){
+ .pc2-workspace-hero-copy{padding:24px 18px}
+ .pc2-workspace-hero h1{font-size:1.72rem!important}
+ .pc2-workspace-hero p{font-size:.78rem}
+ body.pc2-page .btn{min-height:42px}
+}
+
+@media (prefers-reduced-motion:reduce){
+ body.pc2-page *,body.pc2-page *::before,body.pc2-page *::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}
+ .pc2-loader-pet{animation:none!important;left:86px}
+ .pc2-auth-video{display:none!important}
+}
+
+/* Owner pet gallery */
+body.pc2-page #petsGrid > [class*="col-"] .card-pawcare{height:100%;padding:18px!important;overflow:hidden;position:relative}
+body.pc2-page #petsGrid > [class*="col-"] .card-pawcare>img{height:210px!important;border-radius:19px!important;margin-bottom:18px!important;transition:transform 0.4s var(--pc2-ease),filter 0.4s ease;filter:saturate(.92)}
+body.pc2-page #petsGrid > [class*="col-"] .card-pawcare:hover>img{transform:scale(1.025);filter:saturate(1.03)}
+body.pc2-page #petsGrid > [class*="col-"] .card-pawcare h5{font-size:1.22rem!important}
+body.pc2-page #petsGrid > [class*="col-"] .card-pawcare p{padding:5px 8px;margin-bottom:5px!important;border-radius:10px;background:#f9f7fb;font-size:.74rem!important}
+body.pc2-page #petsGrid > [class*="col-"] .card-pawcare .mt-3{padding-top:4px;border-top:1px solid #eeeaf2;flex-wrap:wrap}
+
+/* Vet medical record table becomes a health-record timeline card layout. */
+body.pc2-page #section-records .table-responsive{overflow:visible}
+body.pc2-page #section-records .table-pawcare{display:block;padding:0!important}
+body.pc2-page #section-records .table-pawcare thead{display:none}
+body.pc2-page #section-records .table-pawcare tbody{display:grid;gap:12px;position:relative;padding-left:24px}
+body.pc2-page #section-records .table-pawcare tbody::before{content:"";position:absolute;left:5px;top:20px;bottom:20px;width:2px;background:linear-gradient(var(--pc2-mint),rgba(78,159,145,.08))}
+body.pc2-page #section-records .table-pawcare tbody tr{display:grid;grid-template-columns:minmax(110px,.7fr) minmax(180px,1.2fr) minmax(170px,1fr) minmax(170px,1fr) 120px auto;gap:8px;align-items:center;padding:16px 17px!important;border:1px solid #e8e4ed;border-radius:18px;background:#fff;position:relative}
+body.pc2-page #section-records .table-pawcare tbody tr::before{content:"";position:absolute;left:-25px;top:29px;width:12px;height:12px;border-radius:50%;background:var(--pc2-mint);box-shadow:0 0 0 6px var(--pc2-mint-soft)}
+body.pc2-page #section-records .table-pawcare tbody td{display:block!important;border:0!important;padding:5px 7px!important;border-radius:0!important;background:transparent!important}
+body.pc2-page #section-records .table-pawcare tbody td::before{display:block;color:#9991a4;font-size:.54rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;margin-bottom:2px}
+body.pc2-page #section-records .table-pawcare tbody td:nth-child(1)::before{content:"Pet"}
+body.pc2-page #section-records .table-pawcare tbody td:nth-child(2)::before{content:"Diagnosis"}
+body.pc2-page #section-records .table-pawcare tbody td:nth-child(3)::before{content:"Treatment"}
+body.pc2-page #section-records .table-pawcare tbody td:nth-child(4)::before{content:"Prescription"}
+body.pc2-page #section-records .table-pawcare tbody td:nth-child(5)::before{content:"Date"}
+body.pc2-page #section-records .table-pawcare tbody td:nth-child(6)::before{content:"Actions"}
+
+/* Modern mobile bottom navigation mirrors existing workspace actions. */
+.pc2-mobile-nav{display:none}
+@media(max-width:991.98px){
+ .pc2-mobile-nav{position:fixed;left:12px;right:12px;bottom:12px;z-index:990;display:grid;grid-template-columns:repeat(var(--pc2-mobile-count,4),1fr);gap:5px;padding:7px;border:1px solid rgba(255,255,255,.9);border-radius:20px;background:rgba(255,255,255,.88);box-shadow:0 18px 45px rgba(39,31,56,.16);backdrop-filter:blur(20px) saturate(1.2)}
+ .pc2-mobile-nav a{min-width:0;display:grid;justify-items:center;gap:2px;padding:7px 4px;border-radius:14px;color:#716b7d!important;font-size:.55rem;font-weight:750;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+ .pc2-mobile-nav a i{font-size:1rem}
+ .pc2-mobile-nav a.active,.pc2-mobile-nav a:active{background:#f0ecf9;color:var(--pc2-violet)!important}
+ body.pc2-page #section-records .table-pawcare tbody tr{grid-template-columns:1fr 1fr}
+}
+@media(max-width:575.98px){
+ body.pc2-page #section-records .table-pawcare tbody{padding-left:18px}
+ body.pc2-page #section-records .table-pawcare tbody tr{grid-template-columns:1fr}
+ body.pc2-page #section-records .table-pawcare tbody tr::before{left:-19px}
+}
+
+
+/* PawCare advanced feature panels — keeps the existing PawCare 2.0 visual language. */
+.pc2-notify-button{position:relative;border:0;background:rgba(255,255,255,.94);box-shadow:0 10px 30px rgba(58,44,84,.14);width:42px;height:42px;border-radius:14px;display:inline-grid;place-items:center;color:#5b4b78;margin-left:auto;z-index:30}
+.pc2-notify-button:hover{transform:translateY(-1px)}
+.pc2-notify-count{position:absolute;right:-5px;top:-5px;min-width:20px;height:20px;padding:0 5px;border-radius:99px;background:#dc3545;color:#fff;font-size:.68rem;font-weight:800;display:grid;place-items:center}
+.pc2-notify-panel,.pc2-assistant-panel,.pc2-availability-panel{position:fixed;right:20px;top:78px;width:min(390px,calc(100vw - 24px));max-height:76vh;background:#fff;border:1px solid rgba(91,75,120,.12);border-radius:22px;box-shadow:0 24px 70px rgba(42,31,63,.24);z-index:1095;opacity:0;visibility:hidden;transform:translateY(-8px) scale(.985);transition:0.18s ease;overflow:hidden}
+.pc2-notify-panel.is-open,.pc2-assistant-panel.is-open,.pc2-availability-panel.is-open{opacity:1;visibility:visible;transform:none}
+.pc2-panel-head{padding:16px 18px;display:flex;align-items:flex-start;justify-content:space-between;border-bottom:1px solid #eee8f5;background:linear-gradient(135deg,#fbf9ff,#f3effb)}
+.pc2-panel-head strong{display:block;color:#332a44}.pc2-panel-head small{display:block;color:#7d728d;margin-top:2px}
+.pc2-panel-close{border:0;background:transparent;font-size:1.6rem;line-height:1;color:#766a84}
+.pc2-notify-actions{display:flex;justify-content:flex-end;gap:8px;padding:9px 14px;border-bottom:1px solid #f0ebf5}
+.pc2-notify-actions button,.pc2-availability-row button{border:0;background:#f0eafa;color:#5b4b78;border-radius:10px;padding:7px 10px;font-size:.76rem;font-weight:700}
+.pc2-notify-list{overflow:auto;max-height:58vh}
+.pc2-notify-item{display:grid;grid-template-columns:38px 1fr auto;gap:10px;padding:13px 14px;border-bottom:1px solid #f2eef6;align-items:start;background:#fff}
+.pc2-notify-item.is-unread{background:#faf7ff}.pc2-notify-item.is-unread .pc2-notify-copy strong:after{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:#8265b3;margin-left:7px}
+.pc2-notify-icon{width:34px;height:34px;border-radius:11px;background:#eee8f8;color:#6d55a0;display:grid;place-items:center}
+.pc2-notify-copy strong{font-size:.86rem;color:#342d3f}.pc2-notify-copy p{margin:3px 0;font-size:.78rem;color:#60576a;line-height:1.35}.pc2-notify-copy small{font-size:.67rem;color:#9a91a3}
+.pc2-notify-item-actions{display:flex;gap:2px}.pc2-notify-item-actions button{border:0;background:transparent;color:#8b8096;padding:4px}
+.pc2-panel-loading,.pc2-panel-empty{padding:28px 18px;text-align:center;color:#81778c}.pc2-panel-empty i{display:block;font-size:1.6rem;margin-bottom:8px}.pc2-panel-empty strong,.pc2-panel-empty span{display:block}
+.pc2-assistant-button{position:fixed;right:24px;bottom:24px;border:0;border-radius:18px;padding:12px 16px;background:linear-gradient(135deg,#6f55a4,#8970bd);color:#fff;box-shadow:0 16px 38px rgba(75,54,116,.3);font-weight:800;z-index:1088;display:flex;align-items:center;gap:8px}
+.pc2-assistant-panel{top:auto;bottom:82px;max-height:70vh;display:flex;flex-direction:column}
+.pc2-assistant-messages{padding:14px;overflow:auto;min-height:220px;max-height:360px;background:#fcfbfe}
+.pc2-assistant-msg{max-width:88%;padding:10px 12px;border-radius:15px;margin-bottom:9px;font-size:.8rem;line-height:1.45}
+.pc2-assistant-msg.bot{background:#efe9f7;color:#40354f;border-bottom-left-radius:6px}.pc2-assistant-msg.user{margin-left:auto;background:#6e57a0;color:#fff;border-bottom-right-radius:6px}
+.pc2-assistant-suggestions{padding:0 14px 10px;display:flex;gap:6px;overflow:auto}.pc2-assistant-suggestions button{white-space:nowrap;border:1px solid #e2d9ee;background:#fff;color:#66557b;border-radius:99px;padding:6px 9px;font-size:.7rem}
+.pc2-assistant-form{display:grid;grid-template-columns:1fr 42px;gap:8px;padding:12px;border-top:1px solid #eee8f5}.pc2-assistant-form input{border:1px solid #ddd3e9;border-radius:12px;padding:10px 11px;outline:none}.pc2-assistant-form button{border:0;border-radius:12px;background:#6e57a0;color:#fff}
+.pc2-assistant-notice{padding:0 13px 11px;color:#92889d;font-size:.65rem}
+.pc2-availability-panel{top:88px}.pc2-availability-list{padding:12px;overflow:auto;max-height:64vh}.pc2-availability-row{display:grid;grid-template-columns:1.15fr .8fr auto .8fr auto;gap:7px;align-items:center;padding:9px 4px;border-bottom:1px solid #f0ebf5;font-size:.75rem}.pc2-availability-row input[type=time]{min-width:0;border:1px solid #ddd4e7;border-radius:9px;padding:5px}
+@media(max-width:767px){.pc2-notify-panel,.pc2-assistant-panel,.pc2-availability-panel{right:12px}.pc2-assistant-button{right:14px;bottom:78px}.pc2-assistant-button span{display:none}.pc2-availability-row{grid-template-columns:1fr 1fr auto 1fr}.pc2-availability-row button{grid-column:1/-1}.pc2-notify-button{margin-left:8px}}
+@media(prefers-reduced-motion:reduce){.pc2-notify-panel,.pc2-assistant-panel,.pc2-availability-panel,.pc2-notify-button{transition:none!important}}
+
+.pc2-block-date{padding:12px 16px 16px;border-top:1px solid #eee8f5;background:#fcfbfe}.pc2-block-date>strong{font-size:.8rem;color:#4e425c}.pc2-block-date>div:first-of-type{display:grid;grid-template-columns:1fr 1.2fr auto;gap:7px;margin-top:8px}.pc2-block-date input{border:1px solid #ddd4e7;border-radius:9px;padding:7px;font-size:.75rem}.pc2-block-date button{border:0;background:#6e57a0;color:#fff;border-radius:9px;padding:7px 9px;font-size:.72rem}.pc2-blocked-date{display:flex;justify-content:space-between;gap:8px;align-items:center;padding:7px 0;border-bottom:1px solid #f1edf5;font-size:.72rem}.pc2-blocked-date button{background:#f7e9ec;color:#a14455}
+@media(max-width:575px){.pc2-block-date>div:first-of-type{grid-template-columns:1fr}.pc2-block-date>div:first-of-type button{width:100%}}
+.pc2-notify-actions a{background:#f0eafa;color:#5b4b78;border-radius:10px;padding:7px 10px;font-size:.76rem;font-weight:700;text-decoration:none}
+
+
+/* PawCare themed dialogs: replaces browser alert/confirm popups */
+.paw-dialog-layer{position:fixed;inset:0;z-index:120000;display:grid;place-items:center;padding:22px;background:rgba(31,25,45,.48);backdrop-filter:blur(8px);opacity:0;transition:opacity 0.14s ease}
+.paw-dialog-layer.is-open{opacity:1}
+.paw-dialog-card{position:relative;width:min(520px,100%);overflow:hidden;border:1px solid rgba(255,255,255,.9);border-radius:28px;background:linear-gradient(155deg,rgba(255,255,255,.98),rgba(249,247,252,.96));box-shadow:0 36px 100px rgba(34,27,49,.28);padding:30px 30px 24px;transform:translateY(14px) scale(.98);transition:transform 0.16s cubic-bezier(.2,.8,.2,1)}
+.paw-dialog-layer.is-open .paw-dialog-card{transform:none}
+.paw-dialog-card::after{content:"";position:absolute;width:190px;height:190px;border-radius:50%;right:-85px;top:-100px;background:radial-gradient(circle,rgba(115,92,184,.16),rgba(115,92,184,0) 70%);pointer-events:none}
+.paw-dialog-icon{width:58px;height:58px;border-radius:18px;display:grid;place-items:center;font-size:1.45rem;margin-bottom:19px;box-shadow:0 12px 28px rgba(70,55,100,.12)}
+.paw-dialog-info,.paw-dialog-ai{color:#654ca8;background:linear-gradient(145deg,#f0eafb,#e7f7f3)}
+.paw-dialog-success{color:#18765f;background:#e6f7f0}.paw-dialog-warning{color:#9a6714;background:#fff4d9}.paw-dialog-danger,.paw-dialog-error{color:#b33c49;background:#fdebed}
+.paw-dialog-close{position:absolute;right:18px;top:18px;width:38px;height:38px;border:0;border-radius:12px;background:#f3eff7;color:#6f6579;display:grid;place-items:center;transition:0.14s ease}
+.paw-dialog-close:hover,.paw-dialog-close:focus-visible{background:#e9e2f1;color:#392f45;outline:3px solid rgba(112,87,181,.14)}
+.paw-dialog-kicker{font-size:.68rem;font-weight:800;text-transform:uppercase;letter-spacing:.16em;color:#8c7fb2;margin-bottom:5px}
+.paw-dialog-copy h3{font-size:1.35rem;line-height:1.2;letter-spacing:-.025em;margin:0;color:#2f2838;font-weight:800;padding-right:46px}
+.paw-dialog-message{margin:13px 0 0;color:#625a69;font-size:.92rem;line-height:1.65;white-space:pre-wrap;overflow-wrap:anywhere}
+.paw-dialog-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:24px;padding-top:18px;border-top:1px solid #ece7f0}
+.paw-dialog-actions .btn{min-width:104px;border-radius:13px;font-weight:700}
+.paw-dialog-primary{box-shadow:0 10px 22px rgba(88,68,147,.15)}
+@media(max-width:575.98px){.paw-dialog-layer{align-items:end;padding:12px}.paw-dialog-card{border-radius:24px;padding:25px 20px 18px}.paw-dialog-actions{flex-direction:column-reverse}.paw-dialog-actions .btn{width:100%}}
+
+body.pc2-page .order-review-item{padding:8px 10px;border:1px solid #eee9f2;border-radius:13px;background:linear-gradient(145deg,#fff,#faf8fc)}
+body.pc2-page .order-review-item:last-child{margin-bottom:0!important}
+
+/* PawCare 2.3 — groomer profiles, multi-service booking and profile photo editor */
+.groom-service-picker{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px}
+.groom-service-choice{position:relative;display:flex;gap:10px;align-items:flex-start;padding:14px;border:1px solid rgba(92,68,130,.16);border-radius:16px;background:rgba(255,255,255,.72);cursor:pointer;transition:0.14s ease;min-height:112px}
+.groom-service-choice:hover{transform:translateY(-1px);border-color:rgba(122,88,184,.38);box-shadow:0 10px 28px rgba(57,38,87,.08)}
+.groom-service-choice:has(.groom-service-check:checked){border-color:#7a58b8;background:linear-gradient(145deg,rgba(122,88,184,.10),rgba(255,255,255,.94));box-shadow:0 8px 24px rgba(122,88,184,.10)}
+.groom-service-choice .form-check-input{margin-top:3px;flex:0 0 auto}
+.groom-service-choice span{display:flex;flex-direction:column;gap:3px;line-height:1.25}
+.groom-service-choice strong{font-size:.9rem;color:var(--text-dark,#282236)}
+.groom-service-choice small{font-size:.76rem;color:var(--text-muted,#777184)}
+.groom-service-choice em{font-style:normal;font-size:.78rem;font-weight:700;color:#6d4ba5;margin-top:auto}
+.groom-service-summary{padding:9px 12px;border-radius:12px;background:rgba(122,88,184,.07);color:#645b71;font-size:.84rem}
+
+.groomer-profile-card{display:flex;gap:14px;height:100%;padding:17px;border:1px solid rgba(92,68,130,.14);border-radius:20px;background:rgba(255,255,255,.82);box-shadow:0 12px 34px rgba(57,38,87,.06)}
+.groomer-profile-card h6{margin:0;font-weight:750;color:var(--text-dark,#282236)}
+.groomer-card-photo,.public-groomer-photo,.groomer-home-avatar{object-fit:cover;border-radius:20px;background:linear-gradient(145deg,#e8def5,#d7e7e4);border:1px solid rgba(92,68,130,.14);flex:0 0 auto}
+.groomer-card-photo{width:70px;height:70px}
+.groomer-card-fallback{display:grid;place-items:center;font-weight:800;color:#65479a;letter-spacing:.03em}
+.groomer-rating{display:inline-flex;align-items:center;gap:5px;color:#7b5aa9;font-size:.84rem;font-weight:800;white-space:nowrap}
+.groomer-rating i{color:#e5a62b}
+.groomer-rating small{font-weight:600;color:var(--text-muted,#777184)}
+.groomer-rating.large{font-size:1rem;padding:7px 10px;border-radius:999px;background:rgba(229,166,43,.10)}
+.groomer-review-snippet{margin-top:9px;padding:9px 10px;border-radius:12px;background:rgba(122,88,184,.055);font-size:.75rem}
+.groomer-review-snippet span{color:#e5a62b;letter-spacing:.03em}
+.groomer-review-snippet p{margin:3px 0;color:#514a5c;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.groomer-review-snippet small{color:var(--text-muted,#777184)}
+.groomer-review-snippet.empty{color:var(--text-muted,#777184)}
+.table-avatar{width:32px;height:32px;border-radius:10px;object-fit:cover;border:1px solid rgba(92,68,130,.12)}
+
+.groomer-home-profile{display:flex;gap:22px;align-items:center}
+.groomer-home-avatar{width:116px;height:116px;border-radius:28px}
+.review-home-card{height:100%;padding:18px;border-radius:18px;background:rgba(255,255,255,.86);border:1px solid rgba(92,68,130,.12);box-shadow:0 12px 30px rgba(57,38,87,.05)}
+.review-home-card p{color:#4f485a}
+.public-groomer-card{text-align:center;padding:26px 22px;border-radius:24px;background:rgba(255,255,255,.9);border:1px solid rgba(92,68,130,.13);box-shadow:0 16px 40px rgba(57,38,87,.07)}
+.public-groomer-photo{width:112px;height:112px;margin:0 auto 16px;border-radius:28px}
+.public-groomer-card h5{font-weight:800;margin-bottom:5px}
+.public-review-snippet{text-align:left;margin-top:9px;padding:10px 11px;background:rgba(122,88,184,.05);border-radius:13px;font-size:.78rem}
+.public-review-snippet p{margin:4px 0;color:#544d5f;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.public-review-snippet small{color:var(--text-muted,#777184)}
+
+.pc-account-summary{display:flex;align-items:center;gap:16px;padding:14px;border-radius:18px;background:linear-gradient(145deg,rgba(122,88,184,.08),rgba(55,137,132,.06));margin-bottom:16px}
+.pc-account-avatar{object-fit:cover;border-radius:22px;border:1px solid rgba(92,68,130,.16);background:linear-gradient(145deg,#eadff6,#d9ebe7);flex:0 0 auto}
+.pc-account-avatar-lg{width:84px;height:84px}
+.pc-account-avatar-md{width:72px;height:72px}
+.pc-account-avatar-fallback{display:grid;place-items:center;color:#65479a;font-weight:850;font-size:1.2rem}
+.pc-account-details{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 18px;margin:0 0 14px}
+.pc-account-details>div{padding:8px 0;border-bottom:1px solid rgba(92,68,130,.08)}
+.pc-account-details dt{font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;color:var(--text-muted,#777184)}
+.pc-account-details dd{margin:2px 0 0;color:#403947}
+.pc-profile-photo-editor{display:flex;gap:16px;align-items:center;padding:14px;border:1px dashed rgba(92,68,130,.25);border-radius:18px;background:rgba(122,88,184,.035)}
+
+@media (max-width:767.98px){
+  .groomer-profile-card,.groomer-home-profile,.pc-profile-photo-editor{flex-direction:column;align-items:flex-start}
+  .groomer-home-avatar{width:96px;height:96px}
+  .pc-account-details{grid-template-columns:1fr}
+}
+
+/* Veterinarian directory */
+.vet-profile-card{display:flex;flex-direction:column;align-items:center}
+.vet-available-badge{display:inline-flex;align-items:center;gap:6px;padding:5px 10px;margin:-6px 0 10px;border-radius:999px;background:rgba(55,137,132,.09);color:#2f7d78;font-size:.74rem;font-weight:800}
+.vet-profile-details{width:100%;display:grid;gap:8px;text-align:left;margin-top:2px}
+.vet-detail-row{display:flex;align-items:flex-start;gap:10px;padding:10px 12px;border-radius:14px;background:rgba(122,88,184,.045);border:1px solid rgba(92,68,130,.08)}
+.vet-detail-row>i{width:28px;height:28px;display:grid;place-items:center;border-radius:9px;background:rgba(122,88,184,.09);color:#7252a2;flex:0 0 auto}
+.vet-detail-row small{display:block;color:#81788b;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em}
+.vet-detail-row strong{display:block;color:#3f3749;font-size:.86rem;font-weight:750;line-height:1.35}
+.vet-booking-callout{background:linear-gradient(145deg,rgba(255,255,255,.94),rgba(242,237,249,.9))}
+
+/* Public veterinarian cards are informational only; booking remains in the owner dashboard. */
+.vet-profile-footer{display:flex;align-items:center;justify-content:center;gap:7px;padding:10px 12px;border-radius:13px;background:#f5f1fa;color:#6b568f;font-size:.73rem;font-weight:800}.vet-profile-footer i{color:#5aa596}
+
+
+/* =========================================================
+  FIX: Veterinarian / Groomer availability panel scrolling
+  ========================================================= */
+
+.pc2-availability-panel {
+    top: 88px;
+
+    /* Keep the panel inside the visible browser window */
+    max-height: calc(100vh - 105px);
+    max-height: calc(100dvh - 105px);
+
+    /* Scroll the WHOLE availability panel */
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Don't create another scroll area only for Monday-Sunday */
+.pc2-availability-list {
+    max-height: none;
+    overflow: visible;
+}
+
+/* Keep the heading visible while scrolling */
+.pc2-availability-panel .pc2-panel-head {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}

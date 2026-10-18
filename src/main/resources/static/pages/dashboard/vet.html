@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preload" href="/vendor/fonts/font-5.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/vendor/fonts/font-11.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/vendor/fonts/font-17.woff2" as="font" type="font/woff2" crossorigin>
+<link href="/vendor/fonts/fonts.css?v=20261015-6" rel="stylesheet">
+<link href="/css/design.css?v=20261015-10" rel="stylesheet">
+    <title>Vet Dashboard - PawCare</title>
+    <link href="/vendor/bootstrap/bootstrap.min.css?v=5.3.2" rel="stylesheet">
+    <link href="/vendor/bootstrap-icons/bootstrap-icons.css?v=1.11.2" rel="stylesheet">
+    <link href="/css/style.css?v=20261015-10" rel="stylesheet">
+    <link href="/css/pawcare2.css?v=20261015-26" rel="stylesheet">
+    <link rel="icon" href="/images/paw.svg" type="image/svg+xml">
+    <meta name="theme-color" content="#c7b6e3">
+<link href="/css/assistant-widget.css?v=20261015-24" rel="stylesheet">
+<link href="/css/navigation.css?v=20261016-2" rel="stylesheet">
+<link rel="stylesheet" href="/css/site-fixes.css?v=20261015-26">
+<link href="/css/page-loading.css?v=20261015-10" rel="stylesheet">
+<link href="/css/paw-cursor.css?v=20261015-20" rel="stylesheet">
+<link href="/css/workspace-polish.css?v=20261015-20" rel="stylesheet">
+</head>
+<body class="workspace-page pc2-page pc2-workspace has-shared-nav">
+<script src="/js/page-loading.js?v=20261015-20"></script>
+<script src="/js/paw-cursor.js?v=20261015-20"></script>
+<nav id="mainNavbar" aria-label="Main navigation"><a href="/">PawCare</a></nav>
+<script src="/js/navigation.js?v=20261016-2"></script>
+    <div class="dashboard-sidebar" id="sidebar">
+        <div class="sidebar-brand"><h4><a class="sidebar-home" href="/" aria-label="PawCare homepage"><i class="bi bi-heart-pulse-fill me-2"></i>PawCare</a></h4><small class="text-white-50">Veterinarian</small></div>
+        <nav class="sidebar-nav">
+            <div class="nav-item"><a class="nav-link active" href="#" onclick="showSection('appointments')"><i class="bi bi-calendar-check"></i>Appointments</a></div>
+            <div class="nav-item"><a class="nav-link" href="#" onclick="showSection('records')"><i class="bi bi-journal-medical"></i>Medical Records</a></div>
+            <div class="nav-item"><a class="nav-link" href="#" onclick="showSection('addRecord')"><i class="bi bi-plus-circle"></i>New Record</a></div>
+            <div class="nav-item"><a class="nav-link" href="#" onclick="event.preventDefault();openMessagesInbox()"><i class="bi bi-chat-dots"></i>Messages <span data-message-unread-badge class="badge bg-danger ms-auto" hidden>0</span></a></div>
+            <div class="nav-item"><a class="nav-link" href="#" onclick="event.preventDefault();openAccount()"><i class="bi bi-person-circle"></i>My Account</a></div>
+            <hr class="mx-3" style="border-color:rgba(255,255,255,0.1)">
+            <div class="nav-item"><a class="nav-link" href="/pages/entertainment.html"><i class="bi bi-controller"></i>Entertainment</a></div>
+            <div class="nav-item"><a class="nav-link" href="/"><i class="bi bi-house"></i>Back to Site</a></div>
+            <div class="nav-item"><a class="nav-link" href="#" onclick="logout()"><i class="bi bi-box-arrow-left"></i>Logout</a></div>
+        </nav>
+    </div>
+    <div class="dashboard-content">
+        <div class="dashboard-header">
+            <div><h4 class="fw-bold mb-0">Veterinarian Dashboard</h4><small class="text-muted">Dr. <span id="vetName"></span></small></div>
+            <button class="btn btn-pawcare-outline d-lg-none" onclick="document.getElementById('sidebar').classList.toggle('show')"><i class="bi bi-list"></i></button>
+        </div>
+
+        <div id="section-appointments">
+            <h5 class="fw-bold mb-3">My Appointments</h5>
+            <div class="card-pawcare"><div class="table-responsive"><table class="table table-pawcare mb-0"><thead><tr><th>Appointment / Pet</th><th>Owner</th><th>Date</th><th>Time</th><th>Reason</th><th>Status</th><th>Actions</th></tr></thead><tbody id="vetApptsTable"></tbody></table></div></div>
+        </div>
+
+        <div id="section-records" style="display:none">
+            <h5 class="fw-bold mb-3">My Medical Records</h5>
+            <div class="card-pawcare p-3 mb-3"><div class="row g-2">
+<div class="col-md-4"><input id="recordSearch" class="form-control form-control-pawcare" placeholder="Search pet, diagnosis, treatment"></div>
+<div class="col-md-3"><select id="recordTypeFilter" class="form-control form-control-pawcare"><option value="">All record types</option><option>CONSULTATION</option><option>VACCINATION</option><option>TREATMENT</option><option>PRESCRIPTION</option><option>LABORATORY</option><option>FOLLOW_UP</option><option>WEIGHT</option><option>GENERAL</option></select></div>
+<div class="col-md-2"><input id="recordFrom" type="date" class="form-control form-control-pawcare" aria-label="From date"></div><div class="col-md-2"><input id="recordTo" type="date" class="form-control form-control-pawcare" aria-label="To date"></div>
+<div class="col-md-1"><button class="btn btn-pawcare w-100" onclick="loadRecords(0)"><i class="bi bi-search"></i></button></div></div></div>
+<div class="card-pawcare"><div class="table-responsive"><table class="table table-pawcare mb-0"><thead><tr><th>Pet</th><th>Type</th><th>Diagnosis</th><th>Treatment</th><th>Date</th><th>Actions</th></tr></thead><tbody id="vetRecordsTable"></tbody></table></div></div>
+        </div>
+
+        <div id="section-addRecord" style="display:none">
+            <h5 id="recordEditorTitle" class="fw-bold mb-3">Create Medical Record</h5>
+            <div class="card-pawcare p-4" style="max-width:700px">
+                <div id="appointmentContext" class="alert alert-light border mb-3" hidden></div>
+                <div class="mb-3"><label class="form-label fw-semibold">Pet ID</label><input type="number" id="recPetId" class="form-control form-control-pawcare" required></div>
+                <div class="mb-3"><label class="form-label fw-semibold">Appointment ID (optional)</label><input type="number" id="recApptId" class="form-control form-control-pawcare"></div>
+                <div class="mb-3"><label class="form-label fw-semibold">Record Type</label><select id="recType" class="form-control form-control-pawcare"><option>CONSULTATION</option><option>VACCINATION</option><option>TREATMENT</option><option>PRESCRIPTION</option><option>LABORATORY</option><option>FOLLOW_UP</option><option>WEIGHT</option><option>GENERAL</option></select></div>
+                <div class="mb-3"><label class="form-label fw-semibold">Diagnosis</label><textarea id="recDiag" class="form-control form-control-pawcare" rows="2" required></textarea></div>
+                <div class="mb-3"><label class="form-label fw-semibold">Treatment</label><textarea id="recTreat" class="form-control form-control-pawcare" rows="2" required></textarea></div>
+                <div class="mb-3"><label class="form-label fw-semibold">Prescription</label><textarea id="recPresc" class="form-control form-control-pawcare" rows="2"></textarea></div>
+                <div class="row g-3 mb-3">
+                    <div class="col-4"><label class="form-label fw-semibold">Weight (kg)</label><input type="number" step="0.1" id="recWeight" class="form-control form-control-pawcare"></div>
+                    <div class="col-4"><label class="form-label fw-semibold">Temperature</label><input type="number" step="0.1" id="recTemp" class="form-control form-control-pawcare"></div>
+                    <div class="col-4"><label class="form-label fw-semibold">Record Date</label><input type="date" id="recDate" class="form-control form-control-pawcare" required></div>
+                </div>
+                <div class="mb-3"><label class="form-label fw-semibold">Follow-up Date</label><input type="date" id="recFollowup" class="form-control form-control-pawcare"></div>
+                <div class="mb-3"><label for="recNotes" class="form-label">Notes</label><textarea id="recNotes" maxlength="2000" class="form-control form-control-pawcare"></textarea></div><div class="mb-3"><label for="recAttachment" class="form-label">Attachment (optional)</label><input id="recAttachment" type="file" accept="application/pdf,image/jpeg,image/png" class="form-control"><small class="text-muted">PDF, JPEG or PNG, maximum 5 MB.</small><div id="existingAttachments" class="small mt-2"></div></div><button class="btn btn-pawcare" onclick="saveRecord()">Save Medical Record</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="medicalHistoryModal" tabindex="-1"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><h5 id="medicalHistoryTitle" class="modal-title">Medical History</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body" id="medicalHistoryBody"></div><div class="modal-footer"><button id="medicalReportView" class="btn btn-pawcare-outline">View PDF</button><button id="medicalReportDownload" class="btn btn-pawcare">Download PDF</button><button class="btn btn-secondary" onclick="window.print()">Print</button></div></div></div></div>
+    <div class="modal fade" id="medicalExplainModal" tabindex="-1"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><h5 class="modal-title">AI Explanation</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body" id="medicalExplainBody"></div></div></div></div>
+    <script src="/vendor/bootstrap/bootstrap.bundle.min.js?v=5.3.2"></script>
+    <script src="/js/api.js?v=20261016-2"></script><script src="/js/forms.js?v=20261015-17"></script>
+    <script>
+        if (!api.isLoggedIn() || api.getRole() !== 'VETERINARIAN') window.location.href = '/pages/login.html';
+        document.getElementById('vetName').textContent = api.user?.firstName + ' ' + api.user?.lastName;
+
+        let editingMedicalId=null;
+        function showSection(name) {
+            if(name==="addRecord")resetRecordEditor();
+            if(name==="appointments")loadAppts();
+            document.querySelectorAll('[id^="section-"]').forEach(s => s.style.display = 'none');
+            document.getElementById('section-' + name).style.display = 'block';
+            document.querySelectorAll('.sidebar-nav .nav-link').forEach(l => l.classList.remove('active'));
+            window.event?.target?.closest('.nav-link')?.classList.add('active');
+            if (name === 'records') loadRecords();
+        }
+
+        const validVetTransitions={SCHEDULED:['CONFIRMED','CANCELLED','NO_SHOW'],CONFIRMED:['IN_PROGRESS','CANCELLED','NO_SHOW'],IN_PROGRESS:['COMPLETED'],COMPLETED:[],CANCELLED:[],NO_SHOW:[]};
+        function vetStatusOptions(current){return [current,...(validVetTransitions[current]||[])].map(s=>`<option value="${s}" ${current===s?'selected':''}>${s.replaceAll('_',' ')}</option>`).join('');}
+        async function loadAppts(page=0) {
+            try {
+                const data = await api.getVetAppointments(page);
+                renderPager("vetApptsTable",data,loadAppts);
+                document.getElementById('vetApptsTable').innerHTML = (data.content || []).map(a => `
+                    <tr><td class="fw-semibold">${escapeHtml(a.petName)}<small class="d-block text-muted">Pet ID: ${a.petId} · Appointment ID: ${a.id}</small></td><td>${escapeHtml(a.ownerName)}</td><td>${formatDate(a.appointmentDate)}</td><td>${a.appointmentTime}</td><td>${escapeHtml(a.reason)}</td><td>${statusBadge(a.status)}</td>
+                    <td><div class="d-flex flex-wrap gap-1 align-items-center"><select aria-label="Appointment status" ${['COMPLETED','CANCELLED','NO_SHOW'].includes(a.status)?"disabled":""} class="form-select form-select-sm" style="width:auto;font-size:0.82rem" onchange="updateStatus(${a.id},this.value)">
+                        ${vetStatusOptions(a.status)}
+                    </select><button class="btn btn-sm btn-pawcare" onclick="startRecordFromAppointment(${a.id})"><i class="bi bi-plus-circle me-1"></i>Add Medical Record</button><button class="btn btn-sm btn-pawcare-outline" onclick="viewPetRecords(${a.petId},'${encodeURIComponent(a.petName)}')">View Records</button><button class="btn btn-sm btn-pawcare-outline" onclick="openMessageThread(${a.petId},${a.ownerId},${a.id},'${encodeURIComponent(a.ownerName||'Owner')}')"><i class="bi bi-chat-dots me-1"></i>Message</button></div></td></tr>
+                `).join('') || '<tr><td colspan="7" class="empty-state">No appointments</td></tr>';
+            } catch(e) { showToast(e.message || 'Unable to load data. Please try again.','error'); }
+        }
+
+        async function updateStatus(id, status) { try { await api.updateAppointment(id, {status}); showToast('Updated','success'); } catch(e){ showToast(e.message,'error'); } finally {await loadAppts();} }
+
+        async function loadRecords(page=0) {
+            try {
+                const params=new URLSearchParams({page,size:10});
+                if(value('recordSearch'))params.set('q',value('recordSearch')); if(value('recordTypeFilter'))params.set('recordType',value('recordTypeFilter')); if(value('recordFrom'))params.set('from',value('recordFrom')); if(value('recordTo'))params.set('to',value('recordTo'));
+                const data = await api.searchMedicalRecords(params.toString());
+                renderPager("vetRecordsTable",data,loadRecords);
+                document.getElementById('vetRecordsTable').innerHTML = (data.content || []).map(r => `
+                    <tr><td class="fw-semibold">${escapeHtml(r.petName)}</td><td><span class="status-badge">${escapeHtml(r.recordType||'GENERAL')}</span></td><td>${escapeHtml(r.diagnosis)}</td><td>${escapeHtml(r.treatment)}</td><td>${formatDate(r.recordDate)}</td><td><div class="d-flex flex-wrap gap-1"><button class="btn btn-sm btn-pawcare-outline" onclick="editRecord(${r.id})">View / Edit</button><button class="btn btn-sm btn-pawcare-outline" onclick="explainDiagnosis('${encodeURIComponent(r.diagnosis)}')">Explain</button><button class="btn btn-sm btn-pawcare-outline" onclick="viewPetRecords(${r.petId},'${encodeURIComponent(r.petName)}')">History</button> ${api.getRole()==="VETERINARIAN"?`<button class="btn btn-sm btn-outline-danger" onclick="deleteRecord(${r.id},this)">Delete</button>`:""}</div></td></tr>
+                `).join('') || '<tr><td colspan="6" class="empty-state">No records</td></tr>';
+            } catch(e) { showToast(e.message || 'Unable to load records.','error'); }
+        }
+
+        async function startRecordFromAppointment(id){
+            try{const a=await api.getAppointment(id);showSection('addRecord');document.getElementById('recPetId').value=a.petId;document.getElementById('recApptId').value=a.id;document.getElementById('recPetId').disabled=true;document.getElementById('recApptId').disabled=true;document.getElementById('recordEditorTitle').textContent='Add Medical Record — '+a.petName;const ctx=document.getElementById('appointmentContext');ctx.hidden=false;ctx.innerHTML=`<strong>${escapeHtml(a.petName)}</strong> · Owner: ${escapeHtml(a.ownerName||'-')}<br><small>Appointment #${a.id} · ${formatDate(a.appointmentDate)} ${a.appointmentTime} · ${escapeHtml(a.reason)}</small>`;}catch(e){showToast(e.message,'error');}
+        }
+        async function viewPetRecords(petId,petName){
+            petName=decodeURIComponent(petName);
+            try{const records=await api.getMedicalRecords(petId);const rows=records.map(r=>`<div class="border-start border-3 ps-3 pb-3 mb-2"><div class="d-flex justify-content-between"><strong>${formatDate(r.recordDate)} · ${escapeHtml(r.recordType||'GENERAL')}</strong><small>${r.appointmentId?'Appointment #'+r.appointmentId:''}</small></div><div><strong>Diagnosis:</strong> ${escapeHtml(r.diagnosis)}</div><div class="text-muted"><strong>Treatment:</strong> ${escapeHtml(r.treatment)}</div></div>`).join('')||'<p class="text-muted">No medical records yet.</p>';document.getElementById('medicalHistoryTitle').textContent=petName+' — Medical History';document.getElementById('medicalHistoryBody').innerHTML=rows;document.getElementById('medicalReportView').onclick=()=>openMedicalReport(petId,false);document.getElementById('medicalReportDownload').onclick=()=>openMedicalReport(petId,true);bootstrap.Modal.getOrCreateInstance(document.getElementById('medicalHistoryModal')).show();}catch(e){showToast(e.message,'error');}
+        }
+        async function explainDiagnosis(encoded){try{const x=await api.explainMedicalTerm(decodeURIComponent(encoded));document.getElementById('medicalExplainBody').innerHTML=`<strong>${escapeHtml(x.term)}</strong><p class="mt-2 mb-1">${escapeHtml(x.explanation)}</p><small class="text-muted">${escapeHtml(x.notice)}</small>`;bootstrap.Modal.getOrCreateInstance(document.getElementById('medicalExplainModal')).show();}catch(e){showToast(e.message,'error');}}
+        async function openMedicalReport(petId,download){try{const res=await fetch(`/api/medical-records/pet/${petId}/report.pdf?disposition=${download?'download':'inline'}`,{headers:{Authorization:`Bearer ${api.token}`}});if(!res.ok)throw new Error('Unable to generate report');const blob=await res.blob();const url=URL.createObjectURL(blob);if(download){const a=document.createElement('a');a.href=url;a.download=`pet-health-report-${petId}.pdf`;a.click();}else window.open(url,'_blank');setTimeout(()=>URL.revokeObjectURL(url),30000);}catch(e){showToast(e.message,'error');}}
+
+        async function saveRecord() {
+            if(!validateFields(['recPetId','recApptId','recDiag','recTreat','recPresc','recWeight','recTemp','recDate','recFollowup','recNotes'])) return;
+            try {
+                const saved = await (editingMedicalId ? data=>api.put("/medical-records/"+editingMedicalId,data) : api.createMedicalRecord)({
+                    petId: parseInt(document.getElementById('recPetId').value),
+                    appointmentId: document.getElementById('recApptId').value ? parseInt(document.getElementById('recApptId').value) : null,
+                    diagnosis: document.getElementById('recDiag').value,
+                    treatment: document.getElementById('recTreat').value,
+                    prescription: document.getElementById('recPresc').value,
+                    recordType: document.getElementById('recType').value,
+                    notes:value('recNotes'),clearWeightAtVisit:!value('recWeight'),clearTemperature:!value('recTemp'),clearFollowUpDate:!value('recFollowup'),
+                    weightAtVisit: document.getElementById('recWeight').value ? parseFloat(document.getElementById('recWeight').value) : null,
+                    temperature: document.getElementById('recTemp').value ? parseFloat(document.getElementById('recTemp').value) : null,
+                    recordDate: document.getElementById('recDate').value,
+                    followUpDate: document.getElementById('recFollowup').value || null
+                });
+                const attachment=document.getElementById('recAttachment').files[0]; if(attachment) await api.addMedicalAttachment(saved.id,attachment);
+                showToast('Medical record saved successfully!', 'success');
+                showSection('records');
+            } catch (e) { showToast(e.message, 'error'); }
+        }
+
+        loadAppts();
+    </script>
+    <script>{ const original=saveRecord; let busy=false; saveRecord=async function(...args) {if(busy)return;busy=true;try{return await original(...args);}finally{busy=false;}}; }</script>
+    <script src="/js/medical-records.js"></script>
+    <script src="/js/secure-messaging.js"></script>
+    <script src="/js/groomer-fields.js?v=20261015-17"></script>
+<script src="/js/account.js?v=20261015-26"></script>
+    <script src="/js/ui.js?v=20261015-5"></script>
+    <script src="/js/pawcare2.js?v=20261015-26"></script>
+<script src="/js/assistant-widget.js?v=1.0"></script>
+<script src="/js/site-shell.js?v=20261014-5"></script>
+</body>
+</html>

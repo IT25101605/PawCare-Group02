@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preload" href="/vendor/fonts/font-5.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/vendor/fonts/font-11.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/vendor/fonts/font-17.woff2" as="font" type="font/woff2" crossorigin>
+<link href="/vendor/fonts/fonts.css?v=20261015-6" rel="stylesheet">
+<link href="/css/design.css?v=20261015-10" rel="stylesheet">
+    <title>Service Staff Dashboard - PawCare</title>
+    <link href="/vendor/bootstrap/bootstrap.min.css?v=5.3.2" rel="stylesheet">
+    <link href="/vendor/bootstrap-icons/bootstrap-icons.css?v=1.11.2" rel="stylesheet">
+    <link href="/css/style.css?v=20261015-10" rel="stylesheet">
+    <link href="/css/pawcare2.css?v=20261015-26" rel="stylesheet">
+    <link rel="icon" href="/images/paw.svg" type="image/svg+xml">
+    <meta name="theme-color" content="#c7b6e3">
+<link href="/css/assistant-widget.css?v=20261015-24" rel="stylesheet">
+<link href="/css/navigation.css?v=20261016-2" rel="stylesheet">
+<link rel="stylesheet" href="/css/site-fixes.css?v=20261015-26">
+<link href="/css/page-loading.css?v=20261015-10" rel="stylesheet">
+<link href="/css/paw-cursor.css?v=20261015-20" rel="stylesheet">
+<link href="/css/workspace-polish.css?v=20261015-20" rel="stylesheet">
+</head>
+<body class="workspace-page pc2-page pc2-workspace has-shared-nav">
+<script src="/js/page-loading.js?v=20261015-20"></script>
+<script src="/js/paw-cursor.js?v=20261015-20"></script>
+<nav id="mainNavbar" aria-label="Main navigation"><a href="/">PawCare</a></nav>
+<script src="/js/navigation.js?v=20261016-2"></script>
+    <div class="dashboard-sidebar" id="sidebar">
+        <div class="sidebar-brand"><h4><a class="sidebar-home" href="/" aria-label="PawCare homepage"><i class="bi bi-heart-pulse-fill me-2"></i>PawCare</a></h4><small class="text-white-50">Service Staff</small></div>
+        <nav class="sidebar-nav">
+            <div class="nav-item"><a class="nav-link active" href="#" onclick="showSection('overview')"><i class="bi bi-grid-1x2"></i>Overview</a></div>
+            <div class="nav-item"><a class="nav-link" href="#" onclick="showSection('payments')"><i class="bi bi-credit-card"></i>Payments</a></div>
+            <div class="nav-item"><a class="nav-link" href="#" onclick="showSection('transactions')"><i class="bi bi-receipt"></i>Transactions</a></div>
+            <div class="nav-item"><a class="nav-link" href="#" onclick="showSection('orders')"><i class="bi bi-cart-check"></i>Orders</a></div>
+            <hr class="mx-3" style="border-color:rgba(255,255,255,0.1)">
+            <div class="nav-item"><a class="nav-link" href="/pages/entertainment.html"><i class="bi bi-controller"></i>Entertainment</a></div>
+            <div class="nav-item"><a class="nav-link" href="/"><i class="bi bi-house"></i>Back to Site</a></div>
+            <div class="nav-item"><a class="nav-link" href="#" onclick="logout()"><i class="bi bi-box-arrow-left"></i>Logout</a></div>
+        </nav>
+    </div>
+
+    <div class="dashboard-content">
+        <div class="dashboard-header">
+            <div><h4 class="fw-bold mb-0">Service Staff Dashboard</h4><small class="text-muted">Welcome, <span id="staffName"></span></small></div>
+            <button class="btn btn-pawcare-outline d-lg-none" onclick="document.getElementById('sidebar').classList.toggle('show')"><i class="bi bi-list"></i></button>
+        </div>
+
+        <!-- Overview -->
+        <div id="section-overview">
+            <div class="row g-4 mb-4">
+                <div class="col-md-4"><div class="stat-card"><div class="stat-icon card-icon-primary"><i class="bi bi-credit-card"></i></div><div class="stat-value" id="statPayments">0</div><div class="stat-label">Total Payments</div></div></div>
+                <div class="col-md-4"><div class="stat-card"><div class="stat-icon card-icon-accent"><i class="bi bi-cart-check"></i></div><div class="stat-value" id="statOrders">0</div><div class="stat-label">Total Orders</div></div></div>
+                <div class="col-md-4"><div class="stat-card"><div class="stat-icon card-icon-success"><i class="bi bi-currency-dollar"></i></div><div class="stat-value" id="statRevenue">Rs. 0</div><div class="stat-label">Total Revenue</div></div></div>
+            </div>
+            <h5 class="fw-bold mb-3">Quick Actions</h5>
+            <div class="row g-3">
+                <div class="col-md-4"><div class="card-pawcare p-3 text-center" style="cursor:pointer" onclick="showSection('payments')"><i class="bi bi-search fs-2" style="color:var(--primary)"></i><p class="mb-0 mt-2 fw-semibold">View Payments</p></div></div>
+                <div class="col-md-4"><div class="card-pawcare p-3 text-center" style="cursor:pointer" onclick="showSection('transactions')"><i class="bi bi-check2-circle fs-2" style="color:var(--success)"></i><p class="mb-0 mt-2 fw-semibold">Verify Payments</p></div></div>
+                <div class="col-md-4"><div class="card-pawcare p-3 text-center" style="cursor:pointer" onclick="showSection('orders')"><i class="bi bi-receipt fs-2" style="color:var(--accent)"></i><p class="mb-0 mt-2 fw-semibold">Review Orders</p></div></div>
+            </div>
+        </div>
+
+        <!-- Payments -->
+        <div id="section-payments" style="display:none">
+            <div class="d-flex justify-content-between mb-3"><h5 class="fw-bold">Payment Management</h5></div>
+            <div class="card-pawcare"><div class="table-responsive"><table class="table table-pawcare mb-0"><thead><tr><th>Transaction ID</th><th>Order</th><th>Amount</th><th>Method</th><th>Status</th><th>Action</th></tr></thead><tbody id="paymentsTable"></tbody></table></div></div>
+        </div>
+
+        <!-- Transactions -->
+        <div id="section-transactions" style="display:none">
+            <h5 class="fw-bold mb-3">Transaction Review & Verification</h5>
+            <div class="card-pawcare"><div class="table-responsive"><table class="table table-pawcare mb-0"><thead><tr><th>Transaction ID</th><th>Order #</th><th>Amount</th><th>Method</th><th>Status</th><th>Verify</th></tr></thead><tbody id="transactionsTable"></tbody></table></div></div>
+        </div>
+
+        <!-- Orders -->
+        <div id="section-orders" style="display:none">
+            <h5 class="fw-bold mb-3">Order Overview</h5>
+            <div class="card-pawcare"><div class="table-responsive"><table class="table table-pawcare mb-0"><thead><tr><th>Order #</th><th>Customer</th><th>Total</th><th>Status</th><th>Date</th></tr></thead><tbody id="ordersTable"></tbody></table></div></div>
+        </div>
+    </div>
+
+    <script src="/vendor/bootstrap/bootstrap.bundle.min.js?v=5.3.2"></script>
+    <script src="/js/api.js?v=20261016-2"></script><script src="/js/forms.js?v=20261015-17"></script>
+    <script>
+        if (!api.isLoggedIn() || api.getRole() !== 'SERVICE_STAFF') window.location.href = '/pages/login.html';
+        document.getElementById('staffName').textContent = api.user?.firstName || '';
+
+        function showSection(name) {
+            document.querySelectorAll('[id^="section-"]').forEach(s => s.style.display = 'none');
+            document.getElementById('section-' + name).style.display = 'block';
+            document.querySelectorAll('.sidebar-nav .nav-link').forEach(l => l.classList.remove('active'));
+            window.event?.target?.closest('.nav-link')?.classList.add('active');
+            if (name === 'payments') loadPayments();
+            if (name === 'transactions') loadTransactions();
+            if (name === 'orders') loadOrders();
+        }
+
+        async function loadOverview() {
+            try {
+                const d = await api.getServiceDashboard();
+                document.getElementById('statPayments').textContent = d.totalPayments || 0;
+                document.getElementById('statOrders').textContent = d.totalOrders || 0;
+                document.getElementById('statRevenue').textContent = formatCurrency(d.totalRevenue);
+            } catch(e) { showToast(e.message || 'Unable to load data. Please try again.','error'); }
+        }
+
+        async function loadPayments() {
+            try {
+                const data = await api.getAllPayments();
+                document.getElementById('paymentsTable').innerHTML = (data.content || []).map(p => `
+                    <tr><td><code style="font-size:0.8rem">${p.transactionId || '-'}</code></td><td>${p.orderNumber || '-'}</td>
+                    <td class="fw-semibold">${formatCurrency(p.amount)}</td><td>${p.paymentMethod}</td>
+                    <td>${statusBadge(p.paymentStatus)}</td>
+                    <td><select class="form-select form-select-sm" aria-label="Payment status for ${escapeHtml(p.orderNumber || p.transactionId || 'this payment')}" style="width:auto;font-size:0.82rem" onchange="updatePayment(${p.id},this.value)" ${['FAILED','REFUNDED'].includes(p.paymentStatus)?'disabled':''}>
+                        ${(p.paymentStatus==='PENDING'?['PENDING','COMPLETED','FAILED']:p.paymentStatus==='COMPLETED'?['COMPLETED','REFUNDED']:[p.paymentStatus]).map(status=>`<option ${status===p.paymentStatus?'selected':''}>${escapeHtml(status)}</option>`).join('')}
+                    </select></td></tr>
+                `).join('') || '<tr><td colspan="6" class="empty-state">No payments found</td></tr>';
+            } catch(e) { showToast(e.message || 'Unable to load data. Please try again.','error'); }
+        }
+
+        async function loadTransactions() {
+            try {
+                const data = await api.getAllPayments();
+                document.getElementById('transactionsTable').innerHTML = (data.content || []).map(p => `
+                    <tr><td><code style="font-size:0.8rem">${p.transactionId || '-'}</code></td><td>${p.orderNumber || '-'}</td>
+                    <td class="fw-semibold">${formatCurrency(p.amount)}</td><td>${p.paymentMethod}</td>
+                    <td>${statusBadge(p.paymentStatus)}</td>
+                    <td>${p.paymentStatus === 'PENDING' ?
+                        `<button class="btn btn-sm btn-pawcare" onclick="verifyPayment(${p.id})"><i class="bi bi-check2 me-1"></i>Verify</button>` :
+                        p.paymentStatus === 'COMPLETED' ? `<span class="text-muted" style="font-size:0.82rem"><i class="bi bi-check-circle-fill me-1 text-success"></i>Verified</span>` : `<span class="text-muted small">${p.paymentStatus==='REFUNDED'?'Refunded':'Payment failed'}</span>`
+                    }</td></tr>
+                `).join('') || '<tr><td colspan="6" class="empty-state">No transactions found</td></tr>';
+            } catch(e) { showToast(e.message || 'Unable to load data. Please try again.','error'); }
+        }
+
+        async function loadOrders() {
+            try {
+                const data = await api.getAllOrders();
+                document.getElementById('ordersTable').innerHTML = (data.content || []).map(o => `
+                    <tr><td class="fw-semibold">${o.orderNumber}</td><td>${o.userName || '-'}</td>
+                    <td>${formatCurrency(o.totalAmount)}</td><td>${statusBadge(o.status)}</td>
+                    <td>${formatDate(o.createdAt)}</td></tr>
+                `).join('') || '<tr><td colspan="5" class="empty-state">No orders found</td></tr>';
+            } catch(e) { showToast(e.message || 'Unable to load data. Please try again.','error'); }
+        }
+
+        async function updatePayment(id, status) {
+            try { await api.updatePaymentStatus(id, status); showToast('Payment status updated', 'success'); } catch(e) { showToast(e.message, 'error'); } finally { loadPayments(); }
+        }
+
+        async function verifyPayment(id) {
+            try { await api.updatePaymentStatus(id, 'COMPLETED'); showToast('Payment verified!', 'success'); loadTransactions(); } catch(e) { showToast(e.message, 'error'); }
+        }
+
+        loadOverview();
+    </script>
+    <script src="/js/account.js?v=20261015-26"></script>
+    <script src="/js/ui.js?v=20261015-5"></script>
+    <script src="/js/pawcare2.js?v=20261015-26"></script>
+<script src="/js/assistant-widget.js?v=1.0"></script>
+<script src="/js/site-shell.js?v=20261014-5"></script>
+</body>
+</html>

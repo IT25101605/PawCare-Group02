@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preload" href="/vendor/fonts/font-5.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/vendor/fonts/font-11.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/vendor/fonts/font-17.woff2" as="font" type="font/woff2" crossorigin>
+<link href="/vendor/fonts/fonts.css?v=20261015-6" rel="stylesheet">
+<link href="/css/design.css?v=20261015-10" rel="stylesheet">
+    <title>Our Services - PawCare</title>
+    <link href="/vendor/bootstrap/bootstrap.min.css?v=5.3.2" rel="stylesheet">
+    <link href="/vendor/bootstrap-icons/bootstrap-icons.css?v=1.11.2" rel="stylesheet">
+    <link href="/css/style.css?v=20261015-10" rel="stylesheet">
+    <link href="/css/pawcare2.css?v=20261015-26" rel="stylesheet">
+    <link rel="icon" href="/images/paw.svg" type="image/svg+xml">
+    <meta name="theme-color" content="#c7b6e3">
+<link href="/css/assistant-widget.css?v=20261015-24" rel="stylesheet">
+<link href="/css/services.css?v=20261015-10" rel="stylesheet">
+<link href="/css/navigation.css?v=20261016-2" rel="stylesheet">
+<link rel="stylesheet" href="/css/site-fixes.css?v=20261015-26">
+<link href="/css/page-loading.css?v=20261015-10" rel="stylesheet">
+<link href="/css/typing.css?v=20261015-11" rel="stylesheet">
+<link href="/css/paw-cursor.css?v=20261015-20" rel="stylesheet">
+<link href="/css/workspace-polish.css?v=20261015-20" rel="stylesheet">
+</head>
+<body class="pc2-page has-shared-nav services-page">
+<script src="/js/page-loading.js?v=20261015-20"></script>
+<script src="/js/paw-cursor.js?v=20261015-20"></script>
+    <nav id="mainNavbar" aria-label="Main navigation"><a href="/">PawCare</a></nav>
+<script src="/js/navigation.js?v=20261016-2"></script>
+
+    <main id="main" class="services-main">
+      <section class="care-retreat" aria-labelledby="services-title">
+        <img class="care-landscape" src="/images/grooming.png" alt="" fetchpriority="high" width="2168" height="725">
+        <div class="retreat-shade"></div>
+        <div class="retreat-layout">
+          <div class="retreat-intro">
+            <span class="section-badge">Our services</span>
+            <h1 id="services-title"><span class="visually-hidden">Veterinary care, grooming and everyday essentials for your pet.</span><span class="services-headline" aria-hidden="true"><span class="headline-measure">Expert care.<br>Healthier pets.</span><span class="headline-measure">Gentle grooming.<br>Happy tails.</span><span class="headline-measure">Everyday essentials.<br>Happier lives.</span><span id="services-typed" data-typing data-typing-hold="2400" data-typing-phrases='["Expert care.\nHealthier pets.","Gentle grooming.\nHappy tails.","Everyday essentials.\nHappier lives."]'>Expert care.<br>Healthier pets.</span></span></h1>
+            <p>Veterinary care, grooming and everyday essentials. Everything your companion needs, in one familiar place.</p>
+            <div class="retreat-actions"><a class="retreat-explore" href="#care-collection">Explore services <span aria-hidden="true">↗</span></a></div>
+            <div class="care-workspace-note"><img src="/images/pets-hero.jpg" alt="A dog and cat together" width="80" height="80"><div><strong>One account. All their care.</strong><p>Keep your pets, appointments and health records together.</p><a href="/pages/register.html" data-care-action="pets">Get started with PawCare <span aria-hidden="true">→</span></a></div></div>
+          </div>
+          <div class="retreat-showcase">
+            <div class="service-switcher" role="tablist" aria-label="Explore PawCare services">
+              <button id="tab-veterinary" type="button" role="tab" aria-selected="true" aria-controls="service-preview" data-service="veterinary"><span>Veterinary</span></button>
+              <button id="tab-grooming" type="button" role="tab" aria-selected="false" aria-controls="service-preview" data-service="grooming" tabindex="-1"><span>Grooming</span></button>
+              <button id="tab-store" type="button" role="tab" aria-selected="false" aria-controls="service-preview" data-service="store" tabindex="-1"><span>Essentials</span></button>
+            </div>
+            <article class="retreat-card" id="service-preview" role="tabpanel" aria-labelledby="tab-veterinary" tabindex="0">
+              <h2 id="preview-title">Veterinary care</h2>
+              <button type="button" class="retreat-photo" id="preview-zoom" aria-label="Zoom service preview"><img id="preview-image" src="/images/vet.png" alt="A welcoming veterinary care space with pets and a veterinarian" width="2173" height="724"></button>
+              <div class="retreat-card-body"><p id="preview-description">From routine checkups to ongoing support, find the right care and keep their health records connected.</p><a id="preview-link" href="/pages/veterinarians.html">Find a veterinarian <span aria-hidden="true">↗</span></a></div>
+            </article>
+          </div>
+        </div>
+      </section>
+      <section class="care-collection" id="care-collection" aria-labelledby="collection-title">
+        <div class="collection-heading"><div><h2 id="collection-title">Care for every day.</h2></div><p>Make room for everyday essentials, a little fun and a world of memories.</p></div>
+        <div class="collection-grid">
+          <article class="collection-card"><a class="collection-image" href="/pages/store.html" aria-label="Visit the pet shop"><img src="/images/petstore.png" alt="Food, toys and cosy pet accessories" loading="lazy"></a><div class="collection-copy"><h3>Shop their favourites</h3><p>Stock up on nourishing food, playful toys and cosy comforts for the little moments at home.</p><a href="/pages/store.html">Visit the pet shop <span aria-hidden="true">↗</span></a></div></article>
+          <article class="collection-card"><a class="collection-image collection-illustration" href="/pages/entertainment.html" aria-label="Explore pet entertainment"><img src="/images/products/rope.svg" alt="A rope toy for playful moments" loading="lazy"></a><div class="collection-copy"><h3>A little more play</h3><p>Take a cheerful break with PawCare games and entertainment made for pet lovers.</p><a href="/pages/entertainment.html">Explore entertainment <span aria-hidden="true">↗</span></a></div></article>
+          <article class="collection-card"><a class="collection-image collection-illustration" href="/pages/register.html" data-care-action="pets" aria-label="Manage your pets and their records"><img src="/images/pawcare2/medical-care.svg" alt="An illustration of connected pet health records" loading="lazy"></a><div class="collection-copy"><h3>Their story, together</h3><p>Keep pet profiles, appointments and health records in one place, ready for their next visit.</p><a href="/pages/register.html" data-care-action="pets">Open your pet's world <span aria-hidden="true">↗</span></a></div></article>
+        </div>
+      </section>
+      <section class="care-invitation"><h2>All their care, together.</h2><p>Bring their appointments, health records and everyday care together.</p><a href="/pages/register.html" data-care-action="pets">Create your pet's world <span aria-hidden="true">↗</span></a><a class="invitation-contact" href="/pages/contact.html">Need a hand? Talk to us</a></section>
+    </main>
+
+    <footer class="footer-section"><div class="container"><div class="row g-4"><div class="col-md-5"><a href="/" class="navbar-brand-pawcare"><i class="bi bi-heart-pulse-fill"></i>PawCare</a><p class="mt-3">A little care. A happier life.<br>Here for every chapter of pet parenting.</p></div><div class="col-6 col-md-3"><h5>A world of care</h5><ul class="footer-links"><li><a href="/pages/veterinarians.html">Veterinary care</a></li><li><a href="/pages/grooming.html">Grooming</a></li><li><a href="/pages/entertainment.html">Entertainment</a></li><li><a href="/pages/store.html">The pet store</a></li></ul></div><div class="col-6 col-md-4"><h5>Here for you</h5><ul class="footer-links"><li><a href="/pages/contact.html">Get in touch</a></li><li><a href="/pages/login.html">Your account</a></li><li><a href="tel:+94715473916">+94 71 547 3916</a></li></ul></div></div><div class="footer-bottom"><p class="mb-0">© 2026 PawCare. All paws welcome.</p><a href="/">Back to our world ↗</a></div></div></footer>
+    <script src="/vendor/bootstrap/bootstrap.bundle.min.js?v=5.3.2"></script>
+    <script src="/js/api.js?v=20261016-2"></script><script src="/js/forms.js?v=20261015-17"></script>
+    <script>window.addEventListener('scroll',()=>{document.getElementById('mainNavbar')?.classList.toggle('scrolled',window.scrollY>50)});</script>
+    <script src="/js/ui.js?v=20261015-5"></script>
+    <script src="/js/services.js?v=20261015-10"></script>
+    <script src="/js/pawcare2.js?v=20261015-26"></script>
+<script src="/js/assistant-widget.js?v=1.0"></script>
+<script src="/js/site-shell.js?v=20261014-5"></script>
+<script src="/js/typing.js?v=20261015-11"></script>
+</body>
+</html>

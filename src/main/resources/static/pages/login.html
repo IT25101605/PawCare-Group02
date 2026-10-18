@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preload" href="/vendor/fonts/font-5.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/vendor/fonts/font-11.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/vendor/fonts/font-17.woff2" as="font" type="font/woff2" crossorigin>
+<link href="/vendor/fonts/fonts.css?v=20261015-6" rel="stylesheet">
+<link href="/css/design.css?v=20261015-10" rel="stylesheet">
+    <title>Login - PawCare</title>
+    <link href="/vendor/bootstrap/bootstrap.min.css?v=5.3.2" rel="stylesheet">
+    <link href="/vendor/bootstrap-icons/bootstrap-icons.css?v=1.11.2" rel="stylesheet">
+    <link href="/css/style.css?v=20261015-10" rel="stylesheet">
+    <link href="/css/pawcare2.css?v=20261015-26" rel="stylesheet">
+    <link rel="icon" href="/images/paw.svg" type="image/svg+xml">
+    <meta name="theme-color" content="#c7b6e3">
+    <style>
+        .auth-left { position: fixed; left: 0; top: 0; width: 50%; height: 100vh; background: var(--gradient-hero); display: flex; align-items: center; justify-content: center; flex-direction: column; color: #fff; padding: 3rem; }
+        .auth-left h2 { font-size: 2.4rem; font-weight: 800; margin-bottom: 1rem; }
+        .auth-left p { opacity: 0.8; font-size: 1.05rem; max-width: 400px; text-align: center; }
+        .auth-right { margin-left: 50%; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 2rem; background: var(--body-bg); }
+        .auth-form-card { width: 100%; max-width: 420px; }
+        .form-floating-pw { position: relative; }
+        .form-floating-pw .toggle-pw { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); background: none; border: none; color: var(--text-muted); cursor: pointer; }
+        @media(max-width:991px) {
+            .auth-left { display: none; }
+            .auth-right { margin-left: 0; }
+        }
+    </style>
+<link href="/css/assistant-widget.css?v=20261015-24" rel="stylesheet">
+<link href="/css/navigation.css?v=20261016-2" rel="stylesheet">
+<link rel="stylesheet" href="/css/site-fixes.css?v=20261015-26">
+<link href="/css/page-loading.css?v=20261015-10" rel="stylesheet">
+<link href="/css/paw-cursor.css?v=20261015-20" rel="stylesheet">
+<link href="/css/workspace-polish.css?v=20261015-20" rel="stylesheet">
+<link href="/css/page-scenes.css?v=20261015-22" rel="stylesheet">
+</head>
+<body class="pc2-page pc2-auth pc2-login has-shared-nav">
+<script src="/js/page-loading.js?v=20261015-20"></script>
+<script src="/js/paw-cursor.js?v=20261015-20"></script>
+<nav id="mainNavbar" aria-label="Main navigation"><a href="/">PawCare</a></nav>
+<script src="/js/navigation.js?v=20261016-2"></script>
+    <div class="auth-left">
+        <div style="font-size: 6rem; margin-bottom: 1.5rem; opacity: 0.3;">🐾</div>
+        <h2>Back with your<br>best friend.</h2>
+        <p>A familiar place for all their care. Pick up right where you and your little companion left off.</p>
+        <a href="/" class="btn btn-outline-light mt-4" style="border-radius: var(--radius-full)"><i class="bi bi-arrow-left me-2"></i>Back to Home</a>
+        <span class="auth-watermark" aria-hidden="true">PAWCARE</span>
+        <div class="auth-pets"><div class="pet-ground" aria-hidden="true"></div><img class="pet-photo" src="/images/page-scenes/login-pet-family.webp" alt="A beagle, schnauzer, two cats, rabbit, guinea pig and cockatiel together" width="1536" height="1024" fetchpriority="high"></div>
+    </div>
+    <div class="auth-right">
+        <div class="auth-form-card">
+            <div class="text-center mb-4">
+                <a href="/" class="d-inline-block mb-3" style="font-size:1.6rem;font-weight:800;color:var(--primary);text-decoration:none"><i class="bi bi-heart-pulse-fill me-2" style="color:var(--secondary)"></i>PawCare</a>
+                <h3 class="fw-bold mb-1">Welcome back.</h3>
+                <p class="text-muted" style="font-size:0.9rem">Good to see you. Let’s take care of the little things.</p>
+            </div>
+            <form id="loginForm" onsubmit="handleLogin(event)">
+                <div class="mb-3">
+                    <label class="form-label fw-semibold" style="font-size:0.88rem">Email Address</label>
+                    <input type="email" id="email" autocomplete="email" class="form-control form-control-pawcare" placeholder="you@example.com" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label fw-semibold d-flex justify-content-between" style="font-size:0.88rem">
+                        Password
+                        <a href="/pages/contact.html" style="font-size:0.82rem;color:var(--secondary)">Need help?</a>
+                    </label>
+                    <div class="form-floating-pw">
+                        <input type="password" id="password" autocomplete="current-password" class="form-control form-control-pawcare" placeholder="••••••••" required>
+                        <button type="button" class="toggle-pw" onclick="togglePw()"><i class="bi bi-eye" id="pwIcon"></i></button>
+                    </div>
+                </div>
+                <div class="mb-4 form-check">
+                    <input class="form-check-input" type="checkbox" id="remember">
+                    <label class="form-check-label" for="remember" style="font-size:0.88rem">Remember me</label>
+                </div>
+                <button type="submit" class="btn btn-pawcare w-100 py-3" id="loginBtn">Sign In</button>
+            </form>
+            <div class="text-center mt-4">
+                <p class="text-muted" style="font-size:0.9rem">Don't have an account? <a href="/pages/register.html" class="fw-semibold">Sign Up</a></p>
+            </div>
+            <div class="mt-3 p-3" style="background:rgba(13,115,119,0.05);border-radius:var(--radius-md);font-size:0.82rem">
+                <div class="d-flex justify-content-between align-items-center mb-1">
+                    <span class="fw-bold" style="color:var(--primary)">Demo Accounts (Password: Admin@123)</span>
+                    <small class="text-muted" style="font-size:0.75rem">(click to fill)</small>
+                </div>
+                <div class="row" style="font-size:0.78rem;color:var(--text-secondary)">
+                    <div class="col-6">
+                        <div class="demo-acc-item" style="cursor:pointer;padding:2px 0" onclick="fillDemo('admin@pawcare.com')" title="Click to autofill">Admin: <strong>admin@pawcare.com</strong></div>
+                        <div class="demo-acc-item" style="cursor:pointer;padding:2px 0" onclick="fillDemo('john@pawcare.com')" title="Click to autofill">Owner: <strong>john@pawcare.com</strong></div>
+                        <div class="demo-acc-item" style="cursor:pointer;padding:2px 0" onclick="fillDemo('emily@pawcare.com')" title="Click to autofill">Vet: <strong>emily@pawcare.com</strong></div>
+                        <div class="demo-acc-item" style="cursor:pointer;padding:2px 0" onclick="fillDemo('lisa@pawcare.com')" title="Click to autofill">Groomer: <strong>lisa@pawcare.com</strong></div>
+                    </div>
+                    <div class="col-6">
+                        <div class="demo-acc-item" style="cursor:pointer;padding:2px 0" onclick="fillDemo('karen@pawcare.com')" title="Click to autofill">Store: <strong>karen@pawcare.com</strong></div>
+                        <div class="demo-acc-item" style="cursor:pointer;padding:2px 0" onclick="fillDemo('david@pawcare.com')" title="Click to autofill">Service: <strong>david@pawcare.com</strong></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/vendor/bootstrap/bootstrap.bundle.min.js?v=5.3.2"></script>
+    <script src="/js/api.js?v=20261016-2"></script><script src="/js/forms.js?v=20261015-17"></script>
+    <script src="/js/grooming-booking.js?v=20261015-18"></script>
+    <script>
+        if (api.isLoggedIn()) {
+            const validatingToken=api.token;
+            api.me().then(current => {
+                if(api.token!==validatingToken)return;
+                api.user = current; authStorage.set('pawcare_user', JSON.stringify(current));
+                window.location.href = GroomingBooking.afterAuth(api.getRole(),'/');
+            }).catch(error => {
+                if(api.token!==validatingToken)return;
+                if (error.status === 401 && !error.unexpectedResponse) api.clearAuth();
+                else showToast(error.message, 'warning');
+            });
+        }
+        function togglePw() {
+            const p = document.getElementById('password');
+            const i = document.getElementById('pwIcon');
+            p.type = p.type === 'password' ? 'text' : 'password';
+            i.className = p.type === 'password' ? 'bi bi-eye' : 'bi bi-eye-slash';
+        }
+        function fillDemo(email) {
+            document.getElementById('email').value = email;
+            document.getElementById('password').value = 'Admin@123';
+        }
+        async function handleLogin(e) {
+            e.preventDefault();
+            const btn = document.getElementById('loginBtn');
+            btn.disabled = true; btn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Signing in...';
+            try {
+                const data = await api.login({ email: document.getElementById('email').value, password: document.getElementById('password').value });
+                api.setAuth(data);
+                const pages = { ADMIN:'/pages/dashboard/admin.html', PET_OWNER:'/pages/dashboard/owner.html', VETERINARIAN:'/pages/dashboard/vet.html', GROOMER:'/pages/dashboard/groomer.html', STORE_MANAGER:'/pages/dashboard/store.html', SERVICE_STAFF:'/pages/dashboard/service.html' };
+                window.location.href = GroomingBooking.afterAuth(data.role,pages[data.role] || '/');
+            } catch (err) {
+                showToast(err.message || 'Invalid credentials', 'error');
+                btn.disabled = false; btn.textContent = 'Sign In';
+            }
+        }
+    </script>
+    <script src="/js/ui.js?v=20261015-5"></script>
+    <script src="/js/pawcare2.js?v=20261015-26"></script>
+<script src="/js/assistant-widget.js?v=1.0"></script>
+<script src="/js/site-shell.js?v=20261014-5"></script>
+</body>
+</html>

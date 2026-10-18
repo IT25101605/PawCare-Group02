@@ -1,0 +1,87 @@
+/* One floating, lilac-glass navbar, independent of individual page themes. */
+body #mainNavbar.shared-navbar {
+  position:fixed;top:16px!important;left:0!important;right:0!important;width:100%!important;max-width:none!important;
+  margin:0!important;padding:0 20px!important;border:0!important;border-radius:0!important;background:transparent!important;
+  box-shadow:none!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;z-index:1040;pointer-events:none;animation:none;transition:none!important;
+  font-family:'Plus Jakarta Sans',sans-serif;
+}
+body #mainNavbar > .navbar-pill-container {
+  pointer-events:auto;display:flex;flex-wrap:nowrap;align-items:center;gap:20px;width:100%;min-width:0;max-width:1240px;margin:0 auto;
+  padding:9px 20px!important;border-radius:999px!important;border:1px solid #ffffffdf!important;
+  background:rgba(255,255,255,.86)!important;box-shadow:0 10px 32px #5b3b7e14!important;
+  backdrop-filter:blur(20px) saturate(1.6)!important;-webkit-backdrop-filter:blur(20px) saturate(1.6)!important;
+}
+body #mainNavbar.scrolled > .navbar-pill-container {background:rgba(255,255,255,.96)!important}
+body #mainNavbar .navbar-brand-pawcare {display:inline-flex;align-items:center;gap:8px;flex-shrink:0;margin:0;padding:0;text-decoration:none}
+body #mainNavbar .brand-paw-icon {width:30px;height:30px;flex-shrink:0}
+body #mainNavbar .brand-title {font:800 1.25rem 'Plus Jakarta Sans',sans-serif;letter-spacing:-.04em;color:#21132e!important}
+body #mainNavbar .navbar-collapse {display:flex!important;flex:1;min-width:0;order:1;align-items:center;gap:12px;margin:0;padding:0;border:0;overflow:visible;max-height:none}
+body #mainNavbar .navbar-nav {display:flex;flex-direction:row;align-items:center;gap:1px;list-style:none;padding:0;margin:0 auto}
+body #mainNavbar .nav-link {display:block;padding:8px 10px!important;border-radius:999px;font:500 .79rem/1.4 'Plus Jakarta Sans',sans-serif!important;color:#433352!important;white-space:nowrap;text-decoration:none}
+body #mainNavbar .nav-link:hover {background:#f1edf9!important;color:#5b3b7e!important}
+body #mainNavbar .nav-link.active {background:#ece4f8!important;color:#5b3b7e!important;font-weight:700!important;box-shadow:none}
+body #mainNavbar #authButtons {display:flex;align-items:center;gap:7px;flex-shrink:0;width:auto}
+body #mainNavbar .btn {display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:9px 17px!important;font:600 .78rem/1.4 'Plus Jakarta Sans',sans-serif!important;border-radius:999px!important;text-decoration:none;white-space:nowrap;box-shadow:none!important;min-height:38px}
+body #mainNavbar .btn-login-pill {background:#fff!important;color:#21132e!important;border:1px solid #e3d9ec!important}
+body #mainNavbar .btn-signup-pill {background:#5b3b7e!important;color:#fff!important;border:1px solid #5b3b7e!important}
+body #mainNavbar .btn:hover {filter:brightness(.96)}
+body #mainNavbar .nav-search-btn {display:grid;place-items:center;width:30px;height:38px;color:#554863;text-decoration:none}
+body #mainNavbar .user-name {max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+body #mainNavbar .dropdown-menu {position:absolute;right:0;left:auto;padding:8px;border:1px solid #e3d9ec;border-radius:16px;background:#fff;box-shadow:0 12px 32px #5b3b7e20}
+body #mainNavbar .dropdown-item {font-size:.85rem;border-radius:8px;padding:9px 14px}
+body #mainNavbar .navbar-toggler {display:none;align-items:center;justify-content:center;border:0;background:transparent;color:#5b3b7e;width:42px;height:42px;font-size:1.4rem;padding:0}
+body #mainNavbar .site-notify-button {order:2;flex:none;}
+body #mainNavbar :focus-visible,.sidebar-home:focus-visible {outline:3px solid #9e7cc7!important;outline-offset:4px}
+.sidebar-home {display:flex;align-items:center;color:inherit!important;text-decoration:none;border-radius:6px}
+body.has-shared-nav.workspace-page .dashboard-sidebar {top:98px!important}
+body.has-shared-nav.workspace-page .dashboard-content {padding-top:98px!important}
+body.has-shared-nav.workspace-page .dashboard-header {top:90px!important}
+body.has-shared-nav .sidebar-backdrop {z-index:1045}
+body.has-shared-nav.workspace-page .dashboard-sidebar.show {z-index:1046}
+body.has-shared-nav.pc2-auth .auth-right {padding-top:120px!important}
+body.has-shared-nav.pc2-auth .auth-left {padding-top:120px!important}
+body.has-shared-nav.pc2-register .reg-page {padding-top:112px!important}
+body.has-shared-nav.passport-public .passport-public-shell {padding-top:112px}
+body.has-shared-nav.notifications-page > main {padding-top:116px}
+/* Keep all links visible on laptops; tighten spacing before using the mobile menu. */
+@media(min-width:992px) and (max-width:1199.98px) {
+  body #mainNavbar > .navbar-pill-container {gap:10px;padding:9px 14px!important;}
+  body #mainNavbar .navbar-collapse {gap:8px;}
+  body #mainNavbar .brand-title {font-size:1.12rem;}
+  body #mainNavbar .brand-paw-icon {width:28px;height:28px;}
+  body #mainNavbar .nav-link {padding:8px 6px!important;font-size:.75rem!important;}
+  body #mainNavbar .btn {padding:9px 11px!important;font-size:.74rem!important;}
+  body #mainNavbar #authButtons {gap:5px;}
+  body #mainNavbar .nav-search-btn {width:24px;}
+  body #mainNavbar .user-name {max-width:96px;}
+}
+@media(max-width:991.98px) {
+  body #mainNavbar > .navbar-pill-container {flex-wrap:wrap;gap:0;padding:7px 18px!important;border-radius:27px!important}
+  body #mainNavbar .navbar-toggler {display:flex;order:3;margin-left:0;flex:none;}
+  body #mainNavbar .site-notify-button {margin-left:auto!important;margin-right:7px!important;}
+  body #mainNavbar .navbar-collapse {display:none!important;order:4;flex-basis:100%;flex-direction:column;align-items:stretch;margin-top:10px;padding:12px 0;border-top:1px solid #e3d9ec;max-height:calc(100dvh - 115px);overflow:auto}
+  body #mainNavbar .navbar-collapse.show {display:flex!important}
+  body #mainNavbar .navbar-nav {width:100%;flex-direction:column;align-items:stretch;gap:3px}
+  body #mainNavbar .nav-link {padding:10px 14px!important;font-size:.88rem!important}
+  body #mainNavbar #authButtons {width:100%}
+  body #mainNavbar #authButtons .btn {flex:1}
+  body #mainNavbar .dropdown-menu {position:static;float:none;margin-top:8px}
+}
+@media(max-width:575px) {body #mainNavbar.shared-navbar {padding:0 12px!important;top:12px!important}}
+@media(prefers-reduced-motion:reduce) {body #mainNavbar * {transition:none!important}}
+
+/* PawCare: independently discoverable owner-only shortcut (server-verified before insertion). */
+.pc-owner-shortcut{position:fixed;right:0;top:45%;z-index:1038;display:flex;align-items:center;gap:11px;max-width:calc(100vw - 16px);width:58px;min-height:66px;padding:10px 12px 10px 8px;background:linear-gradient(125deg,#51326c,#79519c);color:#fff!important;text-decoration:none!important;border:1px solid rgba(255,255,255,.3);border-right:0;border-radius:20px 0 0 20px;box-shadow:0 14px 35px rgba(65,35,83,.27);overflow:hidden;white-space:nowrap;transition:width .25s cubic-bezier(.2,.7,.2,1),box-shadow .22s,transform .22s}
+.pc-owner-shortcut:hover,.pc-owner-shortcut:focus-visible{width:185px;box-shadow:0 18px 43px rgba(65,35,83,.39)}
+.pc-owner-shortcut:focus-visible{outline:3px solid #e0b6fa;outline-offset:3px}
+.pc-owner-shortcut-icon{position:relative;display:grid;place-items:center;width:41px;height:41px;min-width:41px;border-radius:13px;background:rgba(255,255,255,.16);font-size:18px}
+.pc-owner-shortcut-icon img{position:absolute;right:-5px;bottom:-4px;width:19px;height:19px;border:2px solid #684584;border-radius:6px}
+.pc-owner-shortcut-text{font-size:.82rem;font-weight:800;letter-spacing:-.01em;line-height:1.15}
+.pc-owner-shortcut-text small{display:block;font-size:.65rem;color:rgba(255,255,255,.77);margin-top:5px;font-weight:500}
+.pc-owner-shortcut-arrow{margin-left:auto;font-size:.73rem;opacity:.74}
+@media(max-width:991.98px){.pc-owner-shortcut{top:auto;bottom:calc(18px + env(safe-area-inset-bottom));right:auto;left:12px;width:auto;min-height:54px;padding:7px 11px 7px 7px;gap:9px;border-radius:17px;border:1px solid rgba(255,255,255,.35);box-shadow:0 12px 30px rgba(65,35,83,.3)}.pc-owner-shortcut:hover,.pc-owner-shortcut:focus-visible{width:auto;transform:translateY(-2px)}.pc-owner-shortcut-icon{width:37px;height:37px;min-width:37px;font-size:17px}.pc-owner-shortcut-text{font-size:.77rem}.pc-owner-shortcut-text small{font-size:.58rem;margin-top:3px}.pc-owner-shortcut-arrow{display:none}}
+@media(max-width:480px){.pc-owner-shortcut{right:auto;left:10px;bottom:calc(12px + env(safe-area-inset-bottom));max-width:calc(100vw - 20px)}}
+@media(prefers-reduced-motion:reduce){.pc-owner-shortcut{transition:none!important}}
+
+/* Invoice PDF download is shared by order history and store checkout. */
+.pc-invoice-modal-button{min-height:42px;display:inline-flex;align-items:center;gap:6px;border-radius:12px!important}.pc-invoice-modal-button:disabled{cursor:wait;opacity:.7}

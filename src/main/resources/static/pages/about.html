@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preload" href="/vendor/fonts/font-5.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/vendor/fonts/font-11.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/vendor/fonts/font-17.woff2" as="font" type="font/woff2" crossorigin>
+<link href="/vendor/fonts/fonts.css?v=20261015-6" rel="stylesheet">
+<link href="/css/design.css?v=20261015-10" rel="stylesheet">
+    <title>About Us - PawCare</title>
+    <link href="/vendor/bootstrap/bootstrap.min.css?v=5.3.2" rel="stylesheet">
+    <link href="/vendor/bootstrap-icons/bootstrap-icons.css?v=1.11.2" rel="stylesheet">
+    <link href="/css/style.css?v=20261015-10" rel="stylesheet">
+    <link href="/css/pawcare2.css?v=20261015-26" rel="stylesheet">
+    <link rel="icon" href="/images/paw.svg" type="image/svg+xml">
+    <meta name="theme-color" content="#c7b6e3">
+<link href="/css/assistant-widget.css?v=20261015-24" rel="stylesheet">
+<link href="/css/navigation.css?v=20261016-2" rel="stylesheet">
+<link rel="stylesheet" href="/css/site-fixes.css?v=20261015-26">
+<link href="/css/about.css?v=20261015-10" rel="stylesheet">
+<meta name="description" content="Meet PawCare: connected veterinary care, grooming, pet essentials and a live view of our community.">
+<link href="/css/page-loading.css?v=20261015-10" rel="stylesheet">
+<link href="/css/typing.css?v=20261015-11" rel="stylesheet">
+<link href="/css/paw-cursor.css?v=20261015-20" rel="stylesheet">
+<link href="/css/workspace-polish.css?v=20261015-20" rel="stylesheet">
+</head>
+<body class="pc2-page has-shared-nav about-page">
+<script src="/js/page-loading.js?v=20261015-20"></script>
+<script src="/js/paw-cursor.js?v=20261015-20"></script>
+<a class="skip-link" href="#main">Skip to content</a>
+<nav id="mainNavbar" aria-label="Main navigation"><a href="/">PawCare</a></nav>
+<script src="/js/navigation.js?v=20261016-2"></script>
+<main id="main" class="about-wrap">
+  <section class="about-hero" aria-labelledby="aboutTitle">
+    <div class="about-hero-copy">
+      <span class="about-eyebrow">A little about PawCare</span>
+      <h1 id="aboutTitle" data-typing>Small paws.<br><span class="about-title-accent">A whole world<br>of care.</span></h1>
+      <p>For the wagging tails, the quiet purrs and the people who love them. Bring their care, their comforts and their everyday moments together in one familiar place.</p>
+      <div class="about-actions"><a class="btn btn-pawcare" href="/pages/services.html">Explore our care <i class="bi bi-arrow-up-right ms-2" aria-hidden="true"></i></a><a class="about-text-link" href="/pages/register.html" data-care-action="pets">Your pet’s world <span aria-hidden="true">↗</span></a></div>
+    </div>
+    <figure class="about-photo"><img src="/images/pets-hero.jpg" alt="A golden retriever and cat sitting together on a lavender rug" width="1024" height="1024" fetchpriority="high"><span class="about-photo-tag"><i class="bi bi-heart me-2" aria-hidden="true"></i>For the ones you love.</span><figcaption class="about-photo-note"><i class="bi bi-journal-heart" aria-hidden="true"></i><div><strong>Every chapter, together.</strong><small>Their care. Their story. Your peace of mind.</small></div></figcaption></figure>
+  </section>
+  <section class="about-live" aria-labelledby="aboutLiveTitle">
+    <div class="about-live-heading"><div><h2 id="aboutLiveTitle">Our little world, right now.</h2><p>Real numbers from the pets, people and care on PawCare.</p></div><div class="about-live-controls"><span id="aboutLiveStatus" class="about-live-status">Loading counts</span><button id="aboutRefresh" type="button" class="btn btn-sm btn-pawcare-outline">Refresh</button></div></div>
+    <div id="aboutMetrics" class="about-metrics" aria-label="Live PawCare community statistics" aria-busy="true" aria-live="polite">
+      <article class="about-metric"><div class="about-metric-top"><span id="about-pets" class="about-number">—</span><i class="bi bi-heart" aria-hidden="true"></i></div><span class="about-metric-label">Pets registered</span><small>A place for every pet’s story</small></article>
+      <article class="about-metric"><div class="about-metric-top"><span id="about-veterinarians" class="about-number">—</span><i class="bi bi-heart-pulse" aria-hidden="true"></i></div><span class="about-metric-label">Veterinarians</span><small>Active professionals on PawCare</small></article>
+      <article class="about-metric"><div class="about-metric-top"><span id="about-groomers" class="about-number">—</span><i class="bi bi-scissors" aria-hidden="true"></i></div><span class="about-metric-label">Groomers</span><small>Active grooming professionals</small></article>
+      <article class="about-metric"><div class="about-metric-top"><span id="about-products" class="about-number">—</span><i class="bi bi-bag-heart" aria-hidden="true"></i></div><span class="about-metric-label">Products available</span><small>Active products in the pet store</small></article>
+      <article class="about-metric"><div class="about-metric-top"><span id="about-groomingServices" class="about-number">—</span><i class="bi bi-stars" aria-hidden="true"></i></div><span class="about-metric-label">Grooming services</span><small>Services available to book</small></article>
+      <article class="about-metric"><div class="about-metric-top"><span id="about-rating" class="about-number">—</span><i class="bi bi-star" aria-hidden="true"></i></div><span class="about-metric-label">Customer rating</span><small id="about-review-caption">Published customer reviews</small></article>
+    </div>
+    <p id="aboutUpdated" class="about-data-note">Counts refresh automatically while this page is open.</p><p id="aboutDataError" class="about-data-error" role="alert" hidden></p>
+  </section>
+  <section class="about-story" aria-labelledby="aboutStoryTitle"><div><span class="about-eyebrow">Why we’re here</span><h2 id="aboutStoryTitle">Less juggling.<br>More time together.</h2></div><div><p>Pet parenting comes with a lot of little details. The next checkup, a fresh coat, their favourite food, the notes you want to remember. PawCare brings those details closer together.</p><p>Find a veterinarian or groomer, book a visit, keep their health records and discover everyday essentials. It all starts with getting to know your pet.</p></div></section>
+  <section class="about-values" aria-label="What matters to PawCare">
+    <article class="about-value"><span class="about-value-icon"><i class="bi bi-heart-pulse" aria-hidden="true"></i></span><h3>Care that connects.</h3><p>Pet profiles, appointments and health records help keep the important details close, from one visit to the next.</p><a class="about-text-link" href="/pages/register.html" data-care-action="pets">Bring their story together <span aria-hidden="true">↗</span></a></article>
+    <article class="about-value"><span class="about-value-icon"><i class="bi bi-people" aria-hidden="true"></i></span><h3>People behind every visit.</h3><p>Get to know the professionals, explore their profiles and choose the care that fits your companion.</p><a class="about-text-link" href="/pages/veterinarians.html">Meet the veterinarians <span aria-hidden="true">↗</span></a></article>
+    <article class="about-value"><span class="about-value-icon"><i class="bi bi-bag-heart" aria-hidden="true"></i></span><h3>The everyday matters.</h3><p>From mealtime favourites to a little more play, discover the comforts that make life together feel good.</p><a class="about-text-link" href="/pages/store.html">Visit the pet store <span aria-hidden="true">↗</span></a></article>
+  </section>
+  <section class="about-invitation"><div><h2>Good care starts with knowing them.</h2><p>Create their profile and give all the little details a place to belong.</p></div><a class="btn btn-pawcare" href="/pages/register.html" data-care-action="pets">Get started with PawCare <span aria-hidden="true">↗</span></a></section>
+</main>
+<footer class="footer-section"></footer>
+<script src="/vendor/bootstrap/bootstrap.bundle.min.js?v=5.3.2"></script>
+<script src="/js/api.js?v=20261016-2"></script><script src="/js/forms.js?v=20261015-17"></script>
+<script src="/js/ui.js?v=20261015-5"></script>
+<script src="/js/pawcare2.js?v=20261015-26"></script>
+<script src="/js/about.js?v=20261015-7"></script>
+<script src="/js/assistant-widget.js?v=1.0"></script>
+<script src="/js/site-shell.js?v=20261014-5"></script>
+<script src="/js/typing.js?v=20261015-11"></script>
+</body>
+</html>

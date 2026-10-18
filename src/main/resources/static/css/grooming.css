@@ -1,0 +1,169 @@
+/* Grooming details inherit PawCare's shared purple palette, buttons and card system. */
+.groom-eyebrow {font-size:.73rem;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:var(--pc2-violet);display:block;margin-bottom:15px;}
+.groom-package {background:white;border:1px solid var(--pc2-line);border-radius:22px;padding:26px;display:flex;flex-direction:column;height:100%;transition:transform 0.16s,box-shadow 0.16s;}
+.groom-package:hover {transform:translateY(-3px);box-shadow:var(--pc2-shadow);}
+
+/* Roomy service cards with moderately sized, uncropped photos. */
+#groomingServices .groom-package {padding:0!important;gap:0;border-radius:25px;overflow:hidden;}
+#groomingServices .groom-package-top {display:block;margin:0;}
+#groomingServices .groom-package-image {width:80%;max-width:320px;height:auto;aspect-ratio:1;margin:20px auto 0;border:0;border-radius:18px;box-shadow:none;}
+#groomingServices .groom-package-heading {display:flex;align-items:center;gap:12px;padding:22px 24px 12px;}
+#groomingServices .groom-package-heading h5 {font-size:1.12rem;line-height:1.4;margin:0;}
+#groomingServices .groom-package-icon {width:40px;height:40px;flex-shrink:0;}
+#groomingServices .groom-package>p {padding:0 24px 22px;font-size:.9rem;line-height:1.75;}
+#groomingServices .groom-package footer {width:calc(100% - 48px);margin:0 24px 24px;padding-top:17px;gap:12px;flex-wrap:wrap;}
+
+/* Compact images in the owner's booking choices. */
+#groomServiceOptions .groom-service-info {flex:1;min-width:0;gap:7px;}
+#groomServiceOptions .groom-service-heading {display:flex;flex-direction:row;align-items:center;gap:9px;}
+#groomServiceOptions .groom-service-heading strong {min-width:0;overflow-wrap:break-word;}
+#groomServiceOptions {grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));}
+#groomServiceOptions .groom-service-thumbnail {display:block;width:72px;height:72px;flex:0 0 72px;object-fit:cover;border-radius:15px;background:#eee5f6;}
+.groom-package .groom-package-icon {width:64px;height:64px;border-radius:20px;background:var(--pc2-violet-soft);color:var(--pc2-violet-deep);display:grid;place-items:center;font-size:1.4rem;margin-bottom:20px;}
+.groom-package p {color:var(--pc2-muted);font-size:.92rem;flex:1;}.groom-package footer {display:flex;justify-content:space-between;border-top:1px solid var(--pc2-line);padding-top:17px;align-items:center;}.groom-package footer strong {font-size:1.2rem;color:var(--pc2-violet-deep);}.groom-package footer span {font-size:.84rem;color:var(--pc2-muted);}
+.groom-workspace-heading {display:flex;align-items:end;justify-content:space-between;gap:16px;margin-bottom:20px;}.groom-workspace-heading h2 {margin:0 0 6px;}.groom-workspace-heading p {margin:0;color:var(--pc2-muted);}
+.groom-planner {border:1px solid var(--pc2-line);background:linear-gradient(120deg,#f4f0fc,#fcfbfe);border-radius:22px;padding:26px;margin:20px 0;}
+.groom-planner-head {display:flex;gap:15px;margin-bottom:22px;align-items:flex-start;}.groom-planner-head>i {font-size:1.5rem;background:var(--pc2-violet-soft);color:var(--pc2-violet-deep);padding:10px 14px;border-radius:14px;}.groom-planner-head h3 {font-size:1.2rem;margin:0 0 6px;}.groom-planner-head p {font-size:.88rem;margin:0;color:var(--pc2-muted);}
+.groom-planner-fields {display:grid;grid-template-columns:1.4fr 1fr 1fr 1.2fr;gap:15px;}.groom-planner label {font-size:.8rem;font-weight:700;margin-bottom:6px;display:block;}.groom-planner input,.groom-planner select {width:100%;min-height:48px;border:1px solid var(--pc2-line-strong);border-radius:14px;padding:10px 14px;background:rgba(250,249,252,.95);color:var(--pc2-ink);}
+.groom-plan-result {margin-top:20px;border-top:1px solid var(--pc2-line);padding-top:20px;}.groom-plan-result:empty {display:none;}.groom-plan-item {display:flex;align-items:start;justify-content:space-between;gap:20px;background:white;padding:16px;border-radius:12px;margin-bottom:8px;}.groom-plan-item small {display:block;color:var(--pc2-muted);max-width:500px;margin-top:4px;}.groom-plan-item>span {white-space:nowrap;font-weight:700;color:var(--pc2-violet-deep);}.groom-plan-reasons {padding-left:18px;font-size:.84rem;color:var(--pc2-ink-2);line-height:1.7;}
+.groom-comfort {display:inline-flex;align-items:center;gap:6px;background:#f5eddc;color:#745321;border-radius:99px;padding:5px 10px;font-size:.74rem;font-weight:700;}.groom-comfort.calm {background:var(--pc2-violet-soft);color:var(--pc2-violet-deep);}
+.groom-visit-grid {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin:20px 0 28px;}.groom-visit-stat {border:1px solid var(--pc2-line);background:#fff;border-radius:18px;padding:20px;}.groom-visit-stat strong {display:block;font-size:2rem;color:var(--pc2-violet-deep);}.groom-visit-stat span {color:var(--pc2-muted);font-size:.86rem;}
+.groom-queue-card {border:1px solid var(--pc2-line);background:white;border-radius:18px;padding:20px;margin-bottom:12px;display:flex;gap:24px;align-items:center;}.groom-queue-time {font-size:1.2rem;font-weight:800;color:var(--pc2-violet-deep);min-width:68px;}.groom-queue-time small {display:block;font-size:.76rem;font-weight:500;color:var(--pc2-muted);}.groom-queue-content {flex:1;min-width:0;}.groom-queue-content h3 {font-size:1.1rem;margin:0 0 5px;}.groom-queue-content p {margin:5px 0;color:var(--pc2-muted);font-size:.86rem;}.groom-preserve-lines {white-space:pre-wrap;overflow-wrap:anywhere;}
+.groom-timeline {list-style:none;padding:0;display:flex;gap:8px;margin:22px 0;}.groom-timeline li {flex:1;border-top:4px solid var(--pc2-line);padding-top:8px;font-size:.74rem;color:var(--pc2-muted);}.groom-timeline li.reached {border-color:var(--pc2-violet);color:var(--pc2-ink);font-weight:700;}
+.groom-visit-detail {background:#f7f4fc;border-radius:14px;padding:18px;margin:15px 0;}.groom-visit-detail h6 {margin:0 0 8px;}.groom-visit-detail p {margin:0;color:var(--pc2-ink-2);}
+@media(prefers-reduced-motion:reduce) {.groom-package {transition:none;}.groom-package:hover {transform:none;}}
+
+body.groomer-studio .pc2-workspace-hero,body.grooming-open .pc2-workspace-hero {display:none;}
+.groom-queue-heading {display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;}
+
+.grooming-planner-callout {max-width:850px;margin-inline:auto;}
+.grooming-planner-callout .card-icon {flex:0 0 auto;background:var(--pc2-violet-soft);color:var(--pc2-violet);}
+.groom-package footer {gap:12px;flex-wrap:wrap;justify-content:center;}
+.groom-package:focus-within {outline:2px solid var(--pc2-violet);outline-offset:4px;}
+.groom-plan-item {border:1px solid var(--pc2-line);box-shadow:var(--pc2-shadow-sm);}
+.groom-plan-item>span {color:var(--pc2-violet);}
+.groom-planner input:focus,.groom-planner select:focus {outline:3px solid rgba(105,83,181,.12);border-color:var(--pc2-violet);}
+@media(max-width:991px) {.groom-planner-fields {grid-template-columns:1fr 1fr;}}
+@media(max-width:767px) {
+    .groom-workspace-heading {display:block;}
+    .groom-planner {padding:18px;}
+    .groom-planner-fields {grid-template-columns:1fr;}
+    .groom-visit-grid {gap:8px;}
+    .groom-visit-stat {padding:12px;}
+    .groom-visit-stat strong {font-size:1.6rem;}
+    .groom-queue-card {flex-wrap:wrap;gap:12px;}
+    .groom-queue-content {flex-basis:65%;}
+    .groom-queue-card>button {width:100%;}
+    .groom-plan-item {display:block;}
+    .groom-plan-item>span {display:block;margin-top:10px;}
+    .grooming-planner-callout>.d-flex {align-items:flex-start!important;}
+}
+
+/* Keep the everyday workflow short; optional tools expand only when needed. */
+.groom-optional {border:1px solid var(--pc2-line);border-radius:16px;background:#fbfafc;overflow:hidden;}
+.groom-optional>summary {padding:16px;cursor:pointer;font-size:.88rem;font-weight:700;color:var(--pc2-violet-deep);}
+.groom-optional>summary>span {font-size:.72rem;font-weight:500;color:var(--pc2-muted);margin-left:8px;}
+.groom-optional[open]>summary {border-bottom:1px solid var(--pc2-line);background:var(--pc2-violet-soft);}
+.groom-optional .groom-planner {border:0;margin:0;border-radius:0;}
+.groom-planner-fields {grid-template-columns:1.4fr 1fr 1fr;}
+.groom-live-stage,.groom-next-visit {display:flex;align-items:center;gap:14px;background:var(--pc2-violet-soft);border-radius:16px;padding:18px;margin:18px 0;color:var(--pc2-violet-deep);}
+.groom-live-stage>i,.groom-next-visit>i {font-size:1.6rem;}
+.groom-live-stage small,.groom-next-visit small {display:block;font-size:.76rem;}
+.groom-live-stage strong,.groom-next-visit strong {display:block;font-size:1.2rem;margin:3px 0;}
+.groom-checklist {border:1px solid var(--pc2-line);border-radius:16px;padding:18px;margin:16px 0;}
+.groom-checklist>summary,.groom-visit-detail>summary {font-weight:700;color:var(--pc2-ink);cursor:pointer;}
+.groom-task {display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--pc2-line);font-size:.88rem;}
+.groom-task:last-of-type {border-bottom:0;}
+.groom-task .form-check-input {margin:0;width:20px;height:20px;flex-shrink:0;}
+.groom-task .form-check-input:checked {background-color:var(--pc2-violet);border-color:var(--pc2-violet);}
+.groom-task span {flex:1;}
+.groom-task small,.groom-task.done {color:var(--pc2-violet);}
+.groom-progress-label {display:block;font-size:.78rem;font-weight:700;color:var(--pc2-violet);}
+@media(max-width:767px) {.groom-planner-fields {grid-template-columns:1fr;}.groom-optional>summary>span {display:block;margin:4px 0 0 24px;}}
+
+/* Keep the full photo height inside the shared frame, including the spa table. */
+body.pc2-page:not(.workspace-page) .page-masthead.masthead-grooming {
+  margin-top: 0;
+  background-color:#ded3ed!important;
+  background-image:linear-gradient(90deg,#ded3ed calc(100% - 1320px),transparent calc(100% - 1080px)),linear-gradient(90deg,#e6dcf1bd,transparent 65%),url('/images/page-scenes/grooming-lavender-spa.webp')!important;
+  background-size: cover, cover, auto 100% !important;
+  background-repeat:no-repeat!important;
+  background-position: center center, center center, right bottom !important;
+}
+body.pc2-page .masthead-grooming .masthead-text h1,
+body.pc2-page .masthead-grooming .typing-heading {color:#352348!important;text-shadow:none!important;}
+body.pc2-page:not(.workspace-page) .page-masthead.masthead-grooming .lead {color:#59426e!important;text-shadow:none!important;opacity:1!important;}
+body.pc2-page .masthead-grooming .section-badge {background:#faf6ffb0!important;color:#674580!important;border-color:#9473b54d!important;}
+body.pc2-page .masthead-grooming .typing-heading {white-space:nowrap;}
+@media(max-width:991px) {
+  body.pc2-page:not(.workspace-page) .page-masthead.masthead-grooming {
+    background-image:linear-gradient(90deg,#ded3ed calc(100% - 1320px),transparent calc(100% - 1080px)),linear-gradient(90deg,#e6dcf1eb,#e6dcf1a8 55%,#e6dcf133),url('/images/page-scenes/grooming-lavender-spa.webp')!important;
+    background-position: center center, center center, 85% bottom !important;
+  }
+}
+@media(max-width:575px) {
+  body.pc2-page .masthead-grooming .typing-heading {white-space:normal;}
+  body.pc2-page:not(.workspace-page) .page-masthead.masthead-grooming {
+    background-position: center center, center center, 90% bottom !important;
+  }
+}
+
+/* Give visitors a clear way from discovering care to confirming a visit. */
+.groom-hero-actions {display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-top:26px;}
+.groom-entry-bar {padding-top:24px;}
+.groom-entry-bar .groom-hero-actions {margin-top:0;}
+.groom-entry-bar .btn {text-decoration:none;}
+.groom-entry-bar .btn-pawcare-outline {background:#fff;color:var(--pc2-violet-deep);border-color:var(--pc2-line-strong);}
+.groom-entry-bar+.groom-start-section {padding-top:28px;}
+#meetGroomers {scroll-margin-top:100px;}
+.groom-hero-actions .btn-pawcare {background:#fff;color:#533775;border-color:#fff;box-shadow:0 8px 24px #39254f20;}
+.groom-hero-actions .btn-pawcare:hover {background:#f2eaf9;border-color:#f2eaf9;color:#49305f;}
+.groom-hero-browse {color:white;border:1px solid #ffffff70;border-radius:999px;padding:12px 20px;text-decoration:none;}
+.groom-hero-browse:hover,.groom-hero-browse:focus-visible {color:white;background:#ffffff20;border-color:white;}
+.groom-start-section {padding:44px 0 16px;}
+.groom-start-grid {display:grid;grid-template-columns:1.1fr 1fr;gap:24px;}
+.groom-booking-guide,.groom-smart-entry {padding:32px;border:1px solid var(--pc2-line);border-radius:26px;background:rgba(255,255,255,.85);}
+.groom-start-grid h2 {font-size:clamp(1.6rem,2.5vw,2.1rem);letter-spacing:-.05em;margin:12px 0 20px;color:var(--pc2-ink);}
+.groom-booking-guide ol {list-style:none;padding:0;margin:0;display:grid;gap:17px;}
+.groom-booking-guide li {display:flex;gap:14px;align-items:center;}
+.groom-booking-guide li>span {display:grid;place-items:center;width:36px;height:36px;border-radius:12px;background:var(--pc2-violet-soft);color:var(--pc2-violet-deep);font-size:.75rem;font-weight:800;flex:none;}
+.groom-booking-guide strong,.groom-booking-guide small {display:block;}
+.groom-booking-guide strong {color:var(--pc2-ink);font-size:.92rem;}
+.groom-booking-guide small {color:var(--pc2-muted);font-size:.8rem;line-height:1.5;margin-top:3px;}
+.groom-smart-entry {position:relative;background:linear-gradient(135deg,#eee5f8,#faf7fd);padding-right:70px;}
+.groom-smart-entry .groom-eyebrow {max-width:85%;}
+.groom-smart-icon {position:absolute;right:28px;top:25px;width:42px;height:42px;display:grid;place-items:center;border-radius:15px;background:white;color:var(--pc2-violet-deep);font-size:1.3rem;}
+.groom-smart-entry p {font-size:.9rem;line-height:1.8;color:var(--pc2-ink-2);margin-bottom:20px;max-width:440px;}
+.groom-smart-entry>small {display:block;margin-top:12px;font-size:.74rem;color:var(--pc2-muted);}
+#groomingPackages {scroll-margin-top:104px;}
+#groomingServices .groom-package footer {margin-bottom:18px;}
+.groom-package-actions {padding:0 24px 24px;width:100%;}
+.groom-package-actions .btn {text-decoration:none;}
+.groom-package-actions small {display:block;margin-top:10px;color:var(--pc2-muted);font-size:.72rem;}
+.groom-booking-footer {display:flex;justify-content:space-between;gap:20px;align-items:center;margin-top:32px;padding:24px 28px;border:1px solid var(--pc2-line);border-radius:22px;background:#f2edf9;}
+.groom-booking-footer strong,.groom-booking-footer span {display:block;}
+.groom-booking-footer strong {color:var(--pc2-ink);margin-bottom:5px;}
+.groom-booking-footer span {color:var(--pc2-muted);font-size:.85rem;}
+.groom-workspace-actions {display:flex;gap:10px;flex-wrap:wrap;flex-shrink:0;}
+.groom-booking-notice {display:flex;align-items:center;gap:12px;padding:16px 20px;margin-bottom:16px;border:1px solid #d8c9ea;border-radius:16px;background:#f4eefb;font-size:.85rem;color:#614478;}
+.groom-booking-notice[hidden] {display:none;}
+.groom-booking-notice>i {font-size:1.3rem;flex:none;}
+.groom-booking-notice span {flex:1;min-width:0;}
+#groomPlanner .groom-planner-fields {grid-template-columns:repeat(4,minmax(0,1fr));}
+@media(max-width:1199px) {.groom-workspace-heading {align-items:start;flex-wrap:wrap;}}
+@media(max-width:991px) {
+    #groomPlanner .groom-planner-fields {grid-template-columns:repeat(2,minmax(0,1fr));}
+    .groom-start-grid {grid-template-columns:1fr;}
+}
+@media(max-width:575px) {
+    .groom-start-section {padding-top:24px;}
+    .groom-start-grid {gap:16px;}
+    .groom-booking-guide,.groom-smart-entry {padding:24px;}
+    .groom-smart-entry .groom-eyebrow {max-width:75%;font-size:.58rem;}
+    .groom-smart-icon {right:20px;top:20px;}
+    .groom-booking-footer {align-items:stretch;flex-direction:column;padding:22px;}
+    .groom-workspace-actions {margin-top:18px;}
+    .groom-booking-notice {flex-wrap:wrap;}
+    .groom-booking-notice .btn {margin-left:32px;}
+    #groomPlanner .groom-planner-fields {grid-template-columns:1fr;}
+}

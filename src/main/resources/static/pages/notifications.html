@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<link rel="preload" href="/vendor/fonts/font-5.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/vendor/fonts/font-11.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/vendor/fonts/font-17.woff2" as="font" type="font/woff2" crossorigin>
+<link href="/vendor/fonts/fonts.css?v=20261015-6" rel="stylesheet">
+<link href="/css/design.css?v=20261015-10" rel="stylesheet">
+<title>Notifications - PawCare</title>
+<link href="/vendor/bootstrap/bootstrap.min.css?v=5.3.2" rel="stylesheet">
+<link href="/vendor/bootstrap-icons/bootstrap-icons.css?v=1.11.2" rel="stylesheet">
+<link href="/css/style.css?v=20261015-10" rel="stylesheet"><link href="/css/pawcare2.css?v=20261015-26" rel="stylesheet">
+<link href="/css/assistant-widget.css?v=20261015-24" rel="stylesheet">
+<link href="/css/navigation.css?v=20261016-2" rel="stylesheet">
+<link rel="stylesheet" href="/css/site-fixes.css?v=20261015-26">
+<link href="/css/page-loading.css?v=20261015-10" rel="stylesheet">
+<link href="/css/paw-cursor.css?v=20261015-20" rel="stylesheet">
+<link href="/css/workspace-polish.css?v=20261015-20" rel="stylesheet">
+</head>
+<body class="pc2-page notifications-page has-shared-nav">
+<script src="/js/page-loading.js?v=20261015-20"></script>
+<script src="/js/paw-cursor.js?v=20261015-20"></script>
+<nav id="mainNavbar" aria-label="Main navigation"><a href="/">PawCare</a></nav>
+<script src="/js/navigation.js?v=20261016-2"></script>
+<main class="container section-padding" style="max-width:900px">
+<a id="backDashboard" class="btn btn-pawcare-outline mb-4">Back to Dashboard</a>
+<div class="d-flex justify-content-between align-items-start mb-4"><div><span class="pc2-section-kicker">PawCare 2.0</span><h1 class="h3 fw-bold mb-1">Notification Center</h1><p class="text-muted mb-0">Appointments, pet care, orders and account updates.</p></div><button id="readAll" class="btn btn-pawcare-outline">Mark all as read</button></div>
+<div id="notificationPageList" class="card-pawcare overflow-hidden"><div class="p-4 text-muted">Loading notifications…</div></div>
+<div class="d-flex justify-content-center mt-3"><button id="loadMoreNotifications" class="btn btn-pawcare-outline">Load more</button></div>
+</main>
+<script src="/vendor/bootstrap/bootstrap.bundle.min.js?v=5.3.2"></script>
+<script src="/js/api.js?v=20261016-2"></script><script src="/js/forms.js?v=20261015-17"></script><script src="/js/ui.js?v=20261015-5"></script>
+<script>
+if(!api.isLoggedIn()) location.href='/pages/login.html';
+const dash={ADMIN:'/pages/dashboard/admin.html',PET_OWNER:'/pages/dashboard/owner.html',VETERINARIAN:'/pages/dashboard/vet.html',GROOMER:'/pages/dashboard/groomer.html',STORE_MANAGER:'/pages/dashboard/store.html',SERVICE_STAFF:'/pages/dashboard/service.html'};
+document.getElementById('backDashboard').href=dash[api.getRole()]||'/';
+let notificationPage=0,hasMore=true;
+function nIcon(t){return ({APPOINTMENT:'bi-calendar-check',GROOMING:'bi-scissors',MEDICAL:'bi-heart-pulse',VACCINATION:'bi-shield-plus',ORDER:'bi-bag-check',DELIVERY:'bi-truck',PAYMENT:'bi-credit-card',INVENTORY:'bi-box-seam',ACCOUNT:'bi-shield-lock',ADMIN:'bi-person-check'})[t]||'bi-bell';}
+async function loadNotifications(reset=false){
+ if(reset){notificationPage=0;hasMore=true;document.getElementById('notificationPageList').innerHTML='';}
+ if(!hasMore)return;
+ const page=await api.get('/notifications?page='+notificationPage+'&size=20');const items=page.content||[];
+ const host=document.getElementById('notificationPageList');
+ if(reset&&!items.length)host.innerHTML='<div class="empty-state p-5"><i class="bi bi-bell-slash fs-2"></i><h5 class="mt-2">No notifications yet</h5><p class="text-muted">New PawCare updates will appear here.</p></div>';
+ else host.insertAdjacentHTML('beforeend',items.map(n=>`<div class="p-3 border-bottom d-flex gap-3 ${n.isRead?'':'bg-light'}" data-id="${n.id}"><div class="pc2-notify-icon"><i class="bi ${nIcon(n.notificationType)}"></i></div><div class="flex-grow-1"><strong>${escapeHtml(n.title)}</strong><p class="mb-1 text-muted">${escapeHtml(n.message)}</p><small class="text-muted">${new Date(n.createdAt).toLocaleString()}</small></div><div class="d-flex gap-1">${n.link?`<button class="btn btn-sm btn-pawcare-outline" data-open="${escapeHtml(n.link)}">Open</button>`:''}<button class="btn btn-sm btn-outline-danger" data-delete="${n.id}"><i class="bi bi-trash"></i></button></div></div>`).join(''));
+ hasMore=!page.last;notificationPage++;document.getElementById('loadMoreNotifications').hidden=!hasMore;
+}
+document.getElementById('notificationPageList').addEventListener('click',async e=>{const del=e.target.closest('[data-delete]');if(del){await api.deleteNotification(Number(del.dataset.delete));del.closest('[data-id]').remove();return;}const open=e.target.closest('[data-open]');if(open){const row=open.closest('[data-id]');await api.markAsRead(Number(row.dataset.id));location.href=open.dataset.open;return;}const row=e.target.closest('[data-id]');if(row){await api.markAsRead(Number(row.dataset.id));row.classList.remove('bg-light');}});
+document.getElementById('readAll').addEventListener('click',async()=>{await api.markAllNotificationsRead();await loadNotifications(true);});
+document.getElementById('loadMoreNotifications').addEventListener('click',()=>loadNotifications(false));
+loadNotifications(true).catch(e=>document.getElementById('notificationPageList').innerHTML='<div class="p-4 text-danger">'+escapeHtml(e.message)+'</div>');
+</script>
+<script src="/js/pawcare2.js?v=20261015-26"></script>
+<script src="/js/assistant-widget.js?v=1.0"></script>
+<script src="/js/site-shell.js?v=20261014-5"></script>
+</body></html>

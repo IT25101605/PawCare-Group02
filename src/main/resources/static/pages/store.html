@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preload" href="/vendor/fonts/font-5.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/vendor/fonts/font-11.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/vendor/fonts/font-17.woff2" as="font" type="font/woff2" crossorigin>
+<link href="/vendor/fonts/fonts.css?v=20261015-6" rel="stylesheet">
+<link href="/css/design.css?v=20261015-10" rel="stylesheet">
+    <title>Pet Store - PawCare</title>
+    <link href="/vendor/bootstrap/bootstrap.min.css?v=5.3.2" rel="stylesheet">
+    <link href="/vendor/bootstrap-icons/bootstrap-icons.css?v=1.11.2" rel="stylesheet">
+    <link href="/css/style.css?v=20261015-10" rel="stylesheet">
+    <link href="/css/pawcare2.css?v=20261015-26" rel="stylesheet">
+    <link rel="icon" href="/images/paw.svg" type="image/svg+xml">
+    <meta name="theme-color" content="#c7b6e3">
+<link href="/css/assistant-widget.css?v=20261015-24" rel="stylesheet">
+<style>
+.typing-heading { display: inline; }
+.typing-heading::after { content: ''; display: inline-block; width: 3px; height: 0.9em; background: #fff; margin-left: 3px; vertical-align: text-bottom; animation: blink-pipe 0.7s step-end infinite; }
+@keyframes blink-pipe { from, to { opacity: 1 } 50% { opacity: 0 } }
+</style>
+<link href="/css/navigation.css?v=20261016-2" rel="stylesheet">
+<link rel="stylesheet" href="/css/site-fixes.css?v=20261015-26">
+<link href="/css/page-loading.css?v=20261015-10" rel="stylesheet">
+<link href="/css/typing.css?v=20261015-11" rel="stylesheet">
+<link href="/css/paw-cursor.css?v=20261015-20" rel="stylesheet">
+<link href="/css/workspace-polish.css?v=20261015-20" rel="stylesheet">
+</head>
+<body class="pc2-page pc2-store has-shared-nav">
+<script src="/js/page-loading.js?v=20261015-20"></script>
+<script src="/js/paw-cursor.js?v=20261015-20"></script>
+    <nav id="mainNavbar" aria-label="Main navigation"><a href="/">PawCare</a></nav>
+<script src="/js/navigation.js?v=20261016-2"></script>
+
+    <section class="page-masthead masthead-store">
+        <div class="container">
+            <div class="masthead-text">
+                <span class="section-badge" style="background:rgba(255,255,255,0.18);color:#fff;border:1px solid rgba(255,255,255,0.3)">Store</span>
+                <h1 class="display-4 fw-bold mt-2" style="color:#fff;text-shadow:0 2px 14px rgba(35,24,60,0.35);min-height:2.1em"><span class="typing-heading" id="typingHeading" data-typing>Good finds.<br>Happy friends.</span></h1>
+                <p class="lead mb-0" style="max-width:540px;color:rgba(255,255,255,0.92);text-shadow:0 1px 8px rgba(35,24,60,0.3)">Everyday essentials and a few little treats. Find their next favorite thing.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding">
+        <div class="container">
+            <div class="mb-3 text-end"><button class="btn btn-pawcare-outline" onclick="openCart()"><i class="bi bi-cart me-2"></i>View Cart</button></div>
+            <div class="row mb-4 store-toolbar g-3">
+                <div class="col-md-8"><div class="d-flex gap-2 flex-wrap" id="categoryFilters"><button class="btn btn-sm btn-pawcare" onclick="filterCat(null)">All</button></div></div>
+                <div class="col-md-4"><input type="text" class="form-control form-control-pawcare" placeholder="Search products..." id="searchInput" onkeyup="debounceSearch()"></div>
+            </div>
+            <div class="row g-4" id="productsGrid"><div class="loading-spinner"></div></div>
+            <div class="text-center mt-4" id="pagination"></div>
+        </div>
+    </section>
+
+    <footer class="footer-section"><div class="container"><div class="row g-4"><div class="col-md-5"><a href="/" class="navbar-brand-pawcare"><i class="bi bi-heart-pulse-fill"></i>PawCare</a><p class="mt-3">A little care. A happier life.<br>Here for every chapter of pet parenting.</p></div><div class="col-6 col-md-3"><h5>A world of care</h5><ul class="footer-links"><li><a href="/pages/services.html">Veterinary care</a></li><li><a href="/pages/grooming.html">Grooming</a></li><li><a href="/pages/entertainment.html">Entertainment</a></li><li><a href="/pages/store.html">The pet store</a></li></ul></div><div class="col-6 col-md-4"><h5>Here for you</h5><ul class="footer-links"><li><a href="/pages/contact.html">Get in touch</a></li><li><a href="/pages/login.html">Your account</a></li><li><a href="tel:+94715473916">+94 71 547 3916</a></li></ul></div></div><div class="footer-bottom"><p class="mb-0">© 2026 PawCare. All paws welcome.</p><a href="/">Back to our world ↗</a></div></div></footer>
+    <script src="/vendor/bootstrap/bootstrap.bundle.min.js?v=5.3.2"></script>
+    <script src="/js/api.js?v=20261016-2"></script><script src="/js/forms.js?v=20261015-17"></script>
+    <script>
+        window.addEventListener('scroll',()=>{document.getElementById('mainNavbar')?.classList.toggle('scrolled',window.scrollY>50)});
+
+        let currentCat = null, searchTimer = null, currentPage = 0;
+
+        async function loadCategories() {
+            try {
+                const cats = await api.getCategories();
+                const btns = (cats||[]).map(c => `<button class="btn btn-sm btn-pawcare-outline" onclick="filterCat(${c.id})">${escapeHtml(c.name)}</button>`).join('');
+                document.getElementById('categoryFilters').innerHTML = `<button class="btn btn-sm btn-pawcare" onclick="filterCat(null)">All</button>` + btns;
+            } catch(e) { showToast(e.message || 'Unable to load data. Please try again.','error'); }
+        }
+
+        function filterCat(catId) { currentCat = catId; currentPage = 0; loadProducts(); }
+        function debounceSearch() { clearTimeout(searchTimer); searchTimer = setTimeout(() => { currentPage = 0; loadProducts(); }, 400); }
+
+        async function loadProducts() {
+            const search = document.getElementById('searchInput')?.value;
+            try {
+                const data = await api.getProducts(currentPage, currentCat, search);
+                const products = data.content || [];
+                document.getElementById('productsGrid').innerHTML = products.length ? products.map(p => `
+                    <div class="col-md-6 col-lg-3">
+                        <div class="product-card position-relative">
+                            <div class="product-img"><img src="${escapeHtml(p.image||'/images/products/bowl.svg')}" alt="${escapeHtml(p.name)}" loading="lazy"></div>
+                            ${p.salePrice ? '<span class="badge-sale">SALE</span>' : ''}
+                            <div class="product-body">
+                                <p class="text-muted mb-1" style="font-size:0.78rem">${escapeHtml(p.categoryName||'')} ${p.brand ? '· '+escapeHtml(p.brand) : ''}</p>
+                                <h6 class="fw-bold mb-1">${escapeHtml(p.name)}</h6>
+                                <button type="button" class="btn btn-link p-0 text-decoration-none small mb-1" onclick="openProductReviews(${p.id},'${encodeURIComponent(p.name)}')"><span class="text-warning">★</span> ${Number(p.averageRating||0).toFixed(1)} <span class="text-muted">(${p.reviewCount||0} reviews)</span></button>
+                                <p class="text-muted mb-2" style="font-size:0.8rem;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">${escapeHtml(p.description||'')}</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="product-price">${formatCurrency(p.salePrice||p.price)}${p.salePrice?`<span class="original-price">${formatCurrency(p.price)}</span>`:''}</span>
+                                    <button class="btn btn-sm btn-pawcare" aria-label="Add ${escapeHtml(p.name)} to cart" onclick="addCart(${p.id},this)" ${p.stockQuantity<1?'disabled':''}><i class="bi bi-cart-plus"></i></button>
+                                </div>
+                                <button class="btn btn-sm btn-pawcare-outline mt-2" onclick="openCart(${p.id})" ${p.stockQuantity<1?'disabled':''}>Buy Now</button>
+                                <div class="mt-2" style="font-size:0.75rem;color:var(--text-muted)">${p.stockQuantity > 0 ? `<i class="bi bi-check-circle text-success me-1"></i>In Stock (${p.stockQuantity})` : '<i class="bi bi-x-circle text-danger me-1"></i>Out of Stock'}</div>
+                            </div>
+                        </div>
+                    </div>
+                `).join('') : '<div class="empty-state"><i class="bi bi-bag-x"></i><p>No products found</p></div>';
+
+                const totalPages = data.totalPages || 1;
+                if (totalPages > 1) {
+                    let pg = '<nav><ul class="pagination justify-content-center">';
+                    for (let i = 0; i < totalPages; i++) pg += `<li class="page-item ${i===currentPage?'active':''}"><a class="page-link" href="#" onclick="event.preventDefault();currentPage=${i};loadProducts()">${i+1}</a></li>`;
+                    pg += '</ul></nav>';
+                    document.getElementById('pagination').innerHTML = pg;
+                } else document.getElementById('pagination').innerHTML = '';
+            } catch(e) { document.getElementById('productsGrid').innerHTML = '<div class="col-12 product-error"><i class="bi bi-bag-heart"></i><h3>A little pause in our pet store.</h3><p>We couldn’t load the collection just now. Please try again.</p><button class="btn btn-pawcare-outline" onclick="loadCategories();loadProducts()">Try again ↻</button></div>'; }
+        }
+
+        async function addCart(productId,button) {
+            if(button?.disabled)return;
+            if (!api.isLoggedIn()) { window.location.href = '/pages/login.html'; return; }
+            if(button)button.disabled=true;
+            try { await api.addToCart(productId, 1); showToast('Added to cart!', 'success'); } catch(e) { showToast(e.message, 'error'); }finally{if(button)button.disabled=false;}
+        }
+
+        loadCategories(); loadProducts();
+    </script>
+    <script src="/js/reviews.js"></script>
+    <script src="/js/payment-flow.js?v=20261016-2"></script>
+    <script src="/js/cart.js"></script>
+    <script src="/js/ui.js?v=20261015-5"></script>
+    <script src="/js/pawcare2.js?v=20261015-26"></script>
+<script src="/js/assistant-widget.js?v=1.0"></script>
+<script src="/js/site-shell.js?v=20261014-5"></script>
+<script src="/js/typing.js?v=20261015-11"></script>
+</body>
+</html>

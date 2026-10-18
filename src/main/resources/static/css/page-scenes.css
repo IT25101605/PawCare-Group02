@@ -1,0 +1,68 @@
+/* Photo mastheads share the veterinary/store frame defined in site-fixes.css. */
+body.pc2-page:not(.workspace-page) .page-masthead.masthead-scene {
+ background:#d9cde6!important;isolation:isolate;
+}
+.masthead-scene .masthead-scene-photo {
+ position:absolute;top:0;right:0;display:block;width:auto;max-width:100%;height:100%;object-fit:contain;object-position:right center;z-index:-2;
+ /* Feather the quiet edge into the page's lilac background. */
+ mask-image:linear-gradient(90deg,transparent,black 25%);-webkit-mask-image:linear-gradient(90deg,transparent,black 25%);
+}
+.masthead-contact .masthead-scene-photo {
+ top:60px;height:calc(100% - 60px);
+ -webkit-mask-image:linear-gradient(90deg,transparent,black 25%),linear-gradient(180deg,transparent,black 18%);
+ mask-image:linear-gradient(90deg,transparent,black 25%),linear-gradient(180deg,transparent,black 18%);
+ -webkit-mask-composite:source-in;mask-composite:intersect;
+}
+body.pc2-page:not(.workspace-page) .page-masthead.masthead-scene::before {
+ display:block;content:'';inset:0;opacity:1;mix-blend-mode:normal;z-index:-1;
+ background:linear-gradient(90deg,#e6dcf1f5 0%,#e6dcf1eb 29%,#e6dcf1b8 44%,#e6dcf122 62%,transparent 75%);
+}
+body.pc2-page:not(.workspace-page) .page-masthead.masthead-scene::after {display:none;}
+.masthead-scene .scene-content {text-align:left;}
+.masthead-scene .scene-copy {max-width:680px;}
+body.pc2-page:not(.workspace-page) .page-masthead.masthead-scene h1 {
+ color:#30203f!important;font-size:clamp(2.35rem,3.6vw,3.6rem)!important;line-height:1.15!important;letter-spacing:-.05em!important;overflow:visible;text-wrap:balance;
+}
+body.pc2-page:not(.workspace-page) .page-masthead.masthead-scene .lead {
+ max-width:590px!important;margin-left:0!important;margin-right:0!important;color:#5a456e!important;opacity:1!important;line-height:1.75;
+}
+body.pc2-page .masthead-scene .section-badge {background:#f7f0fba8!important;border:1px solid #9473b53b!important;color:#694580!important;}
+.masthead-scene .pawpause-promise {justify-content:flex-start;gap:8px;}
+.masthead-scene .pawpause-promise span {background:#faf6ffad;border-color:#9573b62e;color:#674c7c;font-size:.7rem;padding:7px 10px;}
+/* The watermark has its own space above pets resting in the bottom right. */
+body.has-shared-nav.pc2-page.pc2-login .auth-pets {
+ right:1.5%!important;left:auto!important;bottom:1.5%!important;width:76%!important;height:32%!important;max-height:330px;opacity:1!important;filter:none;
+}
+body.has-shared-nav.pc2-page.pc2-login .auth-pets .pet-photo {object-fit:contain;object-position:right bottom;}
+body.has-shared-nav.pc2-page.pc2-login .auth-left::after {content:none!important;}
+.pc2-login .auth-watermark {position:absolute;left:5%;bottom:calc(33.5% + 18px);z-index:1;max-width:90%;font-family:var(--font-heading);font-size:clamp(70px,8vw,148px);font-weight:800;letter-spacing:-.065em;line-height:1.15;color:#eadff6;opacity:.3;white-space:nowrap;pointer-events:none;}
+body.has-shared-nav.pc2-page.pc2-login .auth-left h2 {line-height:1.15!important;overflow:visible;}
+@media(max-width:1199px) {
+ .masthead-scene .scene-copy {max-width:610px;}
+ .masthead-scene .masthead-scene-photo {object-position:right center;}
+}
+@media(max-width:991px) {
+ .masthead-scene .scene-copy {max-width:80%;}
+ body.pc2-page:not(.workspace-page) .page-masthead.masthead-scene::before {background:linear-gradient(90deg,#e6dcf1f5,#e6dcf1e6 48%,#e6dcf199);}
+ .masthead-scene .pawpause-promise {max-width:520px;}
+}
+@media(max-width:575px) {
+ .masthead-scene .scene-copy {max-width:100%;}
+ .masthead-scene .masthead-scene-photo {object-position:80% center;opacity:.55;mask-image:linear-gradient(90deg,transparent,black 50%);-webkit-mask-image:linear-gradient(90deg,transparent,black 50%);}
+ body.pc2-page:not(.workspace-page) .page-masthead.masthead-scene::before {background:linear-gradient(90deg,#e6dcf1f2,#e6dcf1b8);}
+ body.pc2-page:not(.workspace-page) .page-masthead.masthead-scene h1 {font-size:2.35rem!important;line-height:1.15!important;}
+ .masthead-scene .pawpause-promise span {font-size:.66rem;}
+ body.pc2-page:not(.workspace-page) .page-masthead.masthead-entertainment h1 {font-size:clamp(1.85rem,8vw,2.15rem)!important;line-height:1.14!important;margin-top:12px!important;margin-bottom:10px;}
+ body.pc2-page:not(.workspace-page) .page-masthead.masthead-entertainment .lead {font-size:.86rem!important;line-height:1.6;margin-bottom:12px;}
+ .masthead-entertainment .pawpause-promise {margin-top:12px;gap:6px;}
+ .masthead-entertainment .pawpause-promise span:last-child {display:none;}
+ .masthead-entertainment .pawpause-promise span {font-size:.62rem;padding:6px 8px;}
+}
+@media(min-width:992px) and (max-height:900px) {
+ body.has-shared-nav.pc2-page.pc2-login .auth-left {padding-top:40px!important;}
+ body.has-shared-nav.pc2-page.pc2-login .auth-left h2 {font-size:clamp(2.2rem,3.5vw,3.3rem)!important;}
+ body.has-shared-nav.pc2-page.pc2-login .auth-left p {font-size:.85rem!important;line-height:1.6!important;}
+ body.has-shared-nav.pc2-page.pc2-login .auth-left>a {margin-top:14px!important;}
+ body.has-shared-nav.pc2-page.pc2-login .auth-pets {height:30%!important;bottom:1.5%!important;}
+ .pc2-login .auth-watermark {bottom:calc(31.5% + 18px);font-size:clamp(44px,5vw,72px);}
+}

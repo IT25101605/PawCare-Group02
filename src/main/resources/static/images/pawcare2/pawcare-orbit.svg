@@ -1,0 +1,20 @@
+<svg width="960" height="720" viewBox="0 0 960 720" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="90" y1="70" x2="870" y2="650" gradientUnits="userSpaceOnUse"><stop stop-color="#F8F6FF"/><stop offset=".5" stop-color="#EEF7F4"/><stop offset="1" stop-color="#FFF5ED"/></linearGradient>
+    <linearGradient id="ring" x1="250" y1="180" x2="680" y2="560" gradientUnits="userSpaceOnUse"><stop stop-color="#6C57B4"/><stop offset=".52" stop-color="#4A9D8F"/><stop offset="1" stop-color="#EF9B6C"/></linearGradient>
+    <filter id="blur" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="24"/></filter>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="22" stdDeviation="28" flood-color="#392C57" flood-opacity=".16"/></filter>
+  </defs>
+  <rect width="960" height="720" rx="56" fill="url(#bg)"/>
+  <circle cx="178" cy="132" r="86" fill="#D9CCF5" opacity=".55" filter="url(#blur)"/>
+  <circle cx="806" cy="580" r="108" fill="#F3C7A9" opacity=".42" filter="url(#blur)"/>
+  <circle cx="774" cy="134" r="80" fill="#B9DED7" opacity=".46" filter="url(#blur)"/>
+  <circle cx="480" cy="360" r="224" stroke="url(#ring)" stroke-width="30" stroke-linecap="round" stroke-dasharray="260 54" opacity=".2"/>
+  <circle cx="480" cy="360" r="166" fill="white" fill-opacity=".84" stroke="white" stroke-width="2" filter="url(#shadow)"/>
+  <g fill="#5F4A98">
+    <ellipse cx="423" cy="311" rx="24" ry="31" transform="rotate(-18 423 311)"/><ellipse cx="537" cy="311" rx="24" ry="31" transform="rotate(18 537 311)"/><ellipse cx="480" cy="288" rx="24" ry="31"/><ellipse cx="390" cy="365" rx="20" ry="27" transform="rotate(-28 390 365)"/><ellipse cx="570" cy="365" rx="20" ry="27" transform="rotate(28 570 365)"/><path d="M480 346C429 346 398 389 398 433C398 472 431 494 480 494C529 494 562 472 562 433C562 389 531 346 480 346Z"/>
+  </g>
+  <path d="M480 458C461 441 443 425 443 406C443 389 456 379 469 379C476 379 483 383 488 391C493 383 500 379 507 379C520 379 533 389 533 406C533 425 515 441 496 458L488 465L480 458Z" fill="#fff"/>
+  <g opacity=".7" fill="#4A9D8F"><circle cx="134" cy="250" r="8"/><circle cx="154" cy="270" r="5"/><circle cx="116" cy="278" r="5"/></g>
+  <g opacity=".65" fill="#EF9B6C"><circle cx="812" cy="328" r="10"/><circle cx="838" cy="348" r="6"/><circle cx="786" cy="354" r="6"/></g>
+</svg>

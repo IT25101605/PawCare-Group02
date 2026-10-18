@@ -1,0 +1,98 @@
+/* Services uses the same Manrope headings and DM Sans body as the other pages. */
+body.services-page {background:#faf8fc;color:#35263f}
+.services-main {overflow:hidden}
+.care-retreat {position:relative;isolation:isolate;padding:112px max(5vw,24px) 48px;background:#c9b7de}
+.care-landscape,.retreat-shade {position:absolute;inset:0;width:100%;height:100%;z-index:-2}
+.care-landscape {object-fit:cover;object-position:65% center;opacity:.48}
+.retreat-shade {z-index:-1;background:linear-gradient(90deg,rgba(238,229,246,.97),rgba(231,217,241,.72) 48%,rgba(111,83,141,.14))}
+.retreat-layout {display:grid;grid-template-columns:minmax(0,1.15fr) minmax(300px,.95fr);gap:4vw;max-width:1280px;margin:auto;align-items:center}
+.retreat-intro .section-badge {background:#f7f2fbb3;color:#65477f;border:1px solid #a48bbf40;padding:8px 16px;font-size:.78rem;letter-spacing:.03em}
+body.services-page .retreat-intro h1 {font-family:'Manrope','Plus Jakarta Sans',system-ui,sans-serif;font-size:clamp(2.8rem,4.2vw,4rem);font-weight:800;line-height:1.15;letter-spacing:-.05em;margin:22px 0 24px;color:#352443}
+.services-headline {display:grid}
+.services-headline>span {grid-area:1/1;white-space:pre-line;overflow-wrap:normal}
+.headline-measure {visibility:hidden;pointer-events:none}
+#services-typed::after {content:'';display:inline-block;width:3px;height:.88em;margin-left:5px;vertical-align:-.04em;background:#745090;animation:servicesCaret 0.64s step-end infinite}
+.services-headline.is-paused #services-typed::after {display:none}
+@keyframes servicesCaret {50% {opacity:0}}
+.retreat-intro>p {max-width:440px;font-size:1rem;line-height:1.85;color:#65536f;margin:0 0 30px}
+.retreat-actions {display:flex;align-items:center;gap:14px}
+.retreat-explore {display:inline-flex;align-items:center;gap:30px;background:#5b3b7e;color:#fff;padding:14px 24px;border-radius:999px;text-decoration:none;font-size:.9rem;font-weight:650;box-shadow:0 8px 24px #5b3b7e20}
+.retreat-explore:hover {background:#4a2d6c;color:#fff;transform:translateY(-2px)}
+.retreat-explore span {font-size:1.2rem}
+.retreat-showcase {width:100%;max-width:470px;justify-self:end}
+.service-switcher {display:flex;gap:4px;padding:5px;margin-bottom:20px;border:1px solid #ffffff90;border-radius:999px;background:#ffffff70;backdrop-filter:blur(12px)}
+.service-switcher button {flex:1;border:0;border-radius:999px;background:transparent;padding:11px 6px;font-family:inherit;font-size:.84rem;font-weight:600;color:#685275;transition:background 0.16s,color 0.16s}
+.service-switcher button[aria-selected=true] {background:#5b3b7e;color:#fff;box-shadow:0 4px 12px #5b3b7e20}
+.service-switcher button:hover:not([aria-selected=true]) {background:#eee3f6}
+.retreat-card {background:#362a43;color:#ede6f3;box-shadow:0 24px 55px #34213e30;border:1px solid #f4eafb60;border-radius:24px;overflow:hidden;transform-origin:center;transition:transform 0.28s ease,box-shadow 0.28s ease}
+@media(hover:hover) and (pointer:fine) {.retreat-card:hover {transform:scale(1.012);box-shadow:0 28px 60px #34213e38}}
+.retreat-card.is-zooming {animation:careZoom 0.34s ease-in-out both}
+@keyframes careZoom {0%,100% {transform:scale(1)} 50% {transform:scale(1.025)}}
+body.services-page .retreat-card h2 {font-family:'Manrope','Plus Jakarta Sans',system-ui,sans-serif;font-size:1.75rem;line-height:1.25;font-weight:750;color:#faf5ff;letter-spacing:-.035em;margin:0;padding:27px 28px}
+.retreat-photo {position:relative;display:block;width:100%;height:255px;padding:0;border:0;background:#c8b6e3;overflow:hidden;cursor:pointer}
+.retreat-photo img {width:100%;height:100%;object-fit:cover;object-position:76% center;transition:transform 0.52s ease}
+.retreat-photo:hover img {transform:scale(1.045)}
+.retreat-card-body {padding:25px 28px 27px}
+.retreat-card-body p {color:#ded3e6;font-size:.9rem;line-height:1.8;margin:0 0 18px}
+.retreat-card-body>a {display:flex;align-items:center;justify-content:space-between;gap:15px;border-top:1px solid #ffffff26;padding-top:19px;color:#fff;text-decoration:none;font-size:.85rem;font-weight:600}
+.retreat-card-body>a span {font-size:1.2rem}
+.care-collection {padding:55px max(5vw,24px) 65px;max-width:1500px;margin:auto;scroll-margin-top:100px}
+.collection-heading {display:flex;justify-content:space-between;align-items:center;gap:35px;margin-bottom:34px}
+body.services-page .collection-heading h2,body.services-page .care-invitation h2 {font-family:'Manrope','Plus Jakarta Sans',system-ui,sans-serif;font-size:clamp(1.9rem,3vw,2.7rem);line-height:1.2;letter-spacing:-.04em;font-weight:800;color:#3e2d49;margin:0}
+.collection-heading>p {max-width:290px;font-size:.95rem;line-height:1.7;color:#7a6a80;margin:0}
+.collection-grid {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:26px}
+.collection-card {border:1px solid #e5dce9;border-radius:22px;background:#fff;overflow:hidden}
+.collection-image {display:block;height:225px;overflow:hidden;background:#ddd0ed}
+.collection-image img {width:100%;height:100%;object-fit:cover;object-position:75% center;transition:transform 0.48s ease}
+.collection-image:hover img {transform:scale(1.05)}
+.collection-copy {padding:25px}
+body.services-page .collection-copy h3 {font-family:'Manrope','Plus Jakarta Sans',system-ui,sans-serif;font-size:1.25rem;letter-spacing:-.03em;font-weight:750;margin:0 0 13px;color:#45304f}
+.collection-copy p {font-size:.88rem;line-height:1.8;color:#7a6a80;margin-bottom:24px;min-height:5.4em}
+.collection-copy>a {display:flex;align-items:center;justify-content:space-between;gap:14px;color:#5b3b7e;text-decoration:none;font-size:.83rem;font-weight:700}
+.collection-copy>a span {font-size:1.2rem}
+.care-invitation {text-align:center;padding:70px 24px;background:radial-gradient(ellipse at 50% 120%,#d6c3e5,transparent 65%),#eee5f3}
+.care-invitation>p {font-size:.95rem;color:#715d7b;margin:22px auto;max-width:460px;line-height:1.8}
+.care-invitation>a:not(.invitation-contact) {display:inline-flex;gap:30px;align-items:center;background:#5b3b7e;color:white;padding:14px 25px;border-radius:999px;font-size:.85rem;font-weight:600;text-decoration:none}
+.care-invitation .invitation-contact {display:block;width:max-content;margin:22px auto 0;font-size:.83rem;color:#674d79;text-underline-offset:4px}
+.services-main :focus-visible {outline:3px solid #9872b7!important;outline-offset:5px}
+.services-main .retreat-photo:focus-visible {outline-offset:-5px}
+body.services-page .footer-section .navbar-brand-pawcare,body.services-page .footer-section h5 {color:#f5edf9!important}
+@media(min-width:1600px) {.care-retreat {padding-left:max(calc((100vw - 1280px)/2),6vw);padding-right:max(calc((100vw - 1280px)/2),6vw)}}
+@media(max-width:991px) {
+  .care-retreat {padding-top:110px;padding-bottom:42px}
+  .retreat-layout {gap:30px;grid-template-columns:1fr 1fr}
+  body.services-page .retreat-intro h1 {font-size:2.6rem}
+  .retreat-intro>p {font-size:.95rem}
+  .retreat-card-body,body.services-page .retreat-card h2 {padding-left:22px;padding-right:22px}
+  .collection-grid {gap:18px}.collection-image {height:200px}.collection-copy {padding:20px}
+}
+@media(max-width:700px) {
+  .care-retreat {padding:110px 23px 45px}
+  .retreat-layout {grid-template-columns:1fr;gap:30px}
+  .retreat-intro>p {max-width:440px;font-size:.95rem}
+  body.services-page .retreat-intro h1 {font-size:clamp(2rem,7.5vw,3rem);margin-top:20px}
+  .retreat-showcase {max-width:440px;justify-self:center}
+  .retreat-photo {height:225px}
+  .service-switcher button {font-size:.8rem}
+  .care-collection {padding:55px 23px}
+  .collection-heading {display:block;margin-bottom:28px}
+  .collection-heading>p {margin-top:16px}
+  .collection-grid {grid-template-columns:1fr;gap:25px}
+  .collection-image {height:250px}
+  .collection-copy p {min-height:0}
+  .care-invitation {padding:55px 23px}
+}
+@media(prefers-reduced-motion:reduce) {.services-main *, .services-main *::before,.services-main *::after {animation:none!important;transition:none!important;scroll-behavior:auto!important}.retreat-card:hover {transform:none}#services-typed::after {display:none}}
+
+/* A useful workspace introduction fills the hero without extra decorative labels. */
+.care-workspace-note {display:flex;align-items:center;gap:18px;max-width:470px;margin-top:30px;padding:20px;background:#ffffff87;border:1px solid #ffffffc9;border-radius:20px;box-shadow:0 10px 30px #5b3b7e08;backdrop-filter:blur(12px)}
+.care-workspace-note>img {width:80px;height:88px;object-fit:cover;flex-shrink:0;border-radius:14px}
+.care-workspace-note strong {display:block;font-size:.95rem;color:#493156;margin-bottom:6px}
+.care-workspace-note p {font-size:.82rem;line-height:1.65;color:#766181;margin:0 0 10px}
+.care-workspace-note a {font-size:.8rem;font-weight:700;color:#5b3b7e;text-decoration:none}
+.care-workspace-note a span {margin-left:8px}
+@media(max-width:991px) {.care-workspace-note {padding:16px;gap:13px}.care-workspace-note>img {width:62px;height:76px}}
+@media(max-width:700px) {.care-workspace-note {max-width:none;margin-top:24px}.care-workspace-note>img {width:66px;height:80px}}
+
+.collection-image.collection-illustration {background:linear-gradient(135deg,#eee5f8,#d1bce7);display:flex;align-items:center;justify-content:center;}
+.collection-image.collection-illustration img {object-fit:contain;width:70%;height:80%;}

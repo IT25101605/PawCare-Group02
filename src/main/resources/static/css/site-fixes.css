@@ -1,0 +1,232 @@
+/* PawCare interface corrections — shared across pages without changing feature logic. */
+/* Photo banners share one frame; action rows sit outside the photograph. */
+body.pc2-page:not(.workspace-page) .page-masthead:is(.masthead-grooming,.masthead-vet,.masthead-store,.masthead-entertainment,.masthead-contact) {
+  height:440px!important;min-height:440px!important;padding-top:112px!important;padding-bottom:48px!important;
+}
+@media(max-width:575px) {
+  body.pc2-page:not(.workspace-page) .page-masthead:is(.masthead-grooming,.masthead-vet,.masthead-store,.masthead-entertainment,.masthead-contact) {
+    height:400px!important;min-height:400px!important;padding-top:108px!important;padding-bottom:32px!important;
+  }
+}
+/* Put the floating navigation in a consistent top position even on auth screens. */
+body.has-shared-nav #mainNavbar.shared-navbar {position:fixed!important;top:14px!important;transform:none!important;z-index:1080!important;}
+body.has-shared-nav #mainNavbar > .navbar-pill-container {max-width:1240px;}
+body.has-shared-nav #mainNavbar .site-notify-button {flex-shrink:0;order:2;display:grid;place-items:center;position:relative;margin:0 0 0 7px;width:40px;height:40px;border:1px solid #e7deef;border-radius:50%;background:#f5eff9;color:#5b3b7e;text-decoration:none;box-shadow:none;cursor:pointer;transition:background 0.16s,transform 0.16s;}
+body.has-shared-nav #mainNavbar .site-notify-button:hover {background:#eae1f4;transform:translateY(-1px);}
+body.has-shared-nav #mainNavbar .site-notify-button:focus-visible {outline:3px solid #9e7cc7;outline-offset:2px;}
+.site-notify-count {position:absolute;top:-4px;right:-5px;min-width:19px;height:19px;padding:0 4px;border-radius:99px;display:grid;place-items:center;background:#a43d71;color:#fff;font-size:.62rem;font-weight:800;}
+.site-notify-count[hidden] {display:none!important;}
+.site-notify-panel {position:fixed;top:77px;right:max(16px,calc((100vw - 1240px)/2));z-index:1100;width:min(390px,calc(100vw - 24px));max-height:min(75vh,600px);overflow:hidden;display:flex;flex-direction:column;background:#fff;border:1px solid #e7dced;border-radius:21px;box-shadow:0 24px 70px #34244737;opacity:0;visibility:hidden;pointer-events:none;transform:translateY(-8px);transition:opacity 0.16s,transform 0.16s,visibility 0.16s;}
+.site-notify-panel.is-open {opacity:1;visibility:visible;pointer-events:auto;transform:none;}
+.site-panel-heading {display:flex;justify-content:space-between;align-items:start;gap:12px;padding:15px 17px;background:#f5eff9;border-bottom:1px solid #e9deef;}
+.site-panel-heading strong {display:block;color:#35263f;font-weight:750;}.site-panel-heading small {display:block;color:#897491;font-size:.73rem;}.site-notify-close {border:0;background:none;color:#6e567e;font-size:1.6rem;line-height:1;cursor:pointer;}
+.site-notify-actions {display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding:10px 13px;border-bottom:1px solid #efe6f3;}.site-notify-actions a,.site-notify-actions button {background:#f2eaf7;border:0;border-radius:8px;color:#604274;font-size:.73rem;font-weight:650;padding:6px 9px;text-decoration:none;cursor:pointer;}
+.site-notify-items {overflow:auto;min-height:80px;max-height:55vh;}.site-notify-items>p {font-size:.85rem;color:#76647f;text-align:center;padding:25px 15px;margin:0;}
+.site-notify-item {display:grid;grid-template-columns:23px minmax(0,1fr) auto;gap:9px;padding:12px 13px;border-bottom:1px solid #f0eaf4;}.site-notify-item.is-unread {background:#faf7ff;}.site-notify-item>i {color:#71549a;font-size:1.15rem;}.site-notify-item strong {font-size:.79rem;color:#3d2d49;}.site-notify-item p {font-size:.75rem;line-height:1.5;color:#71617b;margin:3px 0 4px;overflow-wrap:anywhere;}.site-notify-item small {font-size:.66rem;color:#9b8da3;}.site-notify-item-actions {display:flex;align-items:start;}.site-notify-item-actions button {background:none;border:0;color:#7c6889;padding:4px;cursor:pointer;}
+
+/* Remove the giant duplicated wordmark and reuse one compact footer on all pages. */
+body .footer-section.shared-site-footer,
+body.pc2-page:not(.workspace-page) .footer-section.shared-site-footer {box-sizing:border-box;position:relative!important;display:block;overflow:hidden;min-height:0;width:auto;margin:0;padding:37px 25px 20px!important;border:0;border-radius:34px 34px 0 0;background:#eae3f0!important;color:#776485!important;box-shadow:none;isolation:isolate;}
+body .footer-section.shared-site-footer::before,body .footer-section.shared-site-footer::after {display:none!important;}
+.shared-footer-inner {max-width:1180px;margin:0 auto;}.shared-footer-grid {display:grid;grid-template-columns:minmax(220px,2fr) repeat(3,minmax(125px,1fr));gap:clamp(18px,3.2vw,55px);}
+.shared-footer-brand {display:inline-flex;gap:9px;align-items:center;color:#2b2037!important;text-decoration:none;font-size:1.4rem;font-weight:800;letter-spacing:-.055em;}.shared-footer-brand img {width:29px;height:29px;}
+.shared-site-footer .shared-footer-grid h2 {font-family:inherit;font-size:.77rem!important;font-weight:800!important;letter-spacing:0!important;color:#62506f!important;line-height:1.4;margin:3px 0 15px!important;}
+.shared-site-footer .shared-footer-grid p {color:#8c799a!important;font-size:.75rem!important;line-height:1.75!important;margin:14px 0 0!important;max-width:300px;}
+.shared-site-footer .shared-footer-grid a:not(.shared-footer-brand) {display:block;margin:0 0 9px;color:#8a7798!important;text-decoration:none;font-size:.74rem!important;line-height:1.5;}.shared-site-footer .shared-footer-grid a:hover {color:#573877!important;text-decoration:underline;}
+.shared-footer-bottom {display:flex;justify-content:space-between;gap:16px;border-top:1px solid #d6c9df;margin-top:26px;padding-top:16px;color:#9a87a7;font-size:.69rem;}
+body.pc2-page.pc2-auth .shared-site-footer {margin-left:54%!important;border-top-left-radius:24px!important;border-top-right-radius:24px!important;}
+body.pc2-page.pc2-auth .shared-footer-grid {grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 28px;}
+body.workspace-page .shared-site-footer {margin-left:324px!important;border-top-left-radius:24px!important;border-top-right-radius:24px!important;}
+
+/* Dashboard sidebar sits directly below the site navbar rather than floating far down. */
+body.has-shared-nav.pc2-page.workspace-page .dashboard-sidebar {top:77px!important;bottom:12px!important;}
+body.has-shared-nav.pc2-page.workspace-page .dashboard-content {padding-top:89px!important;}
+body.has-shared-nav.pc2-page.workspace-page .dashboard-header {top:83px!important;}
+body.has-shared-nav.pc2-page.workspace-page .sidebar-brand {padding-top:20px!important;padding-bottom:16px!important;}
+body.has-shared-nav.pc2-page.workspace-page .sidebar-nav {height:calc(100% - 92px)!important;padding-top:12px!important;}
+
+/* Login: keep heading and body above the pet photograph; wordmark belongs below. */
+body.has-shared-nav.pc2-page.pc2-login .auth-left {justify-content:flex-start!important;align-items:flex-start!important;padding:clamp(135px,19vh,188px) clamp(34px,5vw,86px) 32px!important;}
+body.has-shared-nav.pc2-page.pc2-login .auth-left h2 {position:relative;z-index:3;max-width:520px;font-size:clamp(2.65rem,4.15vw,4.4rem)!important;line-height:1.06!important;letter-spacing:-.065em!important;margin:0 0 17px!important;}
+body.has-shared-nav.pc2-page.pc2-login .auth-left p {position:relative;z-index:3;margin:0!important;max-width:440px!important;font-size:.94rem!important;line-height:1.8!important;}
+body.has-shared-nav.pc2-page.pc2-login .auth-left>a {position:relative;z-index:3;margin-top:24px!important;}
+body.has-shared-nav.pc2-page.pc2-login .auth-left::after {content:'PAWCARE';z-index:0;bottom:10%!important;left:4%!important;font-size:clamp(78px,9vw,155px)!important;letter-spacing:-.065em;line-height:1;opacity:.22;pointer-events:none;white-space:nowrap;}
+body.has-shared-nav.pc2-page.pc2-login .auth-pets {z-index:2;pointer-events:none;}
+body.has-shared-nav.pc2-page.pc2-auth .auth-right {padding-top:110px!important;}
+
+/* Veterinarian hero: show the original image's upper area so the parrot's head stays visible. */
+body.pc2-page:not(.workspace-page) .page-masthead.masthead-vet {background-position:center top, right top!important;}
+
+/* Services first section occupies the full viewport; collection starts after scrolling. */
+body.services-page .care-retreat {min-height:100vh;min-height:100dvh;display:flex;align-items:center;padding-top:clamp(105px,13vh,145px);padding-bottom:clamp(36px,6vh,60px);}
+body.services-page .retreat-layout {width:100%;grid-template-columns:minmax(0,1fr) minmax(350px,1.02fr);gap:clamp(30px,4vw,72px);}
+body.services-page .retreat-showcase {max-width:530px;}
+body.services-page .retreat-card {transform-style:preserve-3d;backface-visibility:hidden;}
+body.services-page .retreat-photo {height:215px;}
+body.services-page .retreat-card h2 {padding-top:22px;padding-bottom:22px;}
+body.services-page .retreat-card-body {padding-top:20px;padding-bottom:21px;}
+@media(hover:hover) and (pointer:fine) {
+ body.services-page .retreat-card:hover:not(.is-changing):not(.is-zooming) {transform:perspective(1200px) rotateY(-4deg) rotateX(2deg) translateY(-4px);box-shadow:0 30px 65px #34213e42;}
+}
+body.services-page .retreat-card.is-changing {animation:careCardRotate 0.45s cubic-bezier(.22,.7,.25,1) both;}
+@keyframes careCardRotate {0% {opacity:.7;transform:perspective(1200px) rotateY(-14deg) translateX(15px) scale(.97)}55%{opacity:1;transform:perspective(1200px) rotateY(3deg) translateX(-2px) scale(1.01)}100%{opacity:1;transform:perspective(1200px) rotateY(0) translateX(0) scale(1)}}
+
+@media(min-width:992px) and (max-width:1199.98px) {body.workspace-page .shared-site-footer {margin-left:292px!important;}}
+@media(max-width:991.98px) {
+ .site-notify-panel {top:78px;right:15px;}
+}
+@media(max-width:991px) {
+ body.has-shared-nav.pc2-page.workspace-page .dashboard-sidebar {top:78px!important;bottom:12px!important;}
+ body.has-shared-nav.pc2-page.workspace-page .dashboard-header {top:85px!important;}
+ body.has-shared-nav.pc2-page.workspace-page .dashboard-content {padding-top:91px!important;}
+ body.workspace-page .shared-site-footer,body.pc2-page.pc2-auth .shared-site-footer {margin-left:0!important;}
+ body.services-page .retreat-layout {grid-template-columns:1fr 1fr;gap:25px;}
+ body.services-page .retreat-photo {height:205px;}
+ body.pc2-page:not(.workspace-page) .page-masthead.masthead-vet {background-position:center top, 70% top!important;}
+}
+@media(max-width:700px) {
+ body.services-page .care-retreat {display:block;min-height:100dvh;padding-top:105px;padding-bottom:45px;}
+ body.services-page .retreat-layout {grid-template-columns:1fr;}
+ body.services-page .retreat-showcase {max-width:530px;width:100%;}
+ body.services-page .retreat-photo {height:210px;}
+ .shared-footer-grid {grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;}
+ .shared-footer-bottom {flex-wrap:wrap;}
+ body.pc2-page.pc2-auth .shared-site-footer {margin-left:0!important;}
+}
+@media(max-width:480px) {
+ body .footer-section.shared-site-footer {padding:31px 21px 18px!important;}
+ .shared-footer-grid {grid-template-columns:1fr 1fr;gap:20px 13px;}
+ .shared-footer-grid>.shared-footer-about {grid-column:span 2;}
+ body.has-shared-nav #mainNavbar .site-notify-button {width:36px;height:36px;}
+ body.pc2-page:not(.workspace-page) .page-masthead.masthead-vet {background-position:center top, 64% top!important;}
+}
+@media(prefers-reduced-motion:reduce) {body.services-page .retreat-card.is-changing {animation:none!important;} body.services-page .retreat-card:hover {transform:none!important;} .site-notify-panel {transition:none!important;}}
+
+/* 14 Oct: services switch with a true half-turn flip, new content visible on second half. */
+body.services-page .retreat-card {transform:perspective(1200px) rotateY(0deg) scale(1);will-change:transform;transition:transform 0.26s cubic-bezier(.2,.75,.25,1),box-shadow 0.26s ease;}
+body.services-page .retreat-card.is-flipping {transform:perspective(1200px) rotateY(-90deg) scale(.975)!important;transition:transform 0.26s ease-in!important;pointer-events:none;}
+body.services-page .retreat-card.is-flip-edge {transform:perspective(1200px) rotateY(90deg) scale(.975)!important;transition:none!important;}
+body.services-page .retreat-card.is-flipping-in {transform:perspective(1200px) rotateY(0deg) scale(1)!important;transition:transform 0.29s ease-out!important;}
+@media(hover:hover) and (pointer:fine) {
+ body.services-page .retreat-card:hover:not(.is-flipping):not(.is-flipping-in):not(.is-zooming) {transform:perspective(1200px) rotateY(-2deg) scale(1.043) translateY(-5px)!important;box-shadow:0 38px 85px #34213e40!important;}
+}
+/* Wide desktops have room beside the sidebar; laptops keep a full-width navbar. */
+body.pc2-page.workspace-page .pc2-workspace-hero-art img {inset:12px;width:calc(100% - 24px);height:calc(100% - 24px);object-fit:contain;transform:none;}
+@media(min-width:1600px) {
+ body.has-shared-nav.pc2-page.workspace-page .dashboard-sidebar {top:13px!important;bottom:13px!important;}
+ body.has-shared-nav.pc2-page.workspace-page #mainNavbar.shared-navbar {left:308px!important;right:0!important;width:calc(100% - 308px)!important;padding-left:10px!important;}
+ body.has-shared-nav.pc2-page.workspace-page #mainNavbar>.navbar-pill-container {max-width:1200px;}
+}
+/* Login panel begins BELOW, rather than behind, the floating shared navbar. */
+@media(min-width:992px) {
+ body.has-shared-nav.pc2-page.pc2-login .auth-left {top:86px!important;left:10px!important;width:calc(54% - 20px)!important;height:calc(100dvh - 98px)!important;border-radius:30px!important;padding-top:clamp(75px,11vh,118px)!important;}
+ body.has-shared-nav.pc2-page.pc2-login .auth-right {min-height:100dvh!important;}
+}
+/* Compact square images for each individual grooming package. */
+body.pc2-page .groom-package {text-align:left!important;display:flex;flex-direction:column;align-items:stretch;gap:10px;padding:17px!important;}
+.groom-package .groom-package-top {display:flex;gap:14px;align-items:center;margin-bottom:4px;}
+.groom-package .groom-package-image {width:108px;height:108px;aspect-ratio:1;flex:none;border-radius:17px;overflow:hidden;background:#e7d8f1;border:1px solid #ede1f4;box-shadow:0 8px 20px #50396817;}
+.groom-package .groom-package-image img {width:100%;height:100%;display:block;object-fit:cover;object-position:center;transition:transform 0.28s ease;}
+.groom-package:hover .groom-package-image img {transform:scale(1.09);}
+.groom-package .groom-package-icon {width:40px;height:40px;margin:0!important;display:grid;place-items:center;}
+.groom-package .groom-package-heading {min-width:0;flex:1;}
+.groom-package .groom-package-heading h5 {font-size:1rem;line-height:1.4;margin:7px 0 0;}
+.groom-package>p {flex:1;font-size:.85rem;line-height:1.65;margin:0!important;}
+.groom-package footer {width:100%;margin-top:auto;}
+/* Groomers display verified profile entries, not invented credentials. */
+.groomer-public-details {margin:14px 0 0;text-align:left;}
+.groomer-public-details .vet-detail-row {margin-bottom:8px;}
+.groomer-public-details .vet-detail-row strong {overflow-wrap:anywhere;}
+body.pc2-page .public-groomer-card .public-groomer-photo {object-fit:cover;}
+body.pc2-page .public-groomer-card .groomer-card-fallback {display:grid;place-items:center;}
+@media(max-width:600px) {.groom-package .groom-package-image {width:92px;height:92px;}}
+@media(prefers-reduced-motion:reduce) {body.services-page .retreat-card.is-flipping,body.services-page .retreat-card.is-flip-edge {transform:perspective(1200px) rotateY(90deg) scale(.975)!important;transition:none!important;}
+body.services-page .retreat-card.is-flipping-in {transform:none!important;transition:none!important;}}
+
+/* Workspace headings stay in the document instead of covering content on scroll. */
+body.has-shared-nav.pc2-page.workspace-page .dashboard-header {
+  position:relative !important;
+  top:auto !important;
+  z-index:auto !important;
+}
+
+/* All edit and booking windows sit above navigation, with their own scroll area. */
+body .modal-backdrop {z-index:1190 !important;}
+body .modal {z-index:1200 !important;}
+body .modal-dialog {margin:24px auto;max-height:calc(100vh - 48px);max-height:calc(100dvh - 48px);}
+body .modal-dialog-centered {min-height:calc(100vh - 48px);min-height:calc(100dvh - 48px);}
+body .modal-content {max-height:calc(100vh - 48px);max-height:calc(100dvh - 48px);overflow:hidden;}
+body .modal-header,body .modal-footer {flex-shrink:0;}
+body .modal-body {min-height:0;overflow-y:auto;overscroll-behavior:contain;}
+body .modal-content > form {display:flex;flex-direction:column;min-height:0;overflow:hidden;}
+body .modal-content > form > .modal-body {flex:1 1 auto;}
+body.modal-open .pc-chat-launcher,body.modal-open .pc-chat-panel,
+body.modal-open .pc2-mobile-nav {visibility:hidden;}
+@media(max-width:575px) {
+  body .modal-dialog {margin:12px;max-height:calc(100dvh - 24px);}
+  body .modal-dialog-centered {min-height:calc(100dvh - 24px);}
+  body .modal-content {max-height:calc(100dvh - 24px);}
+}
+body #groomingServiceTable .service-actions {display:flex;flex-wrap:wrap;gap:6px;min-width:220px;}
+body #groomingServiceTable td {vertical-align:middle;}
+@media(max-width:991px) {
+  body.has-shared-nav.pc2-page.workspace-page .dashboard-sidebar {top:86px !important;bottom:12px !important;}
+  body.workspace-page .dashboard-sidebar .sidebar-close {z-index:5;top:12px;right:12px;}
+  body.workspace-page .dashboard-sidebar .sidebar-brand {padding-right:54px !important;}
+  body.workspace-nav-open .pc-chat-launcher,body.workspace-nav-open .pc-chat-panel {visibility:hidden;}
+}
+
+/* Navigation renders once; populated content remains visible instead of fading twice. */
+body .pc2-loader {display:none !important;}
+body.pc2-page .pc2-reveal,body.pc2-page .pc2-section-enter {animation:none !important;opacity:1;transform:none;}
+body .reveal {opacity:1 !important;transform:none !important;transition:none !important;}
+.grooming-admin-photo {width:66px;height:66px;object-fit:cover;border-radius:12px;background:#eee5f6;flex-shrink:0;}
+.grooming-service-photo-preview {display:block;width:160px;height:120px;object-fit:cover;border-radius:14px;margin-bottom:12px;background:#eee5f6;}
+
+body.pc2-store .product-img,body.home-page #featuredProducts .product-img {width:100%;height:auto;aspect-ratio:1;display:block;overflow:hidden;padding:0;border:0;background:transparent;}
+body.pc2-store .product-img>img,body.home-page #featuredProducts .product-img>img {display:block;width:100%;height:100%;object-fit:cover;object-position:center;border:0;padding:0;}
+body.home-page .service-tile,body.home-page .service-tile:hover,body.home-page .service-tile:focus-visible {text-decoration:none;}
+
+/* A single reserved validation slot keeps neighbouring booking controls aligned. */
+.booking-fields {align-items:flex-start!important;}
+.booking-fields>.col-md-6>.field-validation-message {min-height:2.7em!important;line-height:1.35;}
+.groomer-field-hint {display:block;margin-top:7px;font-size:.76rem;line-height:1.5;color:#81718e;}
+.groomer-suggestion-select {width:100%;min-height:44px;margin-bottom:8px;border:1px solid #dbcee9;border-radius:12px;background-color:#f6f0fb;color:#60417c;font-size:.86rem;text-overflow:ellipsis;}
+.groomer-suggestion-select:focus {border-color:#9471b4;box-shadow:0 0 0 3px #eee6f6;}
+/* Toasts fade inside the viewport instead of widening the page as they slide. */
+body .toast-container {width:min(390px,calc(100vw - 40px));max-width:calc(100vw - 40px);}
+body .toast-pawcare {max-width:100%;transform:none!important;animation:paw-toast-appear .18s ease;transition:opacity .16s ease;overflow-wrap:anywhere;}
+body .toast-pawcare>span {min-width:0;}
+@keyframes paw-toast-appear {from {opacity:0;} to {opacity:1;}}
+.groomer-selection-summary {display:flex;align-items:center;gap:14px;min-height:82px;padding:14px 18px;border:1px solid #e6ddef;border-radius:16px;background:linear-gradient(120deg,#f8f4fc,#fcfbfe);color:#796a86;font-size:.82rem;}
+.groomer-selection-summary>i {font-size:1.45rem;color:#8d6cb1;}
+.groomer-selection-summary>div {min-width:0;}
+.groomer-selection-summary strong {display:block;color:#49365c;font-size:.9rem;}
+.groomer-selection-summary span,.groomer-selection-summary small {display:block;line-height:1.55;overflow-wrap:anywhere;}
+.groomer-selection-summary .groomer-card-photo {width:52px;height:52px;border-radius:14px;object-fit:cover;flex:none;}
+
+/* The store photograph uses a dark overlay, so its heading needs light ink. */
+body.pc2-page:not(.workspace-page) .page-masthead.masthead-store h1 {color:#fff!important;}
+body.pc2-page:not(.workspace-page) .page-masthead.masthead-store .lead {color:#fff!important;}
+body.pc2-page:not(.workspace-page) .page-masthead.masthead-store .section-badge {color:#fff!important;background:#ffffff24!important;border-color:#ffffff70!important;}
+
+/* Give touch controls room, including the small review and motion buttons. */
+body .product-card .btn-link {min-height:44px;display:inline-flex;align-items:center;}
+body.home-page .home-motion-toggle {min-height:40px;}
+@media(max-width:767.98px) {
+  body.pc2-page :is(.form-control,.form-select,.form-control-pawcare,.groom-planner-fields input,.groom-planner-fields select) {font-size:16px!important;}
+  body.workspace-page .pc2-mobile-nav a {min-height:44px;font-size:.62rem;line-height:1.3;}
+}
+@media(max-width:575.98px) {
+  body.workspace-page :is(#section-addPet,#section-addRecord,#section-addProduct) .row>.col-4,
+  body.workspace-page #section-addPet .row>.col-6 {width:100%;}
+  body #paymentModal #cardForm .row .form-control-pawcare {padding-left:8px!important;padding-right:8px!important;}
+}
+@media(max-width:360px) {
+  body #paymentModal #cardForm .row .form-label {display:block;min-height:3em;}
+}
+@media(min-width:768px) {
+  body.workspace-page #section-records>.card-pawcare.p-3>.row>[class*="col-"] {flex:1 1 180px;width:auto;max-width:100%;}
+  body.workspace-page #section-records>.card-pawcare.p-3>.row>.col-md-1 {flex:0 0 52px;}
+}
+

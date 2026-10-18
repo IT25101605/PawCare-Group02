@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preload" href="/vendor/fonts/font-5.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/vendor/fonts/font-11.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/vendor/fonts/font-17.woff2" as="font" type="font/woff2" crossorigin>
+<link href="/vendor/fonts/fonts.css?v=20261015-6" rel="stylesheet">
+<link href="/css/design.css?v=20261015-10" rel="stylesheet">
+    <title>Store Manager Dashboard - PawCare</title>
+    <link href="/vendor/bootstrap/bootstrap.min.css?v=5.3.2" rel="stylesheet">
+    <link href="/vendor/bootstrap-icons/bootstrap-icons.css?v=1.11.2" rel="stylesheet">
+    <link href="/css/style.css?v=20261015-10" rel="stylesheet">
+    <link href="/css/pawcare2.css?v=20261015-26" rel="stylesheet">
+    <link rel="icon" href="/images/paw.svg" type="image/svg+xml">
+    <meta name="theme-color" content="#c7b6e3">
+<link href="/css/assistant-widget.css?v=20261015-24" rel="stylesheet">
+<link href="/css/navigation.css?v=20261016-2" rel="stylesheet">
+<link rel="stylesheet" href="/css/site-fixes.css?v=20261015-26">
+<link href="/css/page-loading.css?v=20261015-10" rel="stylesheet">
+<link href="/css/paw-cursor.css?v=20261015-20" rel="stylesheet">
+<link href="/css/workspace-polish.css?v=20261015-20" rel="stylesheet">
+</head>
+<body class="workspace-page pc2-page pc2-workspace has-shared-nav">
+<script src="/js/page-loading.js?v=20261015-20"></script>
+<script src="/js/paw-cursor.js?v=20261015-20"></script>
+<nav id="mainNavbar" aria-label="Main navigation"><a href="/">PawCare</a></nav>
+<script src="/js/navigation.js?v=20261016-2"></script>
+    <div class="dashboard-sidebar" id="sidebar">
+        <div class="sidebar-brand"><h4><a class="sidebar-home" href="/" aria-label="PawCare homepage"><i class="bi bi-heart-pulse-fill me-2"></i>PawCare</a></h4><small class="text-white-50">Store Manager</small></div>
+        <nav class="sidebar-nav">
+            <div class="nav-item"><a class="nav-link active" href="#" onclick="showSection('overview')"><i class="bi bi-grid-1x2"></i>Overview</a></div>
+            <div class="nav-item"><a class="nav-link" href="#" onclick="showSection('products')"><i class="bi bi-box-seam"></i>Products</a></div>
+            <div class="nav-item"><a class="nav-link" href="#" onclick="showSection('orders')"><i class="bi bi-cart-check"></i>Orders</a></div>
+            <div class="nav-item"><a class="nav-link" href="#" onclick="showSection('reviews')"><i class="bi bi-star"></i>Reviews</a></div>
+            <div class="nav-item"><a class="nav-link" href="#" onclick="showSection('analytics')"><i class="bi bi-graph-up"></i>Analytics</a></div>
+            <div class="nav-item"><a class="nav-link" href="#" onclick="showSection('addProduct')"><i class="bi bi-plus-circle"></i>Add Product</a></div>
+            <hr class="mx-3" style="border-color:rgba(255,255,255,0.1)">
+            <div class="nav-item"><a class="nav-link" href="/pages/entertainment.html"><i class="bi bi-controller"></i>Entertainment</a></div>
+            <div class="nav-item"><a class="nav-link" href="/"><i class="bi bi-house"></i>Back to Site</a></div>
+            <div class="nav-item"><a class="nav-link" href="#" onclick="logout()"><i class="bi bi-box-arrow-left"></i>Logout</a></div>
+        </nav>
+    </div>
+    <div class="dashboard-content">
+        <div class="dashboard-header">
+            <div><h4 class="fw-bold mb-0">Store Manager Dashboard</h4><small class="text-muted">Welcome, <span id="smName"></span></small></div>
+            <button class="btn btn-pawcare-outline d-lg-none" onclick="document.getElementById('sidebar').classList.toggle('show')"><i class="bi bi-list"></i></button>
+        </div>
+
+        <div id="section-overview">
+            <div class="row g-4 mb-4">
+                <div class="col-md-4"><div class="stat-card"><div class="stat-icon card-icon-primary"><i class="bi bi-box-seam"></i></div><div class="stat-value" id="stProducts">0</div><div class="stat-label">Products</div></div></div>
+                <div class="col-md-4"><div class="stat-card"><div class="stat-icon card-icon-accent"><i class="bi bi-cart-check"></i></div><div class="stat-value" id="stOrders">0</div><div class="stat-label">Orders</div></div></div>
+                <div class="col-md-4"><div class="stat-card"><div class="stat-icon card-icon-success"><i class="bi bi-currency-dollar"></i></div><div class="stat-value" id="stRevenue">Rs. 0</div><div class="stat-label">Revenue</div></div></div>
+            </div>
+        </div>
+
+        <div id="section-products" style="display:none">
+            <h5 class="fw-bold mb-3">Product Inventory</h5>
+            <div class="card-pawcare"><div class="table-responsive"><table class="table table-pawcare mb-0"><thead><tr><th>Name</th><th>SKU</th><th>Category</th><th>Price</th><th>Sale</th><th>Stock / Reorder</th><th>Featured</th><th>Actions</th></tr></thead><tbody id="prodTable"></tbody></table></div></div>
+        </div>
+
+        <div id="section-orders" style="display:none">
+            <h5 class="fw-bold mb-3">Order Management</h5>
+            <div class="card-pawcare"><div class="table-responsive"><table class="table table-pawcare mb-0"><thead><tr><th>Order #</th><th>Customer</th><th>Total</th><th>Status</th><th>Date</th><th>Action</th></tr></thead><tbody id="orderTable"></tbody></table></div></div>
+        </div>
+
+        <div id="section-reviews" style="display:none">
+            <div class="d-flex flex-wrap justify-content-between align-items-end gap-2 mb-3">
+                <div><h5 class="fw-bold mb-1">Customer Product Reviews</h5><p class="text-muted small mb-0">Read-only view of customer reviews from delivered PawCare orders. Reviews publish immediately; Admin can hide or delete inappropriate content if needed.</p></div>
+                <button class="btn btn-sm btn-pawcare-outline" onclick="loadStoreReviews(0)"><i class="bi bi-arrow-clockwise me-1"></i>Refresh</button>
+            </div>
+            <div class="card-pawcare"><div class="table-responsive"><table class="table table-pawcare mb-0"><thead><tr><th>Product / Order</th><th>Customer</th><th>Rating</th><th>Review</th><th>Visibility</th><th>Date</th></tr></thead><tbody id="storeReviewTable"></tbody></table></div></div>
+        </div>
+
+
+        <div id="section-analytics" style="display:none">
+            <h5 class="fw-bold mb-3">Store Analytics</h5>
+            <div class="row g-3 mb-4"><div class="col-md-3"><div class="stat-card"><div class="stat-value" id="anTotal">0</div><div class="stat-label">Total Orders</div></div></div><div class="col-md-3"><div class="stat-card"><div class="stat-value" id="anCompleted">0</div><div class="stat-label">Completed</div></div></div><div class="col-md-3"><div class="stat-card"><div class="stat-value" id="anPending">0</div><div class="stat-label">Pending</div></div></div><div class="col-md-3"><div class="stat-card"><div class="stat-value" id="anRevenue">Rs. 0</div><div class="stat-label">Sales Revenue</div></div></div></div>
+            <div class="row g-4"><div class="col-lg-6"><div class="card-pawcare p-3"><h6 class="fw-bold">Revenue by Month</h6><div id="anMonths"></div></div></div><div class="col-lg-6"><div class="card-pawcare p-3"><h6 class="fw-bold">Top Selling Products</h6><div id="anTop"></div></div></div><div class="col-lg-6"><div class="card-pawcare p-3"><h6 class="fw-bold">Order Status Breakdown</h6><div id="anStatus"></div></div></div><div class="col-lg-6"><div class="card-pawcare p-3"><h6 class="fw-bold">Stock Alerts</h6><div id="anStock"></div></div></div></div>
+        </div>
+
+        <div id="section-addProduct" style="display:none">
+            <h5 id="productEditorTitle" class="fw-bold mb-3">Add New Product</h5>
+            <div class="card-pawcare p-4" style="max-width:600px">
+                <div class="mb-3"><label class="form-label fw-semibold">Name</label><input type="text" id="pName" class="form-control form-control-pawcare" required></div>
+                <div class="mb-3"><label class="form-label fw-semibold">Description</label><textarea id="pDesc" class="form-control form-control-pawcare" rows="2"></textarea></div>
+                <div class="row g-3 mb-3">
+                    <div class="col-4"><label class="form-label fw-semibold">Price</label><input type="number" step="0.01" id="pPrice" class="form-control form-control-pawcare" required></div>
+                    <div class="col-4"><label class="form-label fw-semibold">Sale Price</label><input type="number" step="0.01" id="pSale" class="form-control form-control-pawcare"></div>
+                    <div class="col-4"><label class="form-label fw-semibold">Stock</label><input type="number" id="pStock" class="form-control form-control-pawcare" required></div>
+                </div>
+                <div class="row g-3 mb-3">
+                    <div class="col-6"><label class="form-label fw-semibold">SKU</label><input type="text" id="pSku" class="form-control form-control-pawcare" required></div>
+                    <div class="col-6"><label class="form-label fw-semibold">Category</label><select id="pCatId" class="form-control form-control-pawcare" required><option value="">Choose category</option></select></div>
+                </div>
+                <div class="row g-3 mb-3">
+                    <div class="col-6"><label class="form-label fw-semibold">Brand</label><input type="text" id="pBrand" class="form-control form-control-pawcare"></div>
+                    <div class="col-6"><label class="form-label fw-semibold pt-4"><input type="checkbox" id="pFeatured" class="form-check-input me-2">Featured</label></div>
+                </div>
+                <div class="row g-3 mb-3"><div class="col-6"><label for="pReorder" class="form-label">Reorder level</label><input id="pReorder" class="form-control form-control-pawcare" type="number" required min="0" max="1000000" step="1" value="0"></div><div class="col-6"><label for="pWeight" class="form-label">Weight / Size</label><input id="pWeight" maxlength="50" class="form-control form-control-pawcare"></div></div><div class="mb-3"><label class="form-label"><input id="pActive" type="checkbox" checked class="form-check-input me-2">Active</label></div><details class="mb-3"><summary class="fw-semibold">Add a new category</summary><label for="categoryName" class="form-label mt-2">Category name</label><input id="categoryName" maxlength="100" class="form-control form-control-pawcare"><label for="categoryDescription" class="form-label mt-2">Description (optional)</label><input id="categoryDescription" maxlength="255" class="form-control form-control-pawcare"><button id="saveCategoryBtn" class="btn btn-sm btn-pawcare-outline mt-2" onclick="saveCategory()">Create Category</button></details>
+                <div class="mb-3"><label for="pImage" class="form-label fw-semibold">Product image</label>
+<input type="file" id="pImage" accept="image/png,image/jpeg" class="form-control" onchange="previewPhoto(this,'pPreview')">
+<small class="text-muted">JPEG or PNG, up to 5 MB and 16 megapixels.</small>
+<img id="pPreview" hidden alt="Product preview" style="width:120px;height:120px;object-fit:cover"></div>
+<button id="saveProductBtn" class="btn btn-pawcare" onclick="saveProduct()">Save Product</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/vendor/bootstrap/bootstrap.bundle.min.js?v=5.3.2"></script>
+    <script src="/js/api.js?v=20261016-2"></script><script src="/js/forms.js?v=20261015-17"></script>
+    <script>
+        if (!api.isLoggedIn() || !['STORE_MANAGER','ADMIN'].includes(api.getRole())) window.location.href = '/pages/login.html';
+        document.getElementById('smName').textContent = api.user?.firstName;
+
+        let editingProductId=null;
+        async function showSection(name) {
+            document.querySelectorAll('[id^="section-"]').forEach(s => s.style.display = 'none');
+            document.getElementById('section-' + name).style.display = 'block';
+            document.querySelectorAll('.sidebar-nav .nav-link').forEach(l => l.classList.remove('active'));
+            window.event?.target?.closest('.nav-link')?.classList.add('active');
+            if (name === 'products') loadProducts();
+            if (name === 'addProduct') {
+                resetProductEditor();
+                try{setOptions('pCatId',await api.getCategories(),'Choose category');}catch(e){showToast(e.message,'error');}
+            }
+            if (name === 'orders') loadOrders();
+            if (name === 'reviews') loadStoreReviews();
+            if (name === 'analytics') loadAnalytics();
+        }
+
+        async function loadOverview() {
+            try {
+                const d = await api.get(api.getRole()==='ADMIN'?'/dashboard/admin':'/dashboard/store');
+                document.getElementById('stProducts').textContent = d.totalProducts || 0;
+                document.getElementById('stOrders').textContent = d.totalOrders || 0;
+                document.getElementById('stRevenue').textContent = formatCurrency(d.totalRevenue);
+            } catch(e) { showToast(e.message || 'Unable to load data. Please try again.','error'); }
+        }
+
+        async function loadProducts(page=0) {
+            try {
+                const data = await api.get("/products/manage?page="+page);
+                renderPager("prodTable",data,loadProducts);
+                document.getElementById('prodTable').innerHTML = (data.content || []).map(p => `
+                    <tr><td class="fw-semibold"><img src="${escapeHtml(p.image||'/images/products/bowl.svg')}" alt="" width="44" height="44" style="object-fit:contain;margin-right:8px">${escapeHtml(p.name)}</td><td><code style="font-size:0.8rem">${escapeHtml(p.sku||'-')}</code></td><td>${escapeHtml(p.categoryName||'-')}</td>
+                    <td>${formatCurrency(p.price)}</td><td>${p.salePrice?formatCurrency(p.salePrice):'-'}</td>
+                    <td><span class="${p.stockQuantity<=p.reorderLevel?'text-danger fw-bold':'text-success'}">${p.stockQuantity}</span> / ${p.reorderLevel}</td>
+                    <td>${p.isFeatured?'<i class="bi bi-star-fill text-warning"></i>':'<i class="bi bi-star text-muted"></i>'}</td><td><button class="btn btn-sm btn-pawcare-outline" onclick="editProduct(${p.id})">Edit</button> <button class="btn btn-sm btn-outline-danger" onclick="deleteManagedProduct(${p.id},this,loadProducts)">Delete</button><small class="d-block">${p.isActive?"Active":"Inactive"}</small></td></tr>
+                `).join('') || '<tr><td colspan="7" class="empty-state">No products</td></tr>';
+            } catch(e) { showToast(e.message || 'Unable to load data. Please try again.','error'); }
+        }
+
+        async function loadOrders() {
+            try {
+                const data = await api.getAllOrders();
+                document.getElementById('orderTable').innerHTML = (data.content || []).map(o => `
+                    <tr><td class="fw-semibold">${o.orderNumber}</td><td>${escapeHtml(o.userName||'-')}</td><td>${formatCurrency(o.totalAmount)}</td><td>${statusBadge(o.status)}</td><td>${formatDate(o.createdAt)}</td>
+                    <td><select class="form-select form-select-sm" style="width:auto;font-size:0.82rem" onchange="updOrder(${o.id},this.value)">
+                        <option ${o.status==='PENDING'?'selected':''}>PENDING</option><option ${o.status==='CONFIRMED'?'selected':''}>CONFIRMED</option>
+                        <option ${o.status==='PROCESSING'?'selected':''}>PROCESSING</option><option ${o.status==='SHIPPED'?'selected':''}>SHIPPED</option><option ${o.status==='OUT_FOR_DELIVERY'?'selected':''}>OUT_FOR_DELIVERY</option>
+                        <option ${o.status==='DELIVERED'?'selected':''}>DELIVERED</option></select></td></tr>
+                `).join('') || '<tr><td colspan="6" class="empty-state">No orders</td></tr>';
+            } catch(e) { showToast(e.message || 'Unable to load data. Please try again.','error'); }
+        }
+
+        async function updOrder(id, status) { try { await api.updateOrderStatus(id, status); showToast('Order updated', 'success'); } catch(e) { showToast(e.message, 'error'); } }
+
+        async function loadStoreReviews(page=0) {
+            try {
+                const data=await api.getStoreProductReviews(page);
+                renderPager('storeReviewTable',data,loadStoreReviews);
+                document.getElementById('storeReviewTable').innerHTML=(data.content||[]).map(r=>`
+                    <tr>
+                        <td><strong>${escapeHtml(r.productName||'Product')}</strong><small class="d-block text-muted">${escapeHtml(r.orderNumber||'Order')}</small></td>
+                        <td>${escapeHtml(r.userName||'Customer')}</td>
+                        <td><span class="text-warning">${'★'.repeat(r.rating||0)}${'☆'.repeat(Math.max(0,5-(r.rating||0)))}</span><small class="d-block text-muted">${r.rating||0}/5</small></td>
+                        <td style="min-width:240px;max-width:420px;white-space:pre-wrap">${escapeHtml(r.review||'')}</td>
+                        <td>${r.hidden?'<span class="text-danger"><i class="bi bi-eye-slash me-1"></i>Hidden by Admin</span>':'<span class="text-success"><i class="bi bi-eye me-1"></i>Published</span>'}</td>
+                        <td>${formatDate(r.createdAt)}</td>
+                    </tr>`).join('')||'<tr><td colspan="6" class="empty-state">No product reviews yet</td></tr>';
+            } catch(e) { showToast(e.message||'Unable to load product reviews','error'); }
+        }
+
+        async function loadAnalytics(){try{const d=await api.getStoreAnalytics();document.getElementById('anTotal').textContent=d.totalOrders||0;document.getElementById('anCompleted').textContent=d.completedOrders||0;document.getElementById('anPending').textContent=d.pendingOrders||0;document.getElementById('anRevenue').textContent=formatCurrency(d.totalRevenue);const metric=(x,money=false)=>`<div class="d-flex justify-content-between border-bottom py-2"><span>${escapeHtml(x.label)}</span><strong>${money?formatCurrency(x.value):Number(x.value).toFixed(0)}</strong></div>`;document.getElementById('anMonths').innerHTML=(d.monthlyRevenue||[]).map(x=>metric(x,true)).join('')||'<p class="text-muted">No revenue data yet.</p>';document.getElementById('anTop').innerHTML=(d.topProducts||[]).map(x=>metric(x,false)).join('')||'<p class="text-muted">No sales data yet.</p>';document.getElementById('anStatus').innerHTML=Object.entries(d.orderStatusDistribution||{}).map(([k,v])=>`<div class="d-flex justify-content-between border-bottom py-2"><span>${escapeHtml(k.replaceAll('_',' '))}</span><strong>${v}</strong></div>`).join('')||'<p class="text-muted">No order data yet.</p>';const low=[...(d.outOfStock||[]).map(x=>({...x,label:'OUT OF STOCK'})),...(d.lowStock||[]).map(x=>({...x,label:'LOW STOCK'}))];document.getElementById('anStock').innerHTML=low.map(x=>`<div class="d-flex justify-content-between border-bottom py-2"><span>${escapeHtml(x.name)} <small class="text-danger">${x.label}</small></span><strong>${x.stock} / ${x.reorderLevel}</strong></div>`).join('')||'<p class="text-success">No stock alerts.</p>';}catch(e){showToast(e.message,'error');}}
+
+        async function saveProduct() {
+            if(!validateFields(['pName','pDesc','pPrice','pSale','pStock','pSku','pCatId','pBrand','pImage','pReorder','pWeight'])) return;
+            if(value('pSale') && Number(value('pSale'))>Number(value('pPrice'))) {showToast('Sale price cannot be greater than the real price.','error');return;}
+            const btn=document.getElementById('saveProductBtn'); if(btn.disabled)return; btn.disabled=true;
+            try {
+                await (editingProductId ? (data,file)=>api.updateProduct(editingProductId,data,file) : api.createProduct)({
+                    name: document.getElementById('pName').value,
+                    description: document.getElementById('pDesc').value,
+                    price: parseFloat(document.getElementById('pPrice').value),
+                    salePrice: document.getElementById('pSale').value ? parseFloat(document.getElementById('pSale').value) : null,
+                    stockQuantity: parseInt(document.getElementById('pStock').value),
+                    sku: document.getElementById('pSku').value,
+                    categoryId: parseInt(document.getElementById('pCatId').value),
+                    brand: document.getElementById('pBrand').value,
+                    isFeatured: document.getElementById('pFeatured').checked,
+                    isActive:document.getElementById("pActive").checked,reorderLevel:Number(value("pReorder")),weight:value("pWeight"),clearSalePrice:!value("pSale")
+                }, document.getElementById('pImage').files[0]);
+                ['pName','pDesc','pPrice','pSale','pStock','pSku','pBrand','pImage'].forEach(id=>document.getElementById(id).value='');
+                document.getElementById('pPreview').hidden=true; loadOverview();
+                showToast('Product saved!', 'success');
+                showSection('products');
+            } catch(e) { showToast(e.message, 'error'); } finally { btn.disabled=false; }
+        }
+
+        loadOverview();
+    </script>
+    <script src="/js/product-actions.js"></script>
+    <script src="/js/product-editor.js"></script>
+    <script src="/js/account.js?v=20261015-26"></script>
+    <script src="/js/ui.js?v=20261015-5"></script>
+    <script src="/js/pawcare2.js?v=20261015-26"></script>
+<script src="/js/assistant-widget.js?v=1.0"></script>
+<script src="/js/site-shell.js?v=20261014-5"></script>
+</body>
+</html>
